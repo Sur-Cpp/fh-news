@@ -1,31 +1,29 @@
 :root {
   --font-heading: "Merriweather", serif;
   --font-body: "Open Sans", sans-serif;
-  --footer-bg: linear-gradient(
-    180deg,
-    rgba(255, 255, 255, 0.03),
-    rgba(0, 0, 0, 0.02)
-  );
   --muted: #6c757d;
+  --link-color: #0d6efd; /* light-mode link / heading tint */
+  --link-color-dark: #66a8ff; /* dark-mode link / heading tint */
 }
 
-/* page background */
+/* Page base (system font stack for natural look) */
 body {
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue",
+    Arial, var(--font-body), sans-serif;
+  color: #222;
   background-image: url("../assets/images/image0.png");
   background-size: cover;
   background-position: center;
   background-attachment: fixed;
   background-repeat: no-repeat;
-  font-family: var(--font-body);
-  color: #222;
 }
 
-/* ensure readable global text color in dark mode */
+/* Theme: dark-mode base text color */
 [data-bs-theme="dark"] body {
-  color: #e6eef8; /* light text for dark theme */
+  color: #e6eef8;
 }
 
-/* overlay to dim/brighten based on theme */
+/* Overlay to dim/brighten based on theme */
 body::before {
   content: "";
   position: fixed;
@@ -36,12 +34,11 @@ body::before {
   background-color: rgba(255, 255, 255, 0.7);
   z-index: -1;
 }
-
 [data-bs-theme="dark"] body::before {
   background-color: rgba(0, 0, 0, 0.7);
 }
 
-/* small header / marqueee existing styles */
+/* Small header / branding */
 .marquee-container {
   width: 400px;
   height: 40px;
@@ -54,7 +51,7 @@ body::before {
   padding-left: 10px;
 }
 
-/* new theme toggle styling - modern pill, icons and thumb */
+/* Theme toggle (modern) */
 .theme-toggle-new {
   display: inline-block;
   vertical-align: middle;
@@ -98,7 +95,6 @@ body::before {
   background: #fff;
   border-radius: 50%;
   box-shadow: 0 4px 10px rgba(16, 24, 40, 0.12);
-  position: relative;
   transform: translateX(0);
   transition: transform 0.25s cubic-bezier(0.2, 0.9, 0.3, 1);
 }
@@ -109,7 +105,7 @@ body::before {
   transform: translateX(30px);
 }
 
-/* nav adjustments */
+/* Navbar helpers */
 .navbar-brand {
   margin-right: 0;
 }
@@ -128,7 +124,7 @@ body::before {
   color: #adb5bd;
 }
 
-/* datepicker */
+/* Datepicker */
 .custom-datepicker {
   border: 1px solid #dee2e6;
   border-radius: 6px;
@@ -142,71 +138,87 @@ body::before {
   color: #fff;
 }
 
-/* news card (existing) */
-/* light-mode text color for news-section is explicit so switching to dark won't keep black text */
+/* News card */
 .news-section {
   margin-bottom: 3rem;
   padding: 2rem;
   border-radius: 10px;
   background: #f8f9fa;
-  color: #111;
+  color: inherit;
 }
 [data-bs-theme="dark"] .news-section {
   background: #343a40;
-  color: #ffffff;
-} /* ensure white text in dark mode */
+  color: inherit;
+}
 
+/* Heading */
+.news-heading {
+  font-family: var(--font-heading);
+  font-weight: 700;
+  color: var(--link-color);
+  border-bottom: 2px solid rgba(0, 0, 0, 0.08);
+  padding-bottom: 0.5rem;
+  margin-bottom: 1.5rem;
+}
+[data-bs-theme="dark"] .news-heading {
+  color: var(--link-color-dark);
+  border-bottom-color: rgba(255, 255, 255, 0.06);
+}
+
+/* Paragraphs (1.4 as requested) */
+.news-paragraph {
+  margin-bottom: 1rem;
+  line-height: 1.4;
+  color: inherit;
+  font-size: 1rem;
+}
+
+/* Links inside news (theme-aware) */
+.news-section a,
+.news-paragraph a {
+  color: var(--link-color);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+  cursor: pointer;
+  word-break: break-word;
+}
+[data-bs-theme="dark"] .news-section a,
+[data-bs-theme="dark"] .news-paragraph a {
+  color: var(--link-color-dark);
+}
+.news-section a:hover,
+.news-paragraph a:hover {
+  opacity: 0.92;
+  text-decoration-thickness: 2px;
+}
+
+/* HR thicker and theme aware */
+.news-section hr {
+  height: 4px;
+  background: var(--link-color);
+  border: none;
+  border-radius: 4px;
+  margin: 1rem 0;
+}
+[data-bs-theme="dark"] .news-section hr {
+  background: var(--link-color-dark);
+}
+
+/* Images */
 .news-image {
+  width: 100%;
   max-width: 100%;
   height: auto;
   border-radius: 8px;
   margin: 1rem 0;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.15);
 }
 
-/* make heading bold and keep color rules */
-.news-heading {
-  color: #007bff;
-  border-bottom: 2px solid #e9ecef;
-  padding-bottom: 0.5rem;
-  margin-bottom: 1.5rem;
-  font-weight: 700;
-}
-[data-bs-theme="dark"] .news-heading {
-  color: #0d6efd;
-  border-bottom-color: #495057;
-}
-
-/* paragraphs inherit color from parent news-section (so dark mode uses white) */
-.news-paragraph {
-  margin-bottom: 1rem;
-  line-height: 1.6;
-  color: inherit;
-}
-
-/* responsive tweaks */
-@media (max-width: 768px) {
-  .marquee-container {
-    width: 150px;
-  }
-  .navbar-nav {
-    flex-direction: column;
-    align-items: flex-start;
-  }
-  .navbar-nav .nav-item {
-    margin: 5px 0;
-    width: 100%;
-  }
-  .custom-datepicker {
-    width: 120px;
-  }
-}
-
-/* -------- Footer styles (modern) -------- */
+/* Footer */
 .site-footer {
   margin-top: 3.5rem;
   padding: 36px 0 22px;
-  color: #e6eef8;
+  color: inherit;
   background: linear-gradient(180deg, rgba(0, 0, 0, 0.06), rgba(0, 0, 0, 0.02));
   border-top: 1px solid rgba(0, 0, 0, 0.05);
 }
@@ -228,13 +240,12 @@ body::before {
 .footer-brand h4 {
   margin: 0 0 6px 0;
   font-family: var(--font-heading);
-  color: #0d6efd;
+  color: var(--link-color);
 }
 .footer-brand .muted {
   color: var(--muted);
   font-size: 0.95rem;
 }
-
 .footer-contacts h5,
 .footer-credits h5 {
   margin-bottom: 8px;
@@ -248,11 +259,6 @@ body::before {
   color: #495057;
   font-size: 0.95rem;
 }
-.footer-contacts .contact-list li,
-.footer-credits .credits-list li {
-  margin-bottom: 6px;
-}
-
 .footer-bottom {
   margin-top: 18px;
   border-top: 1px solid rgba(0, 0, 0, 0.04);
@@ -260,11 +266,6 @@ body::before {
   text-align: center;
   color: var(--muted);
   font-size: 0.9rem;
-}
-
-/* social icons */
-.social-row {
-  margin-top: 10px;
 }
 .social {
   display: inline-flex;
@@ -274,15 +275,10 @@ body::before {
   height: 36px;
   border-radius: 8px;
   margin-right: 8px;
-  background: #0d6efd;
+  background: var(--link-color);
   color: #fff;
   text-decoration: none;
 }
-.social .fab {
-  font-size: 16px;
-}
-
-/* dark footer adjustments */
 [data-bs-theme="dark"] .site-footer {
   background: linear-gradient(180deg, rgba(0, 0, 0, 0.45), rgba(0, 0, 0, 0.5));
   border-top-color: rgba(255, 255, 255, 0.03);
@@ -298,13 +294,32 @@ body::before {
   color: #9aa6b2;
 }
 
-/* small helpers */
+/* helpers */
 .muted {
   color: var(--muted);
   font-size: 0.95rem;
 }
-
-/* keep previous theme switch legacy class in case other parts used it */
 .theme-switch {
   display: none;
+}
+
+/* responsive */
+@media (max-width: 768px) {
+  .marquee-container {
+    width: 150px;
+  }
+  .navbar-nav {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .navbar-nav .nav-item {
+    margin: 5px 0;
+    width: 100%;
+  }
+  .custom-datepicker {
+    width: 120px;
+  }
+  .footer-grid {
+    grid-template-columns: 1fr;
+  }
 }

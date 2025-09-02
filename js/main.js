@@ -98,7 +98,17 @@ async function loadNewsContent(url) {
 
 function parseFormattedText(text) {
   if (text === undefined || text === null) return "";
+
+  function escapeAttr(s) {
+    return String(s)
+      .replace(/&/g, "&amp;")
+      .replace(/"/g, "&quot;")
+      .replace(/</g, "&lt;")
+      .replace(/>/g, "&gt;");
+  }
+
   const allowedTags = [
+    "a",
     "b",
     "i",
     "sub",
@@ -117,10 +127,40 @@ function parseFormattedText(text) {
     "br",
     "hr",
   ];
-  const tagRegex = /<\/?([a-z0-9]+)(?:\s[^>]*)?>/gi;
-  return text.replace(tagRegex, (match, tag) => {
-    return allowedTags.includes(tag.toLowerCase()) ? match : "";
+
+  text = String(text).replace(/<a\s+([^>]+?)>/gi, (match, attrStr) => {
+    const hrefMatch = attrStr.match(/href\s*=\s*(['"])(.*?)\1/i);
+    if (!hrefMatch) return "";
+    const rawHref = hrefMatch[2].trim();
+
+    if (/^(https?:|\/\/)/i.test(rawHref)) {
+      const safe = escapeAttr(rawHref);
+      return `<a href="${safe}" target="_blank" rel="noopener noreferrer">`;
+    }
+    return "";
   });
+
+  const tagRegex = /<\/?([a-z0-9]+)(?:\s[^>]*)?>/gi;
+
+  const sanitized = text.replace(tagRegex, (match, tag) => {
+    tag = tag.toLowerCase();
+    if (!allowedTags.includes(tag)) return "";
+
+    if (tag === "a") {
+      if (/^<a\s/i.test(match) && /href=/.test(match)) {
+        return match; // keep safe normalized opening <a>
+      }
+      if (/^<\/a>/i.test(match)) {
+        return "</a>";
+      }
+      return "";
+    }
+
+    if (/^<\//.test(match)) return `</${tag}>`;
+    return `<${tag}>`;
+  });
+
+  return sanitized;
 }
 
 function toDirectImageUrl(url) {
