@@ -1,0 +1,475 @@
+/* css/factions.css - final cleaned/stable version */
+
+/* Variables */
+:root {
+  --link-color: #0d6efd;
+  --muted: #6c757d;
+  --banner-overlay: linear-gradient(
+    to bottom,
+    rgba(255, 255, 255, 0.3),
+    rgba(255, 255, 255, 0.18)
+  );
+}
+
+/* Header */
+.factions-header {
+  background: linear-gradient(
+    135deg,
+    rgba(13, 110, 253, 0.08),
+    rgba(102, 168, 255, 0.06)
+  );
+  border-radius: 14px;
+  padding: 2.2rem 1.25rem;
+  margin: 1.5rem 0;
+  text-align: center;
+  backdrop-filter: blur(6px);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+}
+.factions-header h1 {
+  font-family: var(--font-heading);
+  font-weight: 700;
+  color: var(--link-color);
+  margin: 0 0 0.25rem;
+}
+
+/* Grid & Cards */
+.faction-grid {
+  display: grid;
+  gap: 1.25rem;
+  grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+  margin-top: 1rem;
+}
+.faction-card {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+  background: rgba(255, 255, 255, 0.98);
+  border-radius: 12px;
+  padding: 1rem;
+  box-shadow: 0 8px 28px rgba(0, 0, 0, 0.06);
+  border: 1px solid rgba(0, 0, 0, 0.04);
+  min-height: 220px;
+  position: relative;
+}
+[data-bs-theme="dark"] .faction-card {
+  background: rgba(33, 37, 41, 0.95);
+  border-color: rgba(255, 255, 255, 0.04);
+}
+.faction-name {
+  font-family: var(--font-heading);
+  font-weight: 700;
+  color: var(--link-color);
+  margin: 0;
+  font-size: 1.15rem;
+}
+[data-bs-theme="dark"] .faction-name {
+  color: #66a8ff;
+}
+.faction-owner {
+  color: var(--muted);
+  font-size: 0.9rem;
+  margin: 0;
+}
+
+/* Banner inside card (keeps small preview) */
+.faction-banner {
+  width: 100%;
+  height: 120px;
+  object-fit: cover;
+  border-radius: 8px;
+  display: block;
+  background: #f1f1f1;
+}
+
+/* Tags / Chips / Filters */
+.faction-tags-row {
+  display: flex;
+  gap: 0.45rem;
+  flex-wrap: wrap;
+  margin-top: 0.4rem;
+}
+.faction-tag {
+  padding: 0.18rem 0.5rem;
+  border-radius: 8px;
+  background: rgba(13, 110, 253, 0.08);
+  color: var(--link-color);
+  font-size: 0.8rem;
+  border: 1px solid rgba(13, 110, 253, 0.08);
+}
+
+/* Filter buttons (chip style) */
+.filters-container .filter-btn {
+  border-radius: 999px;
+  padding: 0.35rem 0.8rem;
+  border: 2px solid var(--link-color);
+  color: var(--link-color);
+  background: transparent;
+  font-weight: 700;
+}
+.filters-container .filter-btn.active,
+.filters-container .filter-btn:hover {
+  background: var(--link-color);
+  color: #fff;
+}
+[data-bs-theme="dark"] .filters-container .filter-btn {
+  border-color: #66a8ff;
+  color: #66a8ff;
+}
+[data-bs-theme="dark"] .filters-container .filter-btn.active,
+[data-bs-theme="dark"] .filters-container .filter-btn:hover {
+  background: #66a8ff;
+  color: #000;
+}
+
+/* type chip (used in detail meta) */
+.type-chip {
+  display: inline-block;
+  background: linear-gradient(90deg, #0d6efd, #4f46e5);
+  color: #fff;
+  padding: 0.28rem 0.6rem;
+  border-radius: 12px;
+  font-weight: 700;
+  font-size: 0.82rem;
+  box-shadow: 0 6px 16px rgba(13, 110, 253, 0.12);
+  white-space: nowrap;
+}
+
+/* Stats */
+.faction-stats {
+  display: flex;
+  gap: 1rem;
+  padding: 0.5rem;
+  border-radius: 8px;
+  background: rgba(0, 0, 0, 0.03);
+  margin-top: 0.6rem;
+}
+.stat-item {
+  text-align: center;
+  flex: 1;
+}
+.stat-number {
+  font-weight: 700;
+  color: var(--link-color);
+  display: block;
+}
+.stat-label {
+  font-size: 0.75rem;
+  color: var(--muted);
+  text-transform: uppercase;
+}
+
+/* Footer / join */
+.faction-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: auto;
+  gap: 1rem;
+}
+.join-btn {
+  background: #28a745;
+  color: #fff;
+  padding: 0.45rem 0.75rem;
+  border-radius: 10px;
+  text-decoration: none;
+  font-weight: 700;
+  display: inline-flex;
+  gap: 0.5rem;
+  align-items: center;
+}
+.join-btn:focus {
+  outline: 3px solid rgba(40, 167, 69, 0.12);
+  outline-offset: 3px;
+}
+
+/* Verified badge */
+.verified-badge {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  background: #28a745;
+  color: #fff;
+  padding: 0.2rem 0.45rem;
+  border-radius: 999px;
+  font-weight: 700;
+  font-size: 0.78rem;
+  z-index: 5;
+}
+
+/* Detail view container */
+#detailContent {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 10px 6px;
+}
+.detail-article {
+  background: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0.98),
+    rgba(248, 249, 250, 0.95)
+  );
+  border-radius: 12px;
+  padding: 1.25rem;
+  box-shadow: 0 22px 60px rgba(7, 12, 20, 0.12);
+  border: 1px solid rgba(0, 0, 0, 0.04);
+  color: #0d1b2a;
+}
+[data-bs-theme="dark"] #detailContent .detail-article {
+  background: linear-gradient(
+    180deg,
+    rgba(18, 20, 24, 0.96),
+    rgba(28, 32, 38, 0.95)
+  );
+  color: #e6eef8;
+  border-color: rgba(255, 255, 255, 0.04);
+  box-shadow: 0 28px 70px rgba(0, 0, 0, 0.6);
+}
+
+/* Layout for detail */
+.detail-top {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+@media (min-width: 920px) {
+  .detail-top {
+    flex-direction: row;
+    align-items: flex-start;
+  }
+  .detail-main {
+    flex: 2;
+  }
+  .detail-side {
+    flex: 1;
+    min-width: 280px;
+  }
+}
+
+/* MAIN banner (large, fixed aspect ratio) */
+.detail-article .main-banner {
+  width: 100%;
+  aspect-ratio: 16 / 5; /* wide banner feel, consistent across viewports */
+  object-fit: cover;
+  border-radius: 10px;
+  display: block;
+  margin-bottom: 0.75rem;
+  box-shadow: 0 8px 30px rgba(2, 6, 23, 0.06);
+}
+
+/* Carousel (placed after tags) */
+.carousel {
+  position: relative;
+  overflow: hidden;
+  border-radius: 10px;
+  aspect-ratio: 16 / 9;
+  background: #111;
+  margin-top: 0.6rem;
+}
+.carousel-track {
+  position: absolute;
+  inset: 0;
+}
+.carousel-slide {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: opacity 0.36s ease;
+  opacity: 0;
+  pointer-events: none;
+}
+.carousel-slide[aria-hidden="false"] {
+  opacity: 1;
+  pointer-events: auto;
+}
+.carousel-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  border-radius: 8px;
+}
+
+/* Carousel overlay controlled by JS via --banner-overlay */
+.carousel::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: var(--banner-overlay);
+  pointer-events: none;
+  border-radius: 10px;
+}
+
+/* controls */
+.carousel-prev,
+.carousel-next {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 40px;
+  height: 40px;
+  border-radius: 999px;
+  border: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0, 0, 0, 0.38);
+  color: #fff;
+  z-index: 6;
+  cursor: pointer;
+}
+.carousel-prev {
+  left: 10px;
+}
+.carousel-next {
+  right: 10px;
+}
+
+/* dots */
+.carousel-dots {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  bottom: 10px;
+  display: flex;
+  gap: 6px;
+  z-index: 7;
+}
+.carousel-dot {
+  width: 9px;
+  height: 9px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.6);
+  border: none;
+  padding: 0;
+}
+.carousel-dot.active {
+  transform: scale(1.3);
+  background: #fff;
+}
+
+/* hero meta */
+.hero-header {
+  margin-top: 0.85rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+.detail-article .faction-name {
+  font-size: 1.75rem;
+  margin: 0;
+}
+
+/* side card */
+.card-side {
+  position: sticky;
+  top: 84px;
+  padding: 1rem;
+  border-radius: 10px;
+  background: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0.98),
+    rgba(248, 249, 250, 0.95)
+  );
+  border: 1px solid rgba(0, 0, 0, 0.04);
+  box-shadow: 0 12px 30px rgba(2, 6, 23, 0.06);
+}
+[data-bs-theme="dark"] .card-side {
+  background: linear-gradient(
+    180deg,
+    rgba(18, 20, 24, 0.95),
+    rgba(28, 32, 38, 0.94)
+  );
+  border-color: rgba(255, 255, 255, 0.04);
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.6);
+}
+
+/* small tweaks */
+.detail-body {
+  margin-top: 12px;
+}
+.faction-description {
+  margin: 0 0 8px;
+  line-height: 1.55;
+}
+.server-id {
+  font-size: 0.9rem;
+  word-break: break-all;
+  color: var(--muted);
+}
+
+/* focus outlines for accessibility */
+.faction-card:focus,
+.carousel:focus,
+.join-btn:focus {
+  outline: 3px solid rgba(13, 110, 253, 0.12);
+  outline-offset: 3px;
+}
+
+@media (max-width: 760px) {
+  .card-side {
+    position: static;
+    margin-top: 10px;
+  }
+  .carousel-prev,
+  .carousel-next {
+    width: 34px;
+    height: 34px;
+  }
+}
+
+/* Layout for detail: banner sits above .detail-top; .detail-top contains main + side */
+.detail-top {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+/* On wide screens we show main + side columns (side will be to the right of main).
+   The side panel no longer uses sticky positioning so it sits below the banner in normal flow. */
+@media (min-width: 920px) {
+  .detail-top {
+    flex-direction: row;
+    align-items: flex-start;
+  }
+  .detail-main {
+    flex: 2;
+  }
+  .detail-side {
+    flex: 1;
+    min-width: 280px;
+  }
+}
+
+/* side card: remove sticky so it flows under banner and aligns with main content */
+.card-side {
+  position: static; /* was sticky */
+  padding: 1rem;
+  border-radius: 10px;
+  background: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0.98),
+    rgba(248, 249, 250, 0.95)
+  );
+  border: 1px solid rgba(0, 0, 0, 0.04);
+  box-shadow: 0 12px 30px rgba(2, 6, 23, 0.06);
+}
+
+/* keep dark-theme variant */
+[data-bs-theme="dark"] .card-side {
+  background: linear-gradient(
+    180deg,
+    rgba(18, 20, 24, 0.95),
+    rgba(28, 32, 38, 0.94)
+  );
+  border-color: rgba(255, 255, 255, 0.04);
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.6);
+}
+
+/* add a little top margin on small screens to separate it from banner/main */
+@media (max-width: 920px) {
+  .detail-side .card-side {
+    margin-top: 8px;
+  }
+}
