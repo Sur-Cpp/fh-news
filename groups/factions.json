@@ -1,0 +1,64 @@
+[
+  {
+    "id": 1,
+    "name": "Phoenix Consortium",
+    "owner": "Admiral Kade",
+    "type": "Server",
+    "logo": "https://via.placeholder.com/80x80/0d6efd/fff?text=PC",
+    "banner": "https://via.placeholder.com/1600x480/1f6feb/ffffff?text=Phoenix+Banner",
+    "images": [
+      "https://via.placeholder.com/1600x480/1f6feb/ffffff?text=Phoenix+1",
+      "https://via.placeholder.com/1600x480/0b5ed7/ffffff?text=Phoenix+2",
+      "https://via.placeholder.com/1600x480/174ea6/ffffff?text=Phoenix+3"
+    ],
+    "description": "A powerful trading alliance focused on interstellar commerce and resource management across multiple sectors.",
+    "members": 2847,
+    "founded": "2387",
+    "reputation": 94,
+    "tags": ["Commerce", "Logistics", "Diplomacy"],
+    "invite": "https://discord.gg/example1",
+    "server_id": "123456789012345678",
+    "verified": true
+  },
+  {
+    "id": 2,
+    "name": "Void Hunters",
+    "owner": "Captain Rell",
+    "type": "faction",
+    "logo": "https://via.placeholder.com/80x80/2d3436/ffffff?text=VH",
+    "banner": "https://via.placeholder.com/1600x480/2d3436/ffffff?text=Void+Hunters+Banner",
+    "images": [
+      "https://via.placeholder.com/1600x480/2d3436/ffffff?text=Void+1",
+      "https://via.placeholder.com/1600x480/3b3f44/ffffff?text=Void+2"
+    ],
+    "description": "Elite military faction specializing in deep space reconnaissance and tactical operations in hostile territories.",
+    "members": 1543,
+    "founded": "2391",
+    "reputation": 87,
+    "tags": ["Combat", "Reconnaissance", "Tactics"],
+    "invite": "https://discord.gg/example2",
+    "server_id": "234567890123456789",
+    "verified": true
+  },
+  {
+    "id": 3,
+    "name": "Stellar Cartographers",
+    "owner": "Lia Orion",
+    "type": "community",
+    "logo": "https://tse2.mm.bing.net/th/id/OIP.Wv5EJVx5vjuW5gUIBikgbwHaEo?pid=Api&P=0&h=180",
+    "banner": "https://tse2.mm.bing.net/th/id/OIP.Wv5EJVx5vjuW5gUIBikgbwHaEo?pid=Api&P=0&h=180",
+    "images": [
+      "https://tse2.mm.bing.net/th/id/OIP.Wv5EJVx5vjuW5gUIBikgbwHaEo?pid=Api&P=0&h=180",
+      "https://tse2.mm.bing.net/th/id/OIP.Wv5EJVx5vjuW5gUIBikgbwHaEo?pid=Api&P=0&h=180",
+      "https://tse2.mm.bing.net/th/id/OIP.Wv5EJVx5vjuW5gUIBikgbwHaEo?pid=Api&P=0&h=180"
+    ],
+    "description": "Dedicated explorers mapping uncharted regions of space and discovering new worlds and phenomena.",
+    "members": 892,
+    "founded": "2385",
+    "reputation": 76,
+    "tags": ["Exploration", "Mapping", "Discovery"],
+    "invite": "https://discord.gg/example3",
+    "server_id": "345678901234567890",
+    "verified": true
+  }
+]
