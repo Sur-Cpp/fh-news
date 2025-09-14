@@ -3,7 +3,7 @@
     {
       "section": "1",
       "heading": "Monarchy",
-      "borderColor": "#8B0000", 
+      "borderColor": "#8B0000",
       "images": ["../assets/images/fh-director/monarchy.png|30"],
       "text": {
         "p1": "<h2><b>Name:</b> Monarchy</h2><br><b>Position:</b> Director<br><b>Team:</b> Administration<hr><big>Director Monarchy at your service!</big><br><i>Greetings FH I am almost 17 and I am Chinese!</i><br>I have have been FHS for a little bit over 5 months and I have been leading and building the news team for about 1 month.<hr><mark>Vision:</mark> My vision for the news team is to bring the FH community together and celebrating achievements made by custom sites and factions!"
@@ -12,7 +12,7 @@
     {
       "section": "2",
       "heading": "Niu",
-      "borderColor": "#B22222", 
+      "borderColor": "#B22222",
       "images": ["../assets/images/fh-director/niu.png|30"],
       "text": {
         "p1": "<h2><b>Name:</b> Niuqao</h2><br><b>Position:</b> Assistant Director<br><b>Team:</b> Administration & Writting Team<hr>I'm a former FH Staff member, part of the current Senior FHS Aaron_Alessandro Batch.<br><i>I've wanted to lead the News Team since December 2024, and I'm glad I was given the opportunity.</i><br>Although I'm mostly unavailable, my DMs are open for any questions or concerns.<hr><mark>Vision:</mark> Ideally, the News Team would help the Custom Server community stay informed and do what other news broadcasting factions tried to do.<br>I believe with the support from the FH Administration, this matter can be made with ease.<br><ins>We thank everyone for their support of our Pilot Version.</ins>"
@@ -21,7 +21,7 @@
     {
       "section": "3",
       "heading": "Sel",
-      "borderColor": "#DC143C", 
+      "borderColor": "#DC143C",
       "images": ["../assets/images/fh-director/sel.jpg|30"],
       "text": {
         "p1": "<h2><b>Name:</b> Sel</h2><br><b>Position:</b> Team Leader<br><b>Team:</b> Outreach<hr>I'm Sel, current Factions Hub Staff, and so on.<br><i>I will always love vro. </i><hr><mark>Vision:</mark> I think it'll be a great team, as well as an active one.<br>I believe it'll also be the best team for FH's growth."
@@ -30,7 +30,7 @@
     {
       "section": "4",
       "heading": "Sur",
-      "borderColor": "#FF4500", 
+      "borderColor": "#FF4500",
       "images": ["../assets/images/fh-director/sur.png|30"],
       "text": {
         "p1": "<h2><b>Name:</b> Sur</h2><br><b>Position:</b> Team Lead<br><b>Teams:</b> Website Team & Writing Team<hr>Most of you probably know me already.<br>I lead both the Website and Writing teams, and I also manage the FH News website.<hr><mark>Vision:</mark> Balancing Form and Function, look good feel good and definitely work good."
@@ -39,10 +39,10 @@
     {
       "section": "5",
       "heading": "Aero",
-      "borderColor": "#1E90FF", 
+      "borderColor": "#1E90FF",
       "images": ["../assets/images/fh-staff/aero.jpg|30"],
       "text": {
-        "p1": "<h2><b>Name:</b> Aero</h2><br><b>Position:</b> Trial News Team<br><b>Team:</b> Outreach Team<hr>Hey there! I'm aero1flare, call me aero for short.<br>I'm just a chill guy living a complex life. I hope to being alot to the team.<br>I'm currently working as Outreach Team for FH: News and looks forward to making documentaries and stories for FH: News!"
+        "p1": "<h2><b>Name:</b> Aero</h2><br><b>Position:</b> Trial News Team<br><b>Team:</b> Outreach Team<hr>Hey there! I'm aero1flare, call me aero for short.<br>I'm just a chill guy living a complex life. I hope to bring alot to the team.<br>I'm currently working as Outreach Team for FH: News and looks forward to making documentaries and stories for FH: News!"
       }
     },
     {
@@ -136,14 +136,13 @@
       }
     },
     {
-    "section": "16",
-    "heading": "Jay",
-    "borderColor": "#1E90FF",
-    "images": ["../assets/images/fh-staff/jay.jpeg|30"],
-    "text": {
-      "p1": "<h2><b>Name:</b> Jay</h2><br><b>Position:</b> Trial News Staff<br><b>Team:</b> Outreach Team<hr><b>About me:</b> Hey! My name is Jay but you can call me JJ. I am currently working for the SCP FH News Team. I love to startup servers by setting them up, adding bots, and helping the owner create an inviting server based off their needs. I also make logos, graphics, and videos.<br><i>Profile Picture: (Will be changed soon)</i>"
+      "section": "16",
+      "heading": "Jay",
+      "borderColor": "#1E90FF",
+      "images": ["../assets/images/fh-staff/jay.jpeg|30"],
+      "text": {
+        "p1": "<h2><b>Name:</b> Jay</h2><br><b>Position:</b> Trial News Staff<br><b>Team:</b> Outreach Team<hr><b>About me:</b> Hey! My name is Jay but you can call me JJ. I am currently working for the SCP FH News Team. I love to startup servers by setting them up, adding bots, and helping the owner create an inviting server based off their needs. I also make logos, graphics, and videos.<br><i>Profile Picture: (Will be changed soon)</i>"
+      }
     }
-  }
-    
   ]
 }
