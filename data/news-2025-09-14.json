@@ -1,0 +1,149 @@
+{
+  "news": [
+    {
+      "section": "1",
+      "heading": "Monarchy",
+      "borderColor": "#8B0000", 
+      "images": ["../assets/images/fh-director/monarchy.png|30"],
+      "text": {
+        "p1": "<h2><b>Name:</b> Monarchy</h2><br><b>Position:</b> Director<br><b>Team:</b> Administration<hr><big>Director Monarchy at your service!</big><br><i>Greetings FH I am almost 17 and I am Chinese!</i><br>I have have been FHS for a little bit over 5 months and I have been leading and building the news team for about 1 month.<hr><mark>Vision:</mark> My vision for the news team is to bring the FH community together and celebrating achievements made by custom sites and factions!"
+      }
+    },
+    {
+      "section": "2",
+      "heading": "Niu",
+      "borderColor": "#B22222", 
+      "images": ["../assets/images/fh-director/niu.png|30"],
+      "text": {
+        "p1": "<h2><b>Name:</b> Niuqao</h2><br><b>Position:</b> Assistant Director<br><b>Team:</b> Administration & Writting Team<hr>I'm a former FH Staff member, part of the current Senior FHS Aaron_Alessandro Batch.<br><i>I've wanted to lead the News Team since December 2024, and I'm glad I was given the opportunity.</i><br>Although I'm mostly unavailable, my DMs are open for any questions or concerns.<hr><mark>Vision:</mark> Ideally, the News Team would help the Custom Server community stay informed and do what other news broadcasting factions tried to do.<br>I believe with the support from the FH Administration, this matter can be made with ease.<br><ins>We thank everyone for their support of our Pilot Version.</ins>"
+      }
+    },
+    {
+      "section": "3",
+      "heading": "Sel",
+      "borderColor": "#DC143C", 
+      "images": ["../assets/images/fh-director/sel.jpg|30"],
+      "text": {
+        "p1": "<h2><b>Name:</b> Sel</h2><br><b>Position:</b> Team Leader<br><b>Team:</b> Outreach<hr>I'm Sel, current Factions Hub Staff, and so on.<br><i>I will always love vro. </i><hr><mark>Vision:</mark> I think it'll be a great team, as well as an active one.<br>I believe it'll also be the best team for FH's growth."
+      }
+    },
+    {
+      "section": "4",
+      "heading": "Sur",
+      "borderColor": "#FF4500", 
+      "images": ["../assets/images/fh-director/sur.png|30"],
+      "text": {
+        "p1": "<h2><b>Name:</b> Sur</h2><br><b>Position:</b> Team Lead<br><b>Teams:</b> Website Team & Writing Team<hr>Most of you probably know me already.<br>I lead both the Website and Writing teams, and I also manage the FH News website.<hr><mark>Vision:</mark> Balancing Form and Function, look good feel good and definitely work good."
+      }
+    },
+    {
+      "section": "5",
+      "heading": "Aero",
+      "borderColor": "#1E90FF", 
+      "images": ["../assets/images/fh-staff/aero.jpg|30"],
+      "text": {
+        "p1": "<h2><b>Name:</b> Aero</h2><br><b>Position:</b> Trial News Team<br><b>Team:</b> Outreach Team<hr>Hey there! I'm aero1flare, call me aero for short.<br>I'm just a chill guy living a complex life. I hope to being alot to the team.<br>I'm currently working as Outreach Team for FH: News and looks forward to making documentaries and stories for FH: News!"
+      }
+    },
+    {
+      "section": "6",
+      "heading": "pie",
+      "borderColor": "#4169E1",
+      "images": ["../assets/images/fh-staff/pie.png|30"],
+      "text": {
+        "p1": "<h2><b>Name:</b> pie</h2><br><b>Position:</b> News Team<br><b>Team:</b> Outreach Team<hr>I am pie/hottpie, currently positioned as standard Outreach Team and founder behind the semi-known resource and documentary server Locked In.<br>I wish to bring my collaboratory reach and SCP:RP knowledge in betterment of this team and the community in general."
+      }
+    },
+    {
+      "section": "7",
+      "heading": "Max",
+      "borderColor": "#1E90FF",
+      "images": ["../assets/images/fh-staff/max.png|30"],
+      "text": {
+        "p1": "<h2><b>Name:</b> Max</h2><br><b>Position:</b> Trial News Staff<br><b>Team:</b> Writing Team<hr>Hello there! I’m maxielegacy, call me maxie for short.<br>I’m just a chill and cool dude living in my own complexing life.<br>I’m currently working as a Writing Team Writer for the SCP:RP FH News Team, and I am excited to start a journey here for FH: News!"
+      }
+    },
+    {
+      "section": "8",
+      "heading": "RyRy",
+      "borderColor": "#1E90FF",
+      "images": ["../assets/images/fh-staff/Ryry.png|30"],
+      "text": {
+        "p1": "<h2><b>Name:</b> RyRy</h2><br><b>Position:</b> Trial News Staff<br><b>Team:</b> Outreach Team<hr>Hihi, I’m RyRy!<br>I’m part of the SCP: RP FH News Team’s Outreach Team, and I enjoy meeting new people, applying for positions in different communities, and helping them grow!"
+      }
+    },
+    {
+      "section": "9",
+      "heading": "Aaron",
+      "borderColor": "#1E90FF",
+      "images": ["../assets/images/fh-staff/aaron.png|30"],
+      "text": {
+        "p1": "<h2><b>Name:</b> Aaron</h2><br><b>Position:</b> Trial News Staff<br><b>Team:</b> Outreach Team<hr>Hello! My name is Aaron and I am an SCP RP Content Creator who is working for the Factions Hub News Team.<br>I like checking out different SCP RP custom servers and love interacting with the community."
+      }
+    },
+    {
+      "section": "10",
+      "heading": "Dragoon",
+      "borderColor": "#4169E1",
+      "images": ["../assets/images/fh-staff/Dragoon.png|30"],
+      "text": {
+        "p1": "<h2><b>Name:</b> Dragoon</h2><br><b>Position:</b> News Staff<br><b>Team:</b> Outreach Team<hr>Heya, I'm Dragoon!<br>I love playing video games, listening to music, and exploring the world.<br>I'm interested in psychology and medicine.<br>I have been on the Factions Hub Staff Team and the News Team for almost 2 weeks.<br>I joined the Factions Hub News Team in hopes of helping to bring the community closer together."
+      }
+    },
+    {
+      "section": "11",
+      "heading": "Pooh",
+      "borderColor": "#1E90FF",
+      "images": ["../assets/images/fh-staff/pooh.png|30"],
+      "text": {
+        "p1": "<h2><b>Name:</b> Pooh</h2><br><b>Position:</b> Trial News Staff<br><b>Team:</b> Writing Team<hr>Hello! I’m Pooh or as known as Mythical_Nther.<br>I’m currently positioned in the Writing Department in the News Team.<br>I’ve been in the SCP:RP community for around 7 months now and I hope to bring the community to a better place."
+      }
+    },
+    {
+      "section": "12",
+      "heading": "killerbee6rg",
+      "borderColor": "#4169E1",
+      "images": ["../assets/images/fh-staff/killerbee6rg.jpg|30"],
+      "text": {
+        "p1": "<h2><b>Name:</b> killerbee6rg</h2><br><b>Position:</b> News Staff<br><b>Team:</b> Outreach Team<hr>Hello! I’m killerbog00, also known as Emperor or the Raccoon. :Steamhappy:<br>I’m currently positioned in the Outreach Department in the News Team server and I am a Faction Hub Staff.<br>I’ve been in the SCP:RP community for around 5 years, about to be 6 soon :beanosfacereveal:<br>But now I hope for all of us to get along, same with the SCP community ofc."
+      }
+    },
+    {
+      "section": "13",
+      "heading": "Enigma",
+      "borderColor": "#4169E1",
+      "images": ["../assets/images/fh-staff/enigma.png|30"],
+      "text": {
+        "p1": "<h2><b>Name:</b> Enigma</h2><br><b>Position:</b> News Team Staff<br><b>Team:</b> Outreach Team<hr>Hello, my name is Enigma, also known as Akamema or Maelstrom in other circles.<br>I'm currently in the Outreach Department of the News Team server, and I am a former SCP:RP FH staff member.<br>I’ve been in SCP:RP for about a year and a half now, and I've been in several SCP:RP sites and factions."
+      }
+    },
+    {
+      "section": "14",
+      "heading": "whar",
+      "borderColor": "#4169E1",
+      "images": ["../assets/images/fh-staff/whar.png|30"],
+      "text": {
+        "p1": "<h2><b>Name:</b> whar</h2><br><b>Position:</b> News Team Staff<br><b>Team:</b> Writers<hr>I am a newbie to the team and the FHS scene but I love it around here, been very fun being here so far and an awesome experience.<br>I helped write the Site-416 paper.<br>I’ve been in SCP:RP for longer than I care to admit and look forward to giving you all some nice news.<br>Writer team because my social skills are interesting 😭"
+      }
+    },
+    {
+      "section": "15",
+      "heading": "Blue",
+      "borderColor": "#1E90FF",
+      "images": ["../assets/images/fh-staff/blue.png|30"],
+      "text": {
+        "p1": "<h2><b>Name:</b> Blue</h2><br><b>Position:</b> Trial News Team Staff<br><b>Team:</b> Outreach Team<hr>Hello, I’m Blue.<br>I’ve been playing SCP:RP since 2020 and have been part of various SCP factions.<br>I also have a lot of experience in news teams, most of those roles were in graphic design.<br>Since my writing skills aren’t the best and my social skills are much better, I decided to join the News Outreach Team.<br><br>I also really love foxes and know a lot of random fun facts about them :D"
+      }
+    },
+    {
+    "section": "16",
+    "heading": "Jay",
+    "borderColor": "#1E90FF",
+    "images": ["../assets/images/fh-staff/jay.jpeg|30"],
+    "text": {
+      "p1": "<h2><b>Name:</b> Jay</h2><br><b>Position:</b> Trial News Staff<br><b>Team:</b> Outreach Team<hr><b>About me:</b> Hey! My name is Jay but you can call me JJ. I am currently working for the SCP FH News Team. I love to startup servers by setting them up, adding bots, and helping the owner create an inviting server based off their needs. I also make logos, graphics, and videos.<br><i>Profile Picture: (Will be changed soon)</i>"
+    }
+  }
+    
+  ]
+}

@@ -1,3 +1,4 @@
+// utils.js
 export function formatDateISO(d) {
   const y = d.getFullYear();
   const m = String(d.getMonth() + 1).padStart(2, "0");
@@ -28,6 +29,36 @@ export function toDirectImageUrl(url) {
     }
   } catch (e) {}
   return imageUrl;
+}
+
+export function parseImageSpec(input) {
+  if (!input) return { src: "", width: null, height: null, alt: null };
+  if (typeof input === "object") {
+    const srcRaw = input.src || input.url || input.image || "";
+    const src = toDirectImageUrl(String(srcRaw || ""));
+    const width = Number.isFinite(Number(input.width)) ? Number(input.width) : null;
+    const height = Number.isFinite(Number(input.height)) ? Number(input.height) : null;
+    const alt = input.alt ? String(input.alt) : null;
+    return { src, width, height, alt };
+  }
+
+  if (typeof input === "string") {
+    const parts = input.split("|").map((p) => p.trim());
+    const urlPart = parts[0] || "";
+    let width = null;
+    let height = null;
+    if (parts[1]) {
+      const m = parts[1].match(/^(\d+)(?:x(\d+))?$/);
+      if (m) {
+        width = m[1] ? Number(m[1]) : null;
+        height = m[2] ? Number(m[2]) : null;
+      }
+    }
+    const src = toDirectImageUrl(urlPart);
+    return { src, width, height, alt: null };
+  }
+
+  return { src: String(input), width: null, height: null, alt: null };
 }
 
 export function parseFormattedText(text) {

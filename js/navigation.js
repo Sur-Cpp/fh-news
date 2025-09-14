@@ -1,3 +1,4 @@
+// navigation.js
 import { formatDateISO, parseISOFromFilename } from "./utils.js";
 
 let loaderFn = null;
@@ -8,7 +9,17 @@ export function setLoader(fn) {
 const PROBE_LIMIT_DAYS = 60;
 export let availableNewsDates = null;
 
-export function updateCurrentDate(date = new Date()) {
+
+export function updateCurrentDate(date = null) {
+  if (!date) {
+    if (availableNewsDates && Array.isArray(availableNewsDates) && availableNewsDates.length) {
+      const latestIso = availableNewsDates[0];
+      date = new Date(latestIso + "T00:00:00");
+    } else {
+      date = new Date();
+    }
+  }
+
   const options = {
     weekday: "short",
     year: "numeric",
@@ -64,7 +75,7 @@ export async function fetchNewsManifest() {
       )
       .filter(Boolean)
       .sort()
-      .reverse();
+      .reverse(); 
     availableNewsDates = normalized;
     return normalized;
   } catch (e) {
@@ -86,7 +97,7 @@ export async function goToAdjacentAvailable(delta) {
   const dp = document.getElementById("datePicker");
   const currentISO = dp ? dp.value : formatDateISO(new Date());
   if (manifest && Array.isArray(manifest)) {
-    const asc = [...manifest].sort();
+    const asc = [...manifest].sort(); // ascending
     const idx = asc.indexOf(currentISO);
     if (idx === -1) {
       asc.push(currentISO);
@@ -141,6 +152,42 @@ export async function goToNextNews() {
   updateNavButtonsState();
 }
 
+export async function goToLatestNews() {
+  const manifest = await loadAvailableNews();
+  if (manifest && manifest.length) {
+    const latestIso = manifest[0]; // fetchNewsManifest produced reverse-sorted list
+    updateCurrentDate(new Date(latestIso + "T00:00:00"));
+    updateNavButtonsState();
+    return;
+  }
+
+  const today = new Date();
+  for (let i = 0; i < PROBE_LIMIT_DAYS; i++) {
+    const tryDate = new Date();
+    tryDate.setDate(today.getDate() - i);
+    const url = isoToUrl(formatDateISO(tryDate));
+    try {
+      const resp = await fetch(url, { method: "HEAD", cache: "no-store" });
+      if (resp.ok) {
+        updateCurrentDate(tryDate);
+        updateNavButtonsState();
+        return;
+      }
+    } catch (e) {
+      try {
+        const resp2 = await fetch(url, { cache: "no-store" });
+        if (resp2.ok) {
+          updateCurrentDate(tryDate);
+          updateNavButtonsState();
+          return;
+        }
+      } catch (err) {}
+    }
+  }
+
+  updateNavButtonsState();
+}
+
 export function updateNavButtonsState(date = null) {
   const nextBtn = document.getElementById("nextNewsBtn");
   const prevBtn = document.getElementById("prevNewsBtn");
@@ -155,3 +202,5 @@ export function updateNavButtonsState(date = null) {
   if (nextBtn) nextBtn.disabled = compareDate >= todayMid;
   if (prevBtn) prevBtn.disabled = false;
 }
+
+window.goToLatestNews = goToLatestNews;
