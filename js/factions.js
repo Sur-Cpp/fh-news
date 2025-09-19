@@ -1,4 +1,6 @@
 // js/factions.js - Full replacement
+import { initializeTheme } from "./theme.js";
+
 const DATA_PATH = "../groups/factions.json";
 const $ = (sel, ctx = document) => (ctx || document).querySelector(sel);
 const $$ = (sel, ctx = document) =>
@@ -94,6 +96,32 @@ function typeChipSmallHtml(originalType, normalizedType) {
   )}</span>`;
 }
 
+/* --- invite-code extractor --- */
+function extractInviteCode(invite) {
+  if (!invite) return null;
+  try {
+    const s = String(invite).trim();
+    // Primary: .gg/ or /invite/
+    const m = s.match(/(?:\.gg\/|\/invite\/)([A-Za-z0-9-_]+)/i);
+    if (m && m[1]) return m[1];
+    // If the input is likely the code itself (simple letters/numbers/hyphen/underscore)
+    const simple = s.match(/^([A-Za-z0-9-_]{2,})$/);
+    if (simple) return simple[1];
+    // Fallback: last path segment (strip query/hash)
+    const parts = s.split("/").filter(Boolean);
+    if (parts.length) {
+      const last = parts.pop();
+      if (last) {
+        const code = last.split(/[?#]/)[0];
+        if (code && /[A-Za-z0-9-_]+/.test(code)) return code;
+      }
+    }
+  } catch (e) {
+    // ignore and return null
+  }
+  return null;
+}
+
 /* --- Grid / Card --- */
 function createCardHtml(f) {
   const tags = buildTags(f.tags);
@@ -118,7 +146,6 @@ function createCardHtml(f) {
             <h3 id="f-name-${f.id}" class="faction-name">${escapeHtml(
     f.name
   )}</h3>
-            <!-- type chip moved below owner/tags to keep title row cleaner -->
           </div>
           ${
             f.verified
@@ -127,10 +154,8 @@ function createCardHtml(f) {
           }
         </div>
 
-        <!-- owner shown as Discord chip -->
         <div class="faction-owner">${discordChipHtml(f.owner)}</div>
 
-        <!-- Type chip now appears inline with tags (same row) -->
         <div class="faction-tags-row">
           ${typeChip}
           ${tags}
@@ -156,6 +181,9 @@ function createCardHtml(f) {
               )}" target="_blank" rel="noopener noreferrer"><i class="fas fa-sign-in-alt"></i> Join</a>`
             : `<a class="join-btn" href="#" onclick="event.preventDefault();" title="No invite">Join</a>`
         }
+        <button class="learn-btn" type="button" aria-label="Learn more about ${escapeHtml(
+          f.name
+        )}"><i class="fa-solid fa-circle-info"></i>Info</button>
         <div class="server-id">ID: ${escapeHtml(f.server_id || "—")}</div>
       </div>
     </article>
@@ -179,12 +207,27 @@ function renderGrid(list) {
 function attachCardHandlers() {
   const grid = $("#factionGrid");
   if (!grid) return;
+
   grid.onclick = (e) => {
+    // If user clicked the join link, let it behave normally (no detail open)
+    if (e.target.closest(".join-btn")) return;
+
+    // If user clicked learn-btn specifically, open that card's detail
+    const learn = e.target.closest(".learn-btn");
+    if (learn) {
+      const card = learn.closest(".faction-card");
+      if (card) {
+        openDetail(card.dataset.id);
+      }
+      return;
+    }
+
+    // otherwise, clicking anywhere on the card opens detail
     const card = e.target.closest(".faction-card");
     if (!card) return;
-    if (e.target.closest(".join-btn")) return;
     openDetail(card.dataset.id);
   };
+
   grid.onkeydown = (e) => {
     if (e.key === "Enter") {
       const card = e.target.closest && e.target.closest(".faction-card");
@@ -253,7 +296,14 @@ function buildDetailHtml(f) {
        </button>`
     : `<button class="btn btn-lg join-btn" disabled>No invite available</button>`;
 
-  const openSiteBtnHtml = `<button id="openSiteBtn" class="btn btn-outline-secondary w-100 mt-2"><i class="fas fa-link" aria-hidden="true"></i> Open on site</button>`;
+  // extract the invite code (after .gg/ or /invite/), if possible
+  const inviteCode = extractInviteCode(f.invite);
+  // if invite exists, show code (if found) or default text; button will copy full invite when clicked
+  const openSiteBtnHtml = f.invite
+    ? `<button id="openSiteBtn" class="btn btn-outline-secondary w-100 mt-2" data-invite-code="${escapeHtml(
+        inviteCode || ""
+      )}">${inviteCode ? escapeHtml(inviteCode) : "Open on site"}</button>`
+    : `<button id="openSiteBtn" class="btn btn-outline-secondary w-100 mt-2" disabled>No invite</button>`;
 
   const aboutContent = f.description
     ? `<p class="faction-description">${escapeHtml(f.description)}</p>`
@@ -378,15 +428,20 @@ function openDetail(id) {
     };
   }
 
-  // Open on site (deep link) button wiring
+  // Open on site (now: copy the full invite to clipboard; button shows the invite CODE)
   const openSiteBtn = $("#openSiteBtn");
   if (openSiteBtn) {
-    openSiteBtn.addEventListener("click", (e) => {
+    openSiteBtn.addEventListener("click", async (e) => {
       e.preventDefault();
-      const url = `${window.location.origin}${
-        window.location.pathname.split("?")[0]
-      }?id=${encodeURIComponent(String(item.id))}`;
-      window.open(url, "_blank", "noopener");
+      if (!item.invite || !navigator.clipboard) return;
+      try {
+        await navigator.clipboard.writeText(item.invite);
+        const originalText = openSiteBtn.textContent;
+        openSiteBtn.textContent = "Copied!";
+        setTimeout(() => (openSiteBtn.textContent = originalText), 1400);
+      } catch (err) {
+        console.error(err);
+      }
     });
   }
 
@@ -511,7 +566,7 @@ function filterAndRender(all, qtxt, filter) {
   renderGrid(filtered);
 }
 
-/* Banner overlay syncing with theme and listening for theme changes. */
+/* Banner overlay syncing with theme (keeps CSS var and navbar classes updated). */
 function updateBannerOverlay() {
   const theme =
     document.documentElement.getAttribute("data-bs-theme") || "light";
@@ -529,6 +584,7 @@ function updateBannerOverlay() {
   }
 }
 
+/* Observe data-bs-theme changes so banner overlay + navbar update when theme changes elsewhere */
 new MutationObserver((mutations) => {
   for (const m of mutations) {
     if (m.attributeName === "data-bs-theme") {
@@ -538,29 +594,11 @@ new MutationObserver((mutations) => {
   }
 }).observe(document.documentElement, { attributes: true });
 
-function setupFallbackThemeToggle() {
-  const toggle = document.getElementById("themeToggle");
-  if (!toggle) return;
-  const saved = localStorage.getItem("theme");
-  const current =
-    document.documentElement.getAttribute("data-bs-theme") || saved || "light";
-  document.documentElement.setAttribute("data-bs-theme", current);
-  toggle.checked = current === "dark";
-  updateBannerOverlay();
-
-  toggle.addEventListener("change", () => {
-    const next = toggle.checked ? "dark" : "light";
-    document.documentElement.setAttribute("data-bs-theme", next);
-    localStorage.setItem("theme", next);
-    updateBannerOverlay();
-  });
-}
-
 /* --- main init --- */
 let allData = [];
 async function init() {
+  // ensure overlay matches whichever theme is currently applied
   updateBannerOverlay();
-  setupFallbackThemeToggle();
 
   const now = new Date();
   const cd = $("#currentDate");
@@ -647,4 +685,9 @@ async function init() {
   if (cy) cy.textContent = new Date().getFullYear();
 }
 
-document.addEventListener("DOMContentLoaded", init);
+document.addEventListener("DOMContentLoaded", () => {
+  // initialize central theme handling first so the page picks up the stored theme and toggle wiring
+  initializeTheme();
+  // then run the page's own initialization
+  init();
+});
