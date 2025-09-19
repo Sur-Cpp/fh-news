@@ -785,3 +785,33 @@
   align-items: center;
   border: none;
 }
+
+/* Theme switcher icon base style */
+.theme-switcher {
+  position: fixed; /* or absolute depending on placement */
+  top: 1rem;
+  right: 1rem;
+  width: 2.5rem;
+  height: 2.5rem;
+  font-size: 1.25rem; /* icon size */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 999;
+  cursor: pointer;
+  background: var(--link-color);
+  color: #fff;
+  border-radius: 50%;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+/* Smaller screens adjustment */
+@media (max-width: 480px) {
+  .theme-switcher {
+    width: 2rem;
+    height: 2rem;
+    font-size: 1rem;
+    top: 0.75rem;
+    right: 0.75rem;
+  }
+}
