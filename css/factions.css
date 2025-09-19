@@ -1,137 +1,30 @@
-/* css/factions.css - final cleaned/stable version */
-
-/* Variables */
-:root {
-  --link-color: #0d6efd;
-  --muted: #6c757d;
-  --banner-overlay: linear-gradient(
-    to bottom,
-    rgba(255, 255, 255, 0.3),
-    rgba(255, 255, 255, 0.18)
-  );
-}
-
-/* Header */
-.factions-header {
-  background: linear-gradient(
-    135deg,
-    rgba(13, 110, 253, 0.08),
-    rgba(102, 168, 255, 0.06)
-  );
-  border-radius: 14px;
-  padding: 2.2rem 1.25rem;
-  margin: 1.5rem 0;
-  text-align: center;
-  backdrop-filter: blur(6px);
-  border: 1px solid rgba(255, 255, 255, 0.06);
-}
-.factions-header h1 {
-  font-family: var(--font-heading);
-  font-weight: 700;
-  color: var(--link-color);
-  margin: 0 0 0.25rem;
-}
-
-/* Grid & Cards */
-.faction-grid {
-  display: grid;
-  gap: 1.25rem;
-  grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
-  margin-top: 1rem;
-}
-.faction-card {
-  display: flex;
-  flex-direction: column;
-  gap: 0.6rem;
-  background: rgba(255, 255, 255, 0.98);
-  border-radius: 12px;
-  padding: 1rem;
-  box-shadow: 0 8px 28px rgba(0, 0, 0, 0.06);
-  border: 1px solid rgba(0, 0, 0, 0.04);
-  min-height: 220px;
-  position: relative;
-}
-[data-bs-theme="dark"] .faction-card {
-  background: rgba(33, 37, 41, 0.95);
-  border-color: rgba(255, 255, 255, 0.04);
-}
-.faction-name {
-  font-family: var(--font-heading);
-  font-weight: 700;
-  color: var(--link-color);
-  margin: 0;
-  font-size: 1.15rem;
-}
-[data-bs-theme="dark"] .faction-name {
-  color: #66a8ff;
-}
-.faction-owner {
-  color: var(--muted);
-  font-size: 0.9rem;
-  margin: 0;
-}
-
-/* Banner inside card (keeps small preview) */
-.faction-banner {
-  width: 100%;
-  height: 120px;
-  object-fit: cover;
-  border-radius: 8px;
-  display: block;
-  background: #f1f1f1;
-}
-
-/* Tags / Chips / Filters */
-.faction-tags-row {
-  display: flex;
-  gap: 0.45rem;
-  flex-wrap: wrap;
-  margin-top: 0.4rem;
-}
-.faction-tag {
-  padding: 0.18rem 0.5rem;
-  border-radius: 8px;
-  background: rgba(13, 110, 253, 0.08);
-  color: var(--link-color);
-  font-size: 0.8rem;
-  border: 1px solid rgba(13, 110, 253, 0.08);
-}
-
-/* Filter buttons (chip style) */
-.filters-container .filter-btn {
-  border-radius: 999px;
-  padding: 0.35rem 0.8rem;
-  border: 2px solid var(--link-color);
-  color: var(--link-color);
-  background: transparent;
-  font-weight: 700;
-}
-.filters-container .filter-btn.active,
-.filters-container .filter-btn:hover {
-  background: var(--link-color);
+/* Type chips for cards and detail view */
+.type-chip-card {
+  display: inline-block;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
   color: #fff;
-}
-[data-bs-theme="dark"] .filters-container .filter-btn {
-  border-color: #66a8ff;
-  color: #66a8ff;
-}
-[data-bs-theme="dark"] .filters-container .filter-btn.active,
-[data-bs-theme="dark"] .filters-container .filter-btn:hover {
-  background: #66a8ff;
-  color: #000;
+  padding: 0.22rem 0.55rem;
+  border-radius: 8px;
+  font-weight: 700;
+  font-size: 0.78rem;
+  box-shadow: 0 2px 8px rgba(102, 126, 234, 0.25);
+  white-space: nowrap;
+  text-transform: capitalize;
+  margin-right: 0.5rem;
 }
 
 /* type chip (used in detail meta) */
 .type-chip {
   display: inline-block;
-  background: linear-gradient(90deg, #0d6efd, #4f46e5);
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
   color: #fff;
   padding: 0.28rem 0.6rem;
-  border-radius: 12px;
+  border-radius: 10px;
   font-weight: 700;
   font-size: 0.82rem;
-  box-shadow: 0 6px 16px rgba(13, 110, 253, 0.12);
+  box-shadow: 0 3px 12px rgba(102, 126, 234, 0.2);
   white-space: nowrap;
+  text-transform: capitalize;
 }
 
 /* Stats */
@@ -158,6 +51,64 @@
   text-transform: uppercase;
 }
 
+/* Sidebar stats with icons */
+.sidebar-section {
+  margin-bottom: 1rem;
+}
+
+.sidebar-section h5 {
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: var(--link-color);
+  margin-bottom: 0.75rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+[data-bs-theme="dark"] .sidebar-section h5 {
+  color: #66a8ff;
+}
+
+.stat-row {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0.4rem 0;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+}
+
+.stat-row:last-child {
+  border-bottom: none;
+}
+
+[data-bs-theme="dark"] .stat-row {
+  border-bottom-color: rgba(255, 255, 255, 0.06);
+}
+
+.stat-row i {
+  width: 16px;
+  color: var(--muted);
+  font-size: 0.85rem;
+}
+
+.stat-row .stat-label {
+  flex: 1;
+  font-size: 0.85rem;
+  color: var(--muted);
+  margin: 0;
+}
+
+.stat-row .stat-value {
+  font-weight: 600;
+  color: var(--link-color);
+  font-size: 0.85rem;
+}
+
+[data-bs-theme="dark"] .stat-row .stat-value {
+  color: #66a8ff;
+}
+
 /* Footer / join */
 .faction-footer {
   display: flex;
@@ -182,11 +133,8 @@
   outline-offset: 3px;
 }
 
-/* Verified badge */
+/* Verified badge - smart positioning */
 .verified-badge {
-  position: absolute;
-  top: 12px;
-  right: 12px;
   background: #28a745;
   color: #fff;
   padding: 0.2rem 0.45rem;
@@ -194,6 +142,30 @@
   font-weight: 700;
   font-size: 0.78rem;
   z-index: 5;
+  white-space: nowrap;
+  flex-shrink: 0;
+  align-self: flex-start;
+}
+
+/* Detail view verified badge positioning */
+.detail-top-meta .verified-badge {
+  position: absolute;
+  top: 0;
+  right: 0;
+}
+
+/* Detail view header adjustments for logo space */
+.detail-top-meta {
+  position: relative;
+  padding-left: 60px; /* Make space for larger logo in detail view */
+}
+
+.detail-top-meta .faction-name {
+  margin-top: 0;
+}
+
+.detail-top-meta .faction-owner {
+  margin-left: 0;
 }
 
 /* Detail view container */
@@ -363,8 +335,7 @@
 
 /* side card */
 .card-side {
-  position: sticky;
-  top: 84px;
+  position: static;
   padding: 1rem;
   border-radius: 10px;
   background: linear-gradient(
@@ -383,6 +354,37 @@
   );
   border-color: rgba(255, 255, 255, 0.04);
   box-shadow: 0 12px 30px rgba(0, 0, 0, 0.6);
+}
+
+/* Detail sections with icons */
+.detail-section {
+  margin-bottom: 1.5rem;
+}
+
+.detail-section h4 {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--link-color);
+  margin-bottom: 0.75rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+[data-bs-theme="dark"] .detail-section h4 {
+  color: #66a8ff;
+}
+
+.detail-section h4 i {
+  font-size: 0.9rem;
+}
+
+/* Tags display in detail view */
+.tags-display {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+  align-items: center;
 }
 
 /* small tweaks */
@@ -419,57 +421,284 @@
   }
 }
 
-/* Layout for detail: banner sits above .detail-top; .detail-top contains main + side */
-.detail-top {
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
-}
-
-/* On wide screens we show main + side columns (side will be to the right of main).
-   The side panel no longer uses sticky positioning so it sits below the banner in normal flow. */
-@media (min-width: 920px) {
-  .detail-top {
-    flex-direction: row;
-    align-items: flex-start;
-  }
-  .detail-main {
-    flex: 2;
-  }
-  .detail-side {
-    flex: 1;
-    min-width: 280px;
-  }
-}
-
-/* side card: remove sticky so it flows under banner and aligns with main content */
-.card-side {
-  position: static; /* was sticky */
-  padding: 1rem;
-  border-radius: 10px;
-  background: linear-gradient(
-    180deg,
-    rgba(255, 255, 255, 0.98),
-    rgba(248, 249, 250, 0.95)
-  );
-  border: 1px solid rgba(0, 0, 0, 0.04);
-  box-shadow: 0 12px 30px rgba(2, 6, 23, 0.06);
-}
-
-/* keep dark-theme variant */
-[data-bs-theme="dark"] .card-side {
-  background: linear-gradient(
-    180deg,
-    rgba(18, 20, 24, 0.95),
-    rgba(28, 32, 38, 0.94)
-  );
-  border-color: rgba(255, 255, 255, 0.04);
-  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.6);
-}
-
 /* add a little top margin on small screens to separate it from banner/main */
 @media (max-width: 920px) {
   .detail-side .card-side {
     margin-top: 8px;
   }
+}
+
+/* --- Discord owner chip --- */
+.discord-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0.28rem 0.7rem;
+  border-radius: 999px;
+  background: #5865f2; /* Discord blurple */
+  color: #ffffff;
+  font-weight: 700;
+  font-size: 0.88rem;
+  line-height: 1;
+  box-shadow: 0 6px 18px rgba(88, 101, 242, 0.16);
+  vertical-align: middle;
+}
+
+.discord-chip i.fab,
+.discord-chip i.fa-discord {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 20px;
+  height: 20px;
+  font-size: 14px;
+  border-radius: 50%;
+  color: #fff;
+  opacity: 0.98;
+}
+
+/* Slightly smaller chip in card grid to avoid crowding */
+.faction-card .discord-chip {
+  padding: 0.18rem 0.6rem;
+  font-size: 0.85rem;
+  gap: 0.45rem;
+}
+
+/* Ensure chip wraps cleanly on very narrow screens */
+.faction-tags-row + .discord-chip,
+.card-header-area .discord-chip {
+  display: inline-flex;
+  margin-top: 0.35rem;
+}
+
+/* Dark-theme tweak (keeps color but increases contrast subtlely) */
+[data-bs-theme="dark"] .discord-chip {
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.6);
+}
+
+/* small username span to allow text truncation if needed */
+.discord-username {
+  display: inline-block;
+  max-width: 13rem;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  vertical-align: middle;
+}
+
+/* tune spacing for detail header where chip sits under the name */
+.detail-top-meta .faction-owner {
+  margin-top: 8px;
+}
+
+/* Variables */
+:root {
+  --link-color: #0d6efd;
+  --muted: #6c757d;
+  --banner-overlay: linear-gradient(
+    to bottom,
+    rgba(255, 255, 255, 0.3),
+    rgba(255, 255, 255, 0.18)
+  );
+}
+
+/* Header */
+.factions-header {
+  background: linear-gradient(
+    135deg,
+    rgba(13, 110, 253, 0.08),
+    rgba(102, 168, 255, 0.06)
+  );
+  border-radius: 14px;
+  padding: 2.2rem 1.25rem;
+  margin: 1.5rem 0;
+  text-align: center;
+  backdrop-filter: blur(6px);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+}
+.factions-header h1 {
+  font-family: var(--font-heading);
+  font-weight: 700;
+  color: var(--link-color);
+  margin: 0 0 0.25rem;
+}
+
+/* Grid & Cards */
+.faction-grid {
+  display: grid;
+  gap: 1.25rem;
+  grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+  margin-top: 1rem;
+}
+.faction-card {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+  background: rgba(255, 255, 255, 0.98);
+  border-radius: 12px;
+  padding: 1rem;
+  box-shadow: 0 8px 28px rgba(0, 0, 0, 0.06);
+  border: 1px solid rgba(0, 0, 0, 0.04);
+  min-height: 240px;
+  position: relative;
+}
+
+/* Card header area - handles spacing around logo */
+.card-header-area {
+  margin-left: calc(20% + 16px); /* Make space for logo */
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+}
+
+/* Title row - flexbox for name + verified badge */
+.card-title-row {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+  min-height: 1.4rem; /* Ensure space for single line text */
+}
+
+/* Type row - removed as type is now with tags */
+
+[data-bs-theme="dark"] .faction-card {
+  background: rgba(33, 37, 41, 0.95);
+  border-color: rgba(255, 255, 255, 0.04);
+}
+.faction-name {
+  font-family: var(--font-heading);
+  font-weight: 700;
+  color: var(--link-color);
+  margin: 0;
+  font-size: 1.15rem;
+  flex: 1;
+  min-width: 0; /* Allow text to wrap */
+}
+[data-bs-theme="dark"] .faction-name {
+  color: #66a8ff;
+}
+.faction-owner {
+  color: var(--muted);
+  font-size: 0.9rem;
+  margin: 0;
+}
+
+/* Logo positioning - top left corner for both card and detail views */
+.faction-logo {
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  width: 20%;
+  height: 20%;
+  max-width: 5rem;
+  max-height: 5rem;
+  margin-top: 1rem;
+  object-fit: cover;
+  z-index: 5;
+}
+
+/* Detail view logo positioning */
+.detail-top-meta {
+  position: relative;
+}
+
+.detail-top-meta .faction-logo {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 3rem;
+  height: 3rem;
+  object-fit: cover;
+  z-index: 5;
+}
+
+/* Tags / Chips / Filters */
+.faction-tags-row {
+  display: flex;
+  gap: 0.45rem;
+  flex-wrap: wrap;
+  margin-top: 0.4rem;
+}
+.faction-tag {
+  padding: 0.18rem 0.5rem;
+  border-radius: 8px;
+  background: rgba(13, 110, 253, 0.08);
+  color: var(--link-color);
+  font-size: 0.8rem;
+  border: 1px solid rgba(13, 110, 253, 0.08);
+}
+
+/* Filter buttons (chip style) */
+.filters-container .filter-btn {
+  border-radius: 999px;
+  padding: 0.35rem 0.8rem;
+  border: 2px solid var(--link-color);
+  color: var(--link-color);
+  background: transparent;
+  font-weight: 700;
+}
+.filters-container .filter-btn.active,
+.filters-container .filter-btn:hover {
+  background: var(--link-color);
+  color: #fff;
+}
+[data-bs-theme="dark"] .filters-container .filter-btn {
+  border-color: #66a8ff;
+  color: #66a8ff;
+}
+[data-bs-theme="dark"] .filters-container .filter-btn.active,
+[data-bs-theme="dark"] .filters-container .filter-btn:hover {
+  background: #66a8ff;
+  color: #000;
+}
+
+/* Ensure card header area can host an absolutely-positioned verified badge */
+.card-header-area {
+  position: relative;
+  /* make a little right padding so content doesn't underlap the badge */
+  padding-right: 5rem;
+}
+
+/* Position verified badge for cards (keeps detail view rule intact) */
+.faction-card .verified-badge {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  z-index: 6;
+  /* ensure it never shrinks and stays at top */
+  flex: 0 0 auto;
+  align-self: flex-start;
+}
+
+/* Keep left column flexible so long names wrap properly without pushing other elements */
+.card-title-row .title-left {
+  flex: 1;
+  min-width: 0; /* allows child to shrink/wrap correctly inside flex */
+}
+
+/* Ensure tags row lines up type chip + tags on one line when space permits */
+.faction-tags-row {
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+  flex-wrap: wrap;
+  margin-top: 0.4rem;
+}
+
+/* small type chip variant used on cards */
+.type-chip--small {
+  display: inline-block;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: #fff;
+  padding: 0.18rem 0.5rem;
+  border-radius: 8px;
+  font-weight: 700;
+  font-size: 0.78rem;
+  box-shadow: 0 2px 8px rgba(102, 126, 234, 0.18);
+  white-space: nowrap;
+  text-transform: capitalize;
+  margin-right: 0.25rem;
+  flex-shrink: 0;
 }

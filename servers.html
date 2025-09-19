@@ -24,37 +24,52 @@
   </head>
   <body class="factions-page">
     <!-- Navbar -->
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
-      <div class="container-fluid">
-        <a class="navbar-brand d-flex align-items-center" href="./index.html">
-          <img
-            src="../assets/fh-logo.png"
-            alt="Faction Hub"
-            class="navbar-logo"
-          />
-          <div class="ms-2 d-none d-lg-block">
-            <div id="fh">Faction Hub</div>
-            <small class="muted">Verified communities</small>
-          </div>
-        </a>
+    <nav
+      class="navbar navbar-expand-lg sticky-top navbar-light bg-light"
+      data-bs-theme-target
+    >
+      <div class="container-fluid align-items-center">
+        <!-- Logo -->
+        <img src="./assets/fhlogo.png" alt="FH" class="navbar-logo" />
 
+        <!-- Center title -->
+        <div class="text-center mx-2 fh">Faction Hub Server Browser</div>
+
+        <!-- Desktop: News / Servers switch (left of title area) -->
+        <ul class="navbar-nav d-none d-lg-flex align-items-center ms-2">
+          <li class="nav-item">
+            <!-- News shown muted on servers page -->
+            <a class="nav-link text-muted" href="./index.html">News</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link active" href="./servers.html">Servers</a>
+          </li>
+        </ul>
+
+        <!-- Mobile Toggle Button -->
         <button
           class="navbar-toggler"
           type="button"
           data-bs-toggle="collapse"
           data-bs-target="#navbarContent"
+          aria-controls="navbarContent"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
         >
           <span class="navbar-toggler-icon"></span>
         </button>
 
+        <!-- Navbar Content (includes a mobile copy of the switch so it's accessible when collapsed) -->
         <div class="collapse navbar-collapse" id="navbarContent">
           <ul class="navbar-nav ms-auto align-items-center">
-            <li class="nav-item me-3">
-              <span id="currentDate" class="date-display"></span>
+            <!-- Mobile copy of the switch (visible only inside collapse on small screens) -->
+            <li class="nav-item d-lg-none">
+              <a class="nav-link text-muted" href="./index.html">News</a>
             </li>
-            <li class="nav-item me-3">
-              <input id="datePicker" class="custom-datepicker" type="date" />
+            <li class="nav-item d-lg-none">
+              <a class="nav-link active" href="./servers.html">Servers</a>
             </li>
+
             <li class="nav-item me-3">
               <label class="theme-toggle-new" title="Toggle theme">
                 <input id="themeToggle" type="checkbox" />
@@ -66,12 +81,6 @@
                   <span class="toggle-thumb"></span>
                 </span>
               </label>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="./index.html">News</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link active" href="./factions.html">Factions</a>
             </li>
           </ul>
         </div>

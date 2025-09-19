@@ -1,5 +1,4 @@
-// js/factions.js - updated: theme-safe, banner first, carousel after tags, click opens image in new tab
-
+// js/factions.js - Full replacement
 const DATA_PATH = "../groups/factions.json";
 const $ = (sel, ctx = document) => (ctx || document).querySelector(sel);
 const $$ = (sel, ctx = document) =>
@@ -46,18 +45,14 @@ async function fetchFactions() {
       name: d.name,
       owner: d.owner || "",
       type: normalizeType(d.type),
+      originalType: d.type || "",
       logo: d.logo || "",
       banner: d.banner || d.logo || "",
-      images:
-        Array.isArray(d.images) && d.images.length
-          ? d.images
-          : d.banner
-          ? [d.banner]
-          : [],
+      // IMPORTANT: additional images should be stored in `images`. Do NOT fallback to banner here.
+      images: Array.isArray(d.images) && d.images.length ? d.images : [],
       description: d.description || "",
       members: Number(d.members || 0),
       founded: d.founded || "",
-      trust: d.trust ?? d.reputation ?? d.influence ?? d.score ?? "",
       tags: Array.isArray(d.tags) ? d.tags : [],
       invite: d.invite || "",
       server_id: d.server_id || d.serverId || d.server || "",
@@ -74,42 +69,76 @@ function buildTags(tags = []) {
     .map((t) => `<span class="faction-tag">${escapeHtml(t)}</span>`)
     .join(" ");
 }
-function typeLabel(t) {
-  t = String(t || "").toLowerCase();
+
+/* prefer showing original textual type if present */
+function typeLabel(originalType, normalizedType) {
+  if (originalType && String(originalType).trim() !== "")
+    return escapeHtml(originalType);
+  const t = String(normalizedType || "").toLowerCase();
   if (t === "site") return "Site";
   if (t === "faction") return "Faction";
   return "Community";
 }
 
+/* helper: discord owner chip markup */
+function discordChipHtml(owner) {
+  const ownerText = escapeHtml(owner || "—");
+  return `<span class="discord-chip" title="Discord: ${ownerText}"><i class="fab fa-discord" aria-hidden="true"></i><span class="discord-username">${ownerText}</span></span>`;
+}
+
+/* small type chip for cards */
+function typeChipSmallHtml(originalType, normalizedType) {
+  return `<span class="type-chip type-chip--small">${typeLabel(
+    originalType,
+    normalizedType
+  )}</span>`;
+}
+
 /* --- Grid / Card --- */
 function createCardHtml(f) {
   const tags = buildTags(f.tags);
-  const trust =
-    f.trust !== "" && f.trust != null ? escapeHtml(String(f.trust)) : "—";
+  const typeChip = typeChipSmallHtml(f.originalType, f.type);
+
   return `
     <article class="faction-card" data-id="${escapeHtml(
       f.id
     )}" tabindex="0" aria-labelledby="f-name-${f.id}">
       ${
-        f.verified
-          ? `<div class="verified-badge"><i class="fas fa-check-circle"></i> Verified</div>`
-          : ""
-      }
-      <div>
-        <h3 id="f-name-${f.id}" class="faction-name">${escapeHtml(f.name)}</h3>
-        <div class="faction-owner">Owner: ${escapeHtml(f.owner || "—")}</div>
-        <div class="faction-tags-row">${tags}</div>
-      </div>
-      ${
-        f.banner
-          ? `<img class="faction-banner" src="${escapeHtml(
-              f.banner
+        f.logo
+          ? `<img class="faction-logo" src="${escapeHtml(
+              f.logo
             )}" alt="${escapeHtml(
               f.name
-            )} banner" onerror="this.style.display='none'">`
+            )} logo" onerror="this.style.display='none'">`
           : ""
       }
+      <div class="card-header-area">
+        <div class="card-title-row">
+          <div class="title-left">
+            <h3 id="f-name-${f.id}" class="faction-name">${escapeHtml(
+    f.name
+  )}</h3>
+            <!-- type chip moved below owner/tags to keep title row cleaner -->
+          </div>
+          ${
+            f.verified
+              ? `<div class="verified-badge"><i class="fas fa-check-circle" aria-hidden="true"></i> Verified</div>`
+              : ""
+          }
+        </div>
+
+        <!-- owner shown as Discord chip -->
+        <div class="faction-owner">${discordChipHtml(f.owner)}</div>
+
+        <!-- Type chip now appears inline with tags (same row) -->
+        <div class="faction-tags-row">
+          ${typeChip}
+          ${tags}
+        </div>
+      </div>
+
       <p class="faction-description">${escapeHtml(f.description)}</p>
+
       <div class="faction-stats" role="list">
         <div class="stat-item"><span class="stat-number">${Number(
           f.members
@@ -117,8 +146,8 @@ function createCardHtml(f) {
         <div class="stat-item"><span class="stat-number">${escapeHtml(
           f.founded
         )}</span><span class="stat-label">Founded</span></div>
-        <div class="stat-item"><span class="stat-number">${trust}</span><span class="stat-label">Trust</span></div>
       </div>
+
       <div class="faction-footer">
         ${
           f.invite
@@ -132,6 +161,7 @@ function createCardHtml(f) {
     </article>
   `;
 }
+
 function renderGrid(list) {
   const grid = $("#factionGrid"),
     no = $("#noResults");
@@ -145,6 +175,7 @@ function renderGrid(list) {
   grid.innerHTML = list.map(createCardHtml).join("");
   attachCardHandlers();
 }
+
 function attachCardHandlers() {
   const grid = $("#factionGrid");
   if (!grid) return;
@@ -162,31 +193,41 @@ function attachCardHandlers() {
   };
 }
 
-/* --- Detail HTML: Banner first, tags, then carousel --- */
-function renderStats(f) {
+/* --- Sidebar stats for detail --- */
+function renderSidebarStats(f) {
   return `
-  <div class="faction-stats" role="list">
-    <div class="stat-item"><span class="stat-number">${Number(
-      f.members
-    ).toLocaleString()}</span><span class="stat-label">Members</span></div>
-    <div class="stat-item"><span class="stat-number">${escapeHtml(
-      f.founded
-    )}</span><span class="stat-label">Founded</span></div>
-    <div class="stat-item"><span class="stat-number">${escapeHtml(
-      String(f.trust || "—")
-    )}</span><span class="stat-label">Trust</span></div>
+  <div class="sidebar-section">
+    <h5><i class="fas fa-chart-bar" aria-hidden="true"></i> Statistics</h5>
+    <div class="stat-row">
+      <i class="fas fa-users" aria-hidden="true"></i>
+      <span class="stat-label">Members</span>
+      <span class="stat-value">${Number(f.members).toLocaleString()}</span>
+    </div>
+    <div class="stat-row">
+      <i class="fas fa-calendar-alt" aria-hidden="true"></i>
+      <span class="stat-label">Founded</span>
+      <span class="stat-value">${escapeHtml(f.founded || "—")}</span>
+    </div>
+    ${
+      f.server_id
+        ? `
+    <div class="stat-row">
+      <i class="fas fa-server" aria-hidden="true"></i>
+      <span class="stat-label">Server ID</span>
+      <span class="stat-value server-id">${escapeHtml(f.server_id)}</span>
+    </div>
+    `
+        : ""
+    }
   </div>`;
 }
 
+/* --- Detail HTML: About moved above the carousel; carousel shows only additional images (not banner) --- */
 function buildDetailHtml(f) {
   const tags = buildTags(f.tags);
 
-  const images =
-    Array.isArray(f.images) && f.images.length
-      ? f.images
-      : f.banner
-      ? [f.banner]
-      : [];
+  // Use only additional images here. Banner stays separate.
+  const images = Array.isArray(f.images) && f.images.length ? f.images : [];
 
   const slides = images
     .map(
@@ -205,12 +246,20 @@ function buildDetailHtml(f) {
     ? `<a class="btn btn-lg join-btn" href="${escapeHtml(
         f.invite
       )}" target="_blank" rel="noopener noreferrer">
-          <i class="fas fa-sign-in-alt"></i> Join
+          <i class="fas fa-sign-in-alt"></i> Join Server
         </a>
        <button id="copyInviteBtn" class="btn btn-outline-secondary btn-lg ms-2">
          Copy Invite
        </button>`
-    : `<button class="btn btn-lg join-btn" disabled>No invite</button>`;
+    : `<button class="btn btn-lg join-btn" disabled>No invite available</button>`;
+
+  const openSiteBtnHtml = `<button id="openSiteBtn" class="btn btn-outline-secondary w-100 mt-2"><i class="fas fa-link" aria-hidden="true"></i> Open on site</button>`;
+
+  const aboutContent = f.description
+    ? `<p class="faction-description">${escapeHtml(f.description)}</p>`
+    : `<p class="muted">No additional information available for this ${escapeHtml(
+        f.originalType || f.type
+      )}.</p>`;
 
   return `
     <article class="detail-article" aria-live="polite">
@@ -219,15 +268,29 @@ function buildDetailHtml(f) {
       <div class="detail-top-meta">
         ${
           f.verified
-            ? `<div class="verified-badge"><i class="fas fa-check-circle"></i> Verified</div>`
+            ? `<div class="verified-badge"><i class="fas fa-check-circle" aria-hidden="true"></i> Verified</div>`
             : ""
         }
+
+        ${
+          f.logo
+            ? `<img class="faction-logo" src="${escapeHtml(
+                f.logo
+              )}" alt="${escapeHtml(
+                f.name
+              )} logo" onerror="this.style.display='none'">`
+            : ""
+        }
+
         <h2 class="faction-name">${escapeHtml(f.name)}</h2>
-        <div class="faction-owner muted">Owner: ${escapeHtml(
-          f.owner || "—"
+
+        <!-- owner shown as Discord chip -->
+        <div class="faction-owner muted" style="margin-top:6px">${discordChipHtml(
+          f.owner
         )}</div>
-        <div class="meta-row">
-          <span class="type-chip">${escapeHtml(typeLabel(f.type))}</span>
+
+        <div class="meta-row" style="margin: 0.5em 0em">
+          <span class="type-chip">${typeLabel(f.originalType, f.type)}</span>
           <span class="ms-2">${tags}</span>
         </div>
       </div>
@@ -245,10 +308,17 @@ function buildDetailHtml(f) {
 
       <div class="detail-top">
         <div class="detail-main">
+          <!-- ABOUT on top (above the additional images) -->
+          <div class="detail-body">
+            <div class="detail-section">
+              <h4><i class="fas fa-info-circle" aria-hidden="true"></i> About</h4>
+              ${aboutContent}
+            </div>
+          </div>
 
-          <!-- Gallery -->
+          <!-- Gallery (additional images only) -->
           ${
-            images.length > 1 || (images.length === 1 && !f.banner)
+            images.length > 0
               ? `
               <div class="carousel" tabindex="0" role="region" aria-label="${escapeHtml(
                 f.name
@@ -257,57 +327,22 @@ function buildDetailHtml(f) {
                 ${
                   images.length > 1
                     ? `
-                      <button class="carousel-prev" aria-label="Previous"><i class="fas fa-chevron-left"></i></button>
-                      <button class="carousel-next" aria-label="Next"><i class="fas fa-chevron-right"></i></button>`
+                      <button class="carousel-prev" aria-label="Previous"><i class="fas fa-chevron-left" aria-hidden="true"></i></button>
+                      <button class="carousel-next" aria-label="Next"><i class="fas fa-chevron-right" aria-hidden="true"></i></button>`
                     : ""
                 }
                 <div class="carousel-dots"></div>
               </div>`
               : ""
           }
-
-          <!-- Description -->
-          <div class="detail-body">
-            ${
-              f.description
-                ? `<p class="faction-description">${escapeHtml(
-                    f.description
-                  )}</p>`
-                : ""
-            }
-
-            <div class="detail-section">
-              <h4>Overview</h4>
-              <p>Members: <strong>${Number(
-                f.members
-              ).toLocaleString()}</strong> · Founded: <strong>${escapeHtml(
-    f.founded || "—"
-  )}</strong></p>
-              <p>Trust: <strong>${escapeHtml(
-                String(f.trust || "—")
-              )}</strong></p>
-            </div>
-
-            <div class="detail-section">
-              <h4>About</h4>
-              <p class="muted">This is placeholder longer content for the detailed view. Add rules, links, or structured info here.</p>
-            </div>
-          </div>
         </div>
 
         <!-- Sidebar -->
         <aside class="detail-side">
           <div class="card-side">
             <div>${inviteBlock}</div>
-            <div class="mt-3">${renderStats(f)}</div>
-            <div class="detail-actions mt-2">
-              <a class="btn btn-outline-primary w-100" href="#" id="openServerBtn">Open Server</a>
-              <a class="btn btn-secondary w-100" href="#" id="openSiteBtn">Open on site</a>
-            </div>
-            <div class="mt-3 small muted">
-              <strong>Server ID</strong>
-              <div class="server-id">${escapeHtml(f.server_id || "—")}</div>
-            </div>
+            <div style="margin-top:8px">${openSiteBtnHtml}</div>
+            <div class="mt-3">${renderSidebarStats(f)}</div>
           </div>
         </aside>
       </div>
@@ -326,6 +361,7 @@ function openDetail(id) {
   $("#factionsList").classList.add("d-none");
   $("#factionDetail").classList.remove("d-none");
 
+  // copy invite button
   const copyBtn = $("#copyInviteBtn");
   if (copyBtn) {
     copyBtn.onclick = async (e) => {
@@ -342,10 +378,22 @@ function openDetail(id) {
     };
   }
 
+  // Open on site (deep link) button wiring
+  const openSiteBtn = $("#openSiteBtn");
+  if (openSiteBtn) {
+    openSiteBtn.addEventListener("click", (e) => {
+      e.preventDefault();
+      const url = `${window.location.origin}${
+        window.location.pathname.split("?")[0]
+      }?id=${encodeURIComponent(String(item.id))}`;
+      window.open(url, "_blank", "noopener");
+    });
+  }
+
   // initialize carousel interaction
   initDetailCarousel();
 
-  // image click: open in new tab (user wanted Gyazo — uploading would need API keys; this opens raw image in a tab)
+  // image click: open in new tab
   const imgs = detailContent.querySelectorAll(".carousel-img, .main-banner");
   imgs.forEach((img) => {
     img.style.cursor = "zoom-in";
@@ -388,16 +436,18 @@ function initDetailCarousel() {
   const len = slides.length;
 
   // dots
-  dots.innerHTML = "";
-  slides.forEach((s, i) => {
-    const btn = document.createElement("button");
-    btn.className = "carousel-dot";
-    btn.type = "button";
-    btn.dataset.index = String(i);
-    btn.setAttribute("aria-label", `Go to image ${i + 1}`);
-    if (i === 0) btn.classList.add("active");
-    dots.appendChild(btn);
-  });
+  if (dots) {
+    dots.innerHTML = "";
+    slides.forEach((s, i) => {
+      const btn = document.createElement("button");
+      btn.className = "carousel-dot";
+      btn.type = "button";
+      btn.dataset.index = String(i);
+      btn.setAttribute("aria-label", `Go to image ${i + 1}`);
+      if (i === 0) btn.classList.add("active");
+      dots.appendChild(btn);
+    });
+  }
 
   function update() {
     slides.forEach((s, i) => {
@@ -406,9 +456,11 @@ function initDetailCarousel() {
       s.style.pointerEvents = hidden ? "none" : "auto";
       s.setAttribute("aria-hidden", String(hidden));
     });
-    Array.from(dots.children).forEach((d) =>
-      d.classList.toggle("active", Number(d.dataset.index) === idx)
-    );
+    if (dots) {
+      Array.from(dots.children).forEach((d) =>
+        d.classList.toggle("active", Number(d.dataset.index) === idx)
+      );
+    }
   }
   function go(delta) {
     idx = (idx + delta + len) % len;
@@ -425,12 +477,14 @@ function initDetailCarousel() {
       e.preventDefault();
       go(1);
     });
-  dots.addEventListener("click", (e) => {
-    const b = e.target.closest(".carousel-dot");
-    if (!b) return;
-    idx = Number(b.dataset.index);
-    update();
-  });
+  if (dots) {
+    dots.addEventListener("click", (e) => {
+      const b = e.target.closest(".carousel-dot");
+      if (!b) return;
+      idx = Number(b.dataset.index);
+      update();
+    });
+  }
   carousel.addEventListener("keydown", (e) => {
     if (e.key === "ArrowLeft") go(-1);
     if (e.key === "ArrowRight") go(1);
@@ -457,8 +511,7 @@ function filterAndRender(all, qtxt, filter) {
   renderGrid(filtered);
 }
 
-/* Banner overlay syncing with theme and listening for theme changes.
-   This avoids fighting your theme.js: we observe data-bs-theme and react. */
+/* Banner overlay syncing with theme and listening for theme changes. */
 function updateBannerOverlay() {
   const theme =
     document.documentElement.getAttribute("data-bs-theme") || "light";
@@ -467,7 +520,6 @@ function updateBannerOverlay() {
       ? "linear-gradient(to bottom, rgba(0,0,0,0.36), rgba(0,0,0,0.28))"
       : "linear-gradient(to bottom, rgba(255,255,255,0.30), rgba(255,255,255,0.18))";
   document.documentElement.style.setProperty("--banner-overlay", overlay);
-  // ensure navbar classes match (safe toggle)
   const navbar = document.querySelector(".navbar");
   if (navbar) {
     navbar.classList.toggle("navbar-dark", theme === "dark");
@@ -477,7 +529,6 @@ function updateBannerOverlay() {
   }
 }
 
-/* Observe if another script changes data-bs-theme (e.g. theme.js) */
 new MutationObserver((mutations) => {
   for (const m of mutations) {
     if (m.attributeName === "data-bs-theme") {
@@ -487,11 +538,9 @@ new MutationObserver((mutations) => {
   }
 }).observe(document.documentElement, { attributes: true });
 
-/* If theme toggle exists but no other handler provided, toggle attribute and localStorage */
 function setupFallbackThemeToggle() {
   const toggle = document.getElementById("themeToggle");
   if (!toggle) return;
-  // initialize checkbox from attribute/localStorage
   const saved = localStorage.getItem("theme");
   const current =
     document.documentElement.getAttribute("data-bs-theme") || saved || "light";
