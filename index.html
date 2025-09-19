@@ -26,14 +26,96 @@
       class="navbar navbar-expand-lg sticky-top navbar-light bg-light"
       data-bs-theme-target
     >
-      <div class="container-fluid">
-        <img src="./assets/fhlogo.png" alt="FH" srcset="" class="navbar-logo" />
+      <div class="container-fluid align-items-center">
+        <!-- Left side: Logo + Newsletter title -->
+        <div class="navbar-left">
+          <a
+            class="navbar-brand d-flex align-items-center"
+            href="./index.html"
+            aria-label="Faction Hub"
+          >
+            <img src="./assets/fhlogo.png" alt="FH" class="navbar-logo" />
+          </a>
 
-        <div class="text-center" id="fh">Faction Hub Newsletter</div>
+          <!-- Newsletter title (always visible on desktop) -->
+          <div class="text-center fh d-none d-lg-block">
+            Faction Hub Newsletter
+          </div>
+        </div>
+
+        <!-- Center: News/Server switch (desktop only) -->
+        <div class="page-switch d-none d-lg-flex">
+          <ul class="navbar-nav d-flex flex-row align-items-center">
+            <li class="nav-item">
+              <a class="nav-link active" href="./index.html">News</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link text-muted" href="./servers.html">Servers</a>
+            </li>
+          </ul>
+        </div>
+
+        <!-- Right side: Calendar, Latest, Theme, Navigation (desktop only) -->
+        <div class="navbar-right d-none d-lg-flex">
+          <!-- Date picker -->
+          <input
+            type="date"
+            id="datePicker"
+            class="custom-datepicker"
+            title="Select Date"
+            aria-label="Select date"
+          />
+
+          <!-- Latest button -->
+          <button
+            id="latestTopBtn"
+            class="btn btn-primary nav-control-btn latest-top-btn"
+            onclick="goToLatestNews()"
+            title="Go to latest news"
+            aria-label="Go to latest news"
+          >
+            <i class="fas fa-fast-forward" aria-hidden="true"></i>
+            <span class="d-none d-xl-inline ms-2">Latest</span>
+          </button>
+
+          <!-- Theme toggle -->
+          <label class="theme-toggle-new" title="Toggle theme">
+            <input type="checkbox" id="themeToggle" />
+            <span class="toggle-track">
+              <span class="toggle-icons">
+                <i class="fa-solid fa-sun"></i>
+                <i class="fa-solid fa-moon"></i>
+              </span>
+              <span class="toggle-thumb"></span>
+            </span>
+          </label>
+
+          <!-- Previous navigation -->
+          <button
+            id="prevTopBtn"
+            class="btn btn-outline-secondary nav-control-btn"
+            onclick="goToPrevNews()"
+            title="Previous news"
+            aria-label="Previous news"
+          >
+            <i class="fas fa-chevron-left" aria-hidden="true"></i>
+          </button>
+
+          <!-- Next navigation -->
+          <button
+            id="nextTopBtn"
+            class="btn btn-outline-secondary nav-control-btn"
+            onclick="goToNextNews()"
+            title="Next news"
+            aria-label="Next news"
+          >
+            <i class="fas fa-chevron-right" aria-hidden="true"></i>
+          </button>
+        </div>
 
         <!-- Mobile Toggle Button -->
         <button
-          class="navbar-toggler"
+          class="navbar-toggler d-lg-none"
           type="button"
           data-bs-toggle="collapse"
           data-bs-target="#navbarContent"
@@ -44,28 +126,21 @@
           <span class="navbar-toggler-icon"></span>
         </button>
 
-        <!-- Navbar Content -->
+        <!-- Collapsible Navbar Content (mobile only) -->
         <div class="collapse navbar-collapse" id="navbarContent">
-          <ul class="navbar-nav ms-auto">
-            <!-- Current Date Display -->
-            <li class="nav-item d-flex align-items-center">
-              <span class="date-display" id="currentDate"></span>
+          <ul class="navbar-nav ms-auto align-items-center">
+            <!-- Mobile page switch -->
+            <li class="nav-item d-lg-none">
+              <a class="nav-link active" href="./index.html">News</a>
+            </li>
+            <li class="nav-item d-lg-none">
+              <a class="nav-link text-muted" href="./servers.html">Servers</a>
             </li>
 
-            <!-- Date Picker -->
-            <li class="nav-item">
-              <input
-                type="date"
-                class="custom-datepicker"
-                id="datePicker"
-                title="Select Date"
-              />
-            </li>
-
-            <!--dark mode light mode switch-->
-            <li class="nav-item d-flex align-items-center">
+            <!-- Mobile theme toggle -->
+            <li class="nav-item d-flex align-items-center d-lg-none">
               <label class="theme-toggle-new" title="Toggle theme">
-                <input type="checkbox" id="themeToggle" />
+                <input type="checkbox" id="themeToggleMobile" />
                 <span class="toggle-track">
                   <span class="toggle-icons">
                     <i class="fa-solid fa-sun"></i>
@@ -74,28 +149,6 @@
                   <span class="toggle-thumb"></span>
                 </span>
               </label>
-            </li>
-
-            <!-- Previous News -->
-            <li class="nav-item">
-              <button
-                class="btn btn-outline-secondary me-2"
-                onclick="goToPrevNews()"
-                title="Previous news"
-              >
-                <i class="fas fa-arrow-left"></i>
-              </button>
-            </li>
-
-            <!-- Next News -->
-            <li class="nav-item">
-              <button
-                class="btn btn-outline-secondary"
-                onclick="goToNextNews()"
-                title="Next news"
-              >
-                <i class="fas fa-arrow-right"></i>
-              </button>
             </li>
           </ul>
         </div>
@@ -158,14 +211,6 @@
               <li>News Team Assistant Director: niu.q</li>
               <li>Team Lead: sur___, youraveragerobloxhacker</li>
             </ul>
-            <!-- <div class="social-row">
-              <a href="#" aria-label="Faction Hub Discord" class="social">
-                <i class="fab fa-discord"></i>
-              </a>
-              <a href="#" aria-label="Faction Hub Twitter" class="social">
-                <i class="fab fa-twitter"></i>
-              </a>
-            </div> -->
           </div>
         </div>
 
@@ -176,6 +221,65 @@
         </div>
       </div>
     </footer>
+
+    <nav
+      class="bottom-navbar d-lg-none"
+      role="navigation"
+      aria-label="Mobile quick navigation"
+    >
+      <div
+        class="bottom-nav-container container-fluid d-flex align-items-center justify-content-between"
+      >
+        <!-- LEFT: Prev -->
+        <div class="d-flex align-items-center">
+          <button
+            id="prevMobileBtn"
+            class="nav-control-btn-square"
+            onclick="goToPrevNews()"
+            title="Previous news"
+            aria-label="Previous news"
+          >
+            <i class="fas fa-chevron-left" aria-hidden="true"></i>
+          </button>
+        </div>
+
+        <!-- CENTER: Calendar (label opens the top #datePicker input) -->
+        <div class="d-flex align-items-center">
+          <label
+            for="datePicker"
+            class="nav-control-btn-square bottom-calendar"
+            title="Open calendar"
+            aria-label="Open calendar"
+            role="button"
+          >
+            <i class="fas fa-calendar-alt" aria-hidden="true"></i>
+          </label>
+        </div>
+
+        <!-- RIGHT: Next + Latest (latest is far right) -->
+        <div class="d-flex align-items-center gap-2">
+          <button
+            id="nextMobileBtn"
+            class="nav-control-btn-square"
+            onclick="goToNextNews()"
+            title="Next news"
+            aria-label="Next news"
+          >
+            <i class="fas fa-chevron-right" aria-hidden="true"></i>
+          </button>
+
+          <button
+            id="latestMobileBtn"
+            class="nav-control-btn-square latest-btn-mobile"
+            onclick="goToLatestNews()"
+            title="Go to latest news"
+            aria-label="Go to latest news"
+          >
+            <i class="fas fa-fast-forward" aria-hidden="true"></i>
+          </button>
+        </div>
+      </div>
+    </nav>
 
     <!-- script -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
