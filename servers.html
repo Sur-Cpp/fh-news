@@ -92,7 +92,13 @@
       <!-- List View -->
       <section id="factionsList">
         <section class="factions-header text-center mb-4">
-          <h1><i class="fas fa-shield-alt me-2"></i> Verified Groups</h1>
+          <h1>
+            <i
+              class="fas fa-shield-alt me-2 verified-shield"
+              aria-hidden="true"
+            ></i>
+            Verified Groups
+          </h1>
           <p class="lead mb-0">
             Explore various verified servers or some shit idrc [PLACEHOLDER]
           </p>
@@ -151,25 +157,55 @@
       <div class="container">
         <div class="footer-grid">
           <div class="footer-brand">
-            <img src="../assets/fh-logo.png" alt="Faction Hub" />
-            <h4>Faction Hub</h4>
-            <p class="muted">Verified community directory</p>
+            <img src="./assets/fhlogo.png" alt="Faction Hub" />
+            <h4>Faction Hub Newsletter</h4>
+            <p class="muted">Keeping the community informed and connected.</p>
           </div>
+
           <div class="footer-contacts">
             <h5>Contact</h5>
-            <p class="muted">Discord: Monarchy, Aaron</p>
+            <p class="muted">Contact us via Discord:</p>
+            <ul class="contact-list">
+              <li>
+                <strong>News Team Director:</strong>
+                our_excellency
+              </li>
+              <li><strong>News Team Assistant Director:</strong> niu.q</li>
+              <li>
+                <strong>Team Leads:</strong> sur___, youraveragerobloxhacker,
+                whar
+              </li>
+            </ul>
           </div>
+
           <div class="footer-credits">
-            <h5>Credits</h5>
+            <h5>Credits & Authors</h5>
             <p class="muted">Produced by Faction Hub Community</p>
+            <ul class="credits-list">
+              <li>Faction Hub Director: bluered900</li>
+              <li>Senior Staff In Charge: aaron_alessandro</li>
+              <li>News Team Director: our_excellency</li>
+              <li>News Team Assistant Director: niu.q</li>
+              <li>Team Lead: sur___, youraveragerobloxhacker, whar</li>
+            </ul>
+            <!-- <div class="social-row">
+              <a href="#" aria-label="Faction Hub Discord" class="social">
+                <i class="fab fa-discord"></i>
+              </a>
+              <a href="#" aria-label="Faction Hub Twitter" class="social">
+                <i class="fab fa-twitter"></i>
+              </a>
+            </div> -->
           </div>
         </div>
+
         <div class="footer-bottom">
-          <p class="muted">© <span id="currentYear"></span> Faction Hub</p>
+          <p class="muted">
+            © <span id="currentYear"></span> Faction Hub — All rights reserved.
+          </p>
         </div>
       </div>
     </footer>
-
     <!-- Scripts -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js"></script>
     <script type="module" src="./js/factions.js"></script>
