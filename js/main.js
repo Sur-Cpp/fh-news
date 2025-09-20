@@ -20,6 +20,27 @@ const $$ = (sel, ctx = document) =>
  * Keep #datePicker and #bottomDatePicker mirrored (two-way).
  * If one is missing this silently degrades.
  */
+
+/**Scroll utilities
+ * for mobile
+ */
+let lastScrollY = window.scrollY;
+const bottomNav = document.querySelector(".bottom-navbar");
+
+window.addEventListener("scroll", () => {
+  if (!bottomNav) return;
+
+  if (window.scrollY > lastScrollY) {
+    // user scrolling down → hide
+    bottomNav.style.transform = "translateY(100%)";
+  } else {
+    // user scrolling up → show
+    bottomNav.style.transform = "translateY(0)";
+  }
+
+  lastScrollY = window.scrollY;
+});
+
 function syncDatePickers() {
   const top = document.getElementById("datePicker");
   const bottom = document.getElementById("bottomDatePicker");
