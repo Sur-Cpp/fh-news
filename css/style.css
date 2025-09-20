@@ -496,8 +496,7 @@ nav.navbar .container-fluid {
   align-items: center;
   justify-content: center;
   background: transparent;
-  border: 1px solid rgba(13, 110, 253, 0.08);
-  color: #495057;
+
   transition: background 0.12s ease, transform 0.08s ease;
 }
 .nav-control-btn-square i {
@@ -505,12 +504,10 @@ nav.navbar .container-fluid {
 }
 .nav-control-btn-square:hover,
 .nav-control-btn-square:focus {
-  background: rgba(13, 110, 253, 0.06);
   transform: translateY(-1px);
-  color: var(--link-color);
 }
 .latest-btn-mobile {
-  background: linear-gradient(90deg, #0d6efd, #4f46e5);
+  background: linear-gradient(90deg, #67a4ff, #4f46e5);
   color: #fff;
   border-color: transparent;
   width: 44px;
@@ -518,52 +515,6 @@ nav.navbar .container-fluid {
 }
 .latest-btn-mobile:hover {
   filter: brightness(0.96);
-}
-
-/* stronger visibility for arrow controls */
-#prevTopBtn,
-#nextTopBtn,
-#prevNewsBtn,
-#nextNewsBtn {
-  background: linear-gradient(
-    135deg,
-    rgba(13, 110, 253, 0.1),
-    rgba(13, 110, 253, 0.05)
-  ) !important;
-  border: 2px solid rgba(13, 110, 253, 0.3) !important;
-  color: #0d6efd !important;
-  font-weight: 700;
-  font-size: 16px;
-  min-width: 44px;
-  height: 44px;
-  border-radius: 8px;
-  box-shadow: 0 3px 6px rgba(13, 110, 253, 0.15);
-  transition: all 0.2s ease;
-}
-#prevTopBtn:hover,
-#nextTopBtn:hover,
-#prevNewsBtn:hover,
-#nextNewsBtn:hover {
-  background: linear-gradient(
-    135deg,
-    rgba(13, 110, 253, 0.2),
-    rgba(13, 110, 253, 0.1)
-  ) !important;
-  border-color: rgba(13, 110, 253, 0.5) !important;
-  color: #0b5ed7 !important;
-  transform: translateY(-3px);
-  box-shadow: 0 6px 12px rgba(13, 110, 253, 0.25);
-}
-#prevTopBtn:disabled,
-#nextTopBtn:disabled,
-#prevNewsBtn:disabled,
-#nextNewsBtn:disabled {
-  opacity: 0.3;
-  transform: none !important;
-  box-shadow: none;
-  background: rgba(108, 117, 125, 0.1) !important;
-  border-color: rgba(108, 117, 125, 0.2) !important;
-  color: #6c757d !important;
 }
 
 /* RESPONSIVE BREAKPOINTS */
@@ -631,7 +582,7 @@ nav.navbar .container-fluid {
     order: 3;
   }
 
-  .bottom-nav-btn {
+  /* .bottom-nav-btn {
     background: linear-gradient(
       135deg,
       rgba(13, 110, 253, 0.1),
@@ -672,7 +623,7 @@ nav.navbar .container-fluid {
     background: rgba(108, 117, 125, 0.1);
     border-color: rgba(108, 117, 125, 0.2);
     color: #6c757d;
-  }
+  } */
 
   .bottom-datepicker {
     border: none;
@@ -744,6 +695,32 @@ nav.navbar .container-fluid {
   body {
     padding-bottom: 80px;
   }
+
+  /*Footer credits part*/
+  /* Footer layout fix for small screens */
+  .footer-grid {
+    grid-template-columns: 1fr; /* stack vertically */
+    text-align: center; /* optional: center text on mobile */
+  }
+
+  .footer-brand,
+  .footer-contacts,
+  .footer-credits {
+    margin-bottom: 20px; /* spacing between stacked sections */
+  }
+
+  /* hide page scrollbar */
+  html {
+    scrollbar-width: none;
+  } /* Firefox */
+  body {
+    -ms-overflow-style: none;
+  } /* IE and Edge */
+  body::-webkit-scrollbar,
+  body::-webkit-scrollbar-button {
+    display: none;
+  } /* Chrome */
+  /* end hide page scrollbar */
 }
 
 html,
@@ -751,4 +728,14 @@ body {
   max-width: 100%;
   overflow-x: hidden; /* hides stray overflow if something slips through */
   box-sizing: border-box;
+}
+
+.noselect {
+  -webkit-touch-callout: none; /* iOS Safari */
+  -webkit-user-select: none; /* Safari */
+  -khtml-user-select: none; /* Konqueror HTML */
+  -moz-user-select: none; /* Old versions of Firefox */
+  -ms-user-select: none; /* Internet Explorer/Edge */
+  user-select: none; /* Non-prefixed version, currently
+                                  supported by Chrome, Edge, Opera and Firefox */
 }
