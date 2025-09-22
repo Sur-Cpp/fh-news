@@ -6,10 +6,7 @@
     "type": "Site",
     "logo": "https://i.gyazo.com/6b49203c9418be3ebd22bcb275e12411.png",
     "banner": "https://i.gyazo.com/d5366f88c69a124e2d65a69ee5a9de1b.png",
-    "images": [
-      "https://i.gyazo.com/d5366f88c69a124e2d65a69ee5a9de1b.png",
-      "https://i.gyazo.com/d5366f88c69a124e2d65a69ee5a9de1b.png"
-    ],
+    "images": ["https://i.gyazo.com/d5366f88c69a124e2d65a69ee5a9de1b.png"],
     "description": "ACA-107 is a Serious Roleplay server. We encourage our players to be fully immersed into their roles, and are happy to help newcomers.",
     "members": 534,
     "founded": "Apr 2024",
