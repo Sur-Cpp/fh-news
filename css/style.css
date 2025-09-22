@@ -1,7 +1,3 @@
-/* =========================
-   Full merged CSS (drop-in)
-   ========================= */
-
 :root {
   --font-heading: "Merriweather", serif;
   --font-body: "Open Sans", sans-serif;
@@ -292,27 +288,6 @@ body::before {
   display: none;
 }
 
-/* responsive helper */
-@media (max-width: 768px) {
-  .marquee-container {
-    width: 150px;
-  }
-  .navbar-nav {
-    flex-direction: column;
-    align-items: flex-start;
-  }
-  .navbar-nav .nav-item {
-    margin: 5px 0;
-    width: 100%;
-  }
-  .custom-datepicker {
-    width: 120px;
-  }
-  .footer-grid {
-    grid-template-columns: 1fr;
-  }
-}
-
 /* faction card styles (unchanged) */
 .faction-grid {
   display: grid;
@@ -398,194 +373,83 @@ body::before {
   text-decoration: none;
 }
 
-/* bottom navbar styles (mobile quick nav) */
+/* DEFAULT: All controls visible in desktop navbar */
+body {
+  padding-bottom: 0;
+}
+
 .bottom-navbar {
-  position: fixed;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  background: rgba(248, 249, 250, 0.95);
-  backdrop-filter: blur(10px);
-  border-top: 1px solid rgba(0, 0, 0, 0.1);
-  box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
-  z-index: 1030;
-  padding: 8px 0;
-  transition: transform 0.3s ease;
+  display: none;
 }
-.bottom-nav-container {
-  max-width: 1200px;
-  margin: 0 auto;
+
+/* top navbar layout: explicit left / center / right groups */
+nav.navbar .container-fluid {
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  padding: 0 16px;
   gap: 12px;
+  flex-wrap: nowrap;
+  justify-content: flex-start;
 }
-.bottom-nav-item {
+
+/* left area: logo + title */
+.navbar-left {
   display: flex;
   align-items: center;
-  flex-shrink: 0;
+  gap: 12px;
+  order: 1;
+  flex: 0 0 auto;
 }
-.bottom-nav-controls {
+
+/* center: page switch */
+.page-switch {
   display: flex;
   align-items: center;
   gap: 8px;
-  background: rgba(255, 255, 255, 0.8);
-  padding: 6px 12px;
-  border-radius: 25px;
-  border: 1px solid rgba(0, 0, 0, 0.1);
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  order: 2;
+  flex: 0 0 auto;
+  margin-left: 6px;
 }
 
-.bottom-nav-btn {
-  background: transparent;
-  border: none;
-  color: #6c757d;
-  font-size: 16px;
-  padding: 8px 10px;
-  border-radius: 50%;
-  transition: all 0.2s ease;
-  cursor: pointer;
+.page-switch .navbar-nav {
+  flex-direction: row;
+  gap: 0;
+}
+
+.page-switch .nav-item {
+  margin: 0 5px;
+}
+
+/* right area: date, latest, theme, prev/next */
+.navbar-right {
   display: flex;
   align-items: center;
-  justify-content: center;
-  width: 36px;
-  height: 36px;
-}
-.bottom-nav-btn:hover {
-  background: rgba(0, 123, 255, 0.1);
-  color: #007bff;
-  transform: translateY(-1px);
-}
-.latest-btn {
-  width: auto !important;
-  padding: 8px 12px !important;
-  border-radius: 20px !important;
-  background: #007bff;
-  color: white;
-  font-size: 14px;
-  font-weight: 500;
-  gap: 6px;
-}
-.latest-btn:hover {
-  background: #0056b3;
-  transform: translateY(-1px);
+  gap: 12px;
+  order: 3;
+  margin-left: auto;
+  flex: 0 0 auto;
 }
 
-.bottom-datepicker {
-  border: none;
-  background: transparent;
-  color: #495057;
-  font-size: 14px;
-  padding: 6px 8px;
-  border-radius: 6px;
-  width: 130px;
-  text-align: center;
-  cursor: pointer;
-  transition: background-color 0.2s ease;
-}
-.bottom-datepicker:hover {
-  background: rgba(0, 123, 255, 0.05);
-}
-.bottom-datepicker:focus {
-  outline: none;
-  background: rgba(0, 123, 255, 0.1);
-  box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.2);
+/* keep toggler after right area (mobile) */
+.navbar-toggler {
+  order: 4;
+  margin-left: 8px;
+  display: none; /* Hide Bootstrap toggler since we're using bottom nav */
 }
 
-.bottom-date-display {
-  font-size: 13px;
-  font-weight: 600;
-  color: #495057;
-  background: rgba(255, 255, 255, 0.8);
-  padding: 8px 12px;
-  border-radius: 20px;
-  border: 1px solid rgba(0, 0, 0, 0.1);
+/* prevent wrapping of important items */
+.navbar-left .navbar-logo,
+.fh,
+.page-switch,
+.navbar-right > * {
   white-space: nowrap;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
 }
 
-[data-bs-theme="dark"] .bottom-navbar {
-  background: rgba(33, 37, 41, 0.95);
-  border-top: 1px solid rgba(255, 255, 255, 0.1);
-  box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.3);
+.navbar-nav .nav-item {
+  display: flex;
+  align-items: center;
 }
-[data-bs-theme="dark"] .bottom-nav-controls {
-  background: rgba(52, 58, 64, 0.8);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-}
-[data-bs-theme="dark"] .bottom-nav-btn {
-  color: #adb5bd;
-}
-[data-bs-theme="dark"] .bottom-nav-btn:hover {
-  background: rgba(0, 123, 255, 0.2);
-  color: #007bff;
-}
-[data-bs-theme="dark"] .bottom-datepicker {
-  color: #adb5bd;
-}
-[data-bs-theme="dark"] .bottom-date-display {
-  background: rgba(52, 58, 64, 0.8);
-  color: #adb5bd;
-  border: 1px solid rgba(255, 255, 255, 0.1);
-}
-
-/* mobile sizes */
-@media (max-width: 768px) {
-  .bottom-nav-container {
-    padding: 0 12px;
-    gap: 8px;
-  }
-  .bottom-nav-controls {
-    padding: 4px 8px;
-    gap: 6px;
-  }
-  .bottom-nav-btn {
-    width: 32px;
-    height: 32px;
-    font-size: 14px;
-  }
-  .bottom-datepicker {
-    width: 110px;
-    font-size: 12px;
-  }
-  .bottom-date-display {
-    font-size: 12px;
-    padding: 6px 8px;
-  }
-  .latest-text {
-    display: none;
-  }
-  .latest-btn {
-    width: 32px !important;
-    height: 32px !important;
-    padding: 6px !important;
-    border-radius: 50% !important;
-  }
-}
-@media (max-width: 480px) {
-  .bottom-nav-container {
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 6px;
-  }
-  .bottom-nav-item:first-child {
-    order: 2;
-    width: 100%;
-    justify-content: center;
-    margin-top: 4px;
-  }
-  .bottom-nav-controls {
-    order: 1;
-  }
-  .bottom-nav-item:last-child {
-    order: 1;
-  }
-}
-
-/* reserve bottom space so content not hidden */
-body {
-  padding-bottom: 70px;
+.theme-toggle-new {
+  margin-left: 8px;
 }
 
 /* top control helpers */
@@ -632,8 +496,7 @@ body {
   align-items: center;
   justify-content: center;
   background: transparent;
-  border: 1px solid rgba(13, 110, 253, 0.08);
-  color: #495057;
+
   transition: background 0.12s ease, transform 0.08s ease;
 }
 .nav-control-btn-square i {
@@ -641,12 +504,10 @@ body {
 }
 .nav-control-btn-square:hover,
 .nav-control-btn-square:focus {
-  background: rgba(13, 110, 253, 0.06);
   transform: translateY(-1px);
-  color: var(--link-color);
 }
 .latest-btn-mobile {
-  background: linear-gradient(90deg, #0d6efd, #4f46e5);
+  background: linear-gradient(90deg, #67a4ff, #4f46e5);
   color: #fff;
   border-color: transparent;
   width: 44px;
@@ -656,207 +517,225 @@ body {
   filter: brightness(0.96);
 }
 
-/* stronger visibility for arrow controls */
-#prevTopBtn,
-#nextTopBtn,
-#prevNewsBtn,
-#nextNewsBtn {
-  background: linear-gradient(
-    135deg,
-    rgba(13, 110, 253, 0.1),
-    rgba(13, 110, 253, 0.05)
-  ) !important;
-  border: 2px solid rgba(13, 110, 253, 0.3) !important;
-  color: #0d6efd !important;
-  font-weight: 700;
-  font-size: 16px;
-  min-width: 44px;
-  height: 44px;
-  border-radius: 8px;
-  box-shadow: 0 3px 6px rgba(13, 110, 253, 0.15);
-  transition: all 0.2s ease;
-}
-#prevTopBtn:hover,
-#nextTopBtn:hover,
-#prevNewsBtn:hover,
-#nextNewsBtn:hover {
-  background: linear-gradient(
-    135deg,
-    rgba(13, 110, 253, 0.2),
-    rgba(13, 110, 253, 0.1)
-  ) !important;
-  border-color: rgba(13, 110, 253, 0.5) !important;
-  color: #0b5ed7 !important;
-  transform: translateY(-3px);
-  box-shadow: 0 6px 12px rgba(13, 110, 253, 0.25);
-}
-#prevTopBtn:disabled,
-#nextTopBtn:disabled,
-#prevNewsBtn:disabled,
-#nextNewsBtn:disabled {
-  opacity: 0.3;
-  transform: none !important;
-  box-shadow: none;
-  background: rgba(108, 117, 125, 0.1) !important;
-  border-color: rgba(108, 117, 125, 0.2) !important;
-  color: #6c757d !important;
-}
+/* RESPONSIVE BREAKPOINTS */
 
-/* top navbar layout: explicit left / center / right groups */
-nav.navbar .container-fluid {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  flex-wrap: nowrap;
-  justify-content: flex-start;
-}
-
-/* left area: logo + title */
-.navbar-left {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  order: 1;
-  flex: 0 0 auto;
-}
-
-/* center: page switch */
-.page-switch {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  order: 2;
-  flex: 0 0 auto;
-  margin-left: 6px;
-}
-
-/* right area: date, latest, theme, prev/next */
-.navbar-right {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  order: 3;
-  margin-left: auto;
-  flex: 0 0 auto;
-}
-
-/* keep toggler after right area (mobile) */
-.navbar-toggler {
-  order: 4;
-  margin-left: 8px;
-}
-
-/* prevent wrapping of important items */
-.navbar-left .navbar-logo,
-.fh,
-.page-switch,
-.navbar-right > * {
-  white-space: nowrap;
-}
-
-/* desktop hides toggler */
-@media (min-width: 992px) {
-  .navbar-toggler {
-    display: none;
-  }
-}
-
-/* MOBILE: keep #datePicker focusable (off-screen) instead of display:none
-   so <label for="datePicker"> opens native calendar in mobile UI */
-@media (max-width: 991px) {
-  /* hide page-switch in small screens (it lives inside collapse) */
-  .page-switch {
+/* Medium screens and below (tablets and phones) */
+@media (max-width: 991.98px) {
+  /* Hide date controls, navigation buttons, and theme toggle from top navbar */
+  .navbar-right .date-display,
+  .navbar-right #datePicker,
+  .navbar-right .nav-control-btn,
+  .navbar-right .nav-control-btn-square,
+  .navbar-right .theme-toggle-new {
     display: none !important;
   }
 
-  /* move datePicker off-screen but keep focusable */
-  #datePicker {
-    position: absolute !important;
-    left: -9999px !important;
-    top: auto !important;
-    width: 1px !important;
-    height: 1px !important;
-    overflow: hidden !important;
-    opacity: 0 !important;
-    pointer-events: auto !important;
-  }
-
-  /* collapse content left aligned */
-  #navbarContent {
-    display: flex !important;
-    justify-content: flex-start !important;
-    width: auto !important;
-  }
-
-  /* compact navbar */
-  nav.navbar {
-    padding-top: 0.35rem;
-    padding-bottom: 0.35rem;
-  }
-  .navbar-logo {
-    max-height: 36px;
-  }
-  .fh {
-    font-size: 1rem;
-    font-weight: 700;
-  }
-
-  /* reserve bottom space for mobile bottom nav */
-  body {
-    padding-bottom: 64px;
-  }
-
-  /* ensure bottom nav visible & stacked above other content */
+  /* Show bottom navbar */
   .bottom-navbar {
-    display: block !important;
-    z-index: 1050;
+    display: block;
     position: fixed;
     bottom: 0;
     left: 0;
     right: 0;
+    background: rgba(248, 249, 250, 0.95);
+    backdrop-filter: blur(10px);
+    border-top: 1px solid rgba(0, 0, 0, 0.1);
+    box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
+    z-index: 1030;
+    padding: 12px 0;
+    transition: transform 0.3s ease;
   }
 
-  /* improved calendar icon styling for bottom control */
+  .bottom-nav-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 16px;
+    gap: 12px;
+    width: 100%;
+  }
+
+  /* Left navigation button (previous) */
+  .bottom-nav-left {
+    display: flex;
+    align-items: center;
+    order: 1;
+  }
+
+  /* Center controls (date picker and theme toggle) */
+  .bottom-nav-center {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    order: 2;
+    background: rgba(255, 255, 255, 0.8);
+    padding: 6px 12px;
+    border-radius: 25px;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  }
+
+  /* Right navigation button (next) */
+  .bottom-nav-right {
+    display: flex;
+    align-items: center;
+    order: 3;
+  }
+
+  /* .bottom-nav-btn {
+    background: linear-gradient(
+      135deg,
+      rgba(13, 110, 253, 0.1),
+      rgba(13, 110, 253, 0.05)
+    );
+    border: 2px solid rgba(13, 110, 253, 0.3);
+    color: #0d6efd;
+    font-size: 16px;
+    padding: 12px 14px;
+    border-radius: 12px;
+    transition: all 0.2s ease;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 48px;
+    height: 48px;
+    font-weight: 700;
+    box-shadow: 0 3px 6px rgba(13, 110, 253, 0.15);
+  }
+
+  .bottom-nav-btn:hover {
+    background: linear-gradient(
+      135deg,
+      rgba(13, 110, 253, 0.2),
+      rgba(13, 110, 253, 0.1)
+    );
+    border-color: rgba(13, 110, 253, 0.5);
+    color: #0b5ed7;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 12px rgba(13, 110, 253, 0.25);
+  }
+
+  .bottom-nav-btn:disabled {
+    opacity: 0.3;
+    transform: none !important;
+    box-shadow: none;
+    background: rgba(108, 117, 125, 0.1);
+    border-color: rgba(108, 117, 125, 0.2);
+    color: #6c757d;
+  } */
+
   .bottom-datepicker {
-    -webkit-appearance: none;
-    -moz-appearance: textfield;
-    appearance: none;
-    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='%23343a40' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M15.854 12.854a.5.5 0 0 1-.708 0L11 8.707V2.5a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v5.293l3.146 3.147a.5.5 0 0 1 0 .708z'/%3e%3c/svg%3e");
-    background-repeat: no-repeat;
-    background-position: right 8px center;
-    background-size: 16px 12px;
-    padding-right: 28px;
+    border: none;
+    background: transparent;
+    color: #495057;
+    font-size: 14px;
+    padding: 6px 8px;
+    border-radius: 6px;
+    width: 130px;
+    text-align: center;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
   }
+
+  .bottom-datepicker:hover {
+    background: rgba(0, 123, 255, 0.05);
+  }
+
   .bottom-datepicker:focus {
-    outline: 2px solid rgba(13, 110, 253, 0.5);
-    outline-offset: 2px;
+    outline: none;
+    background: rgba(0, 123, 255, 0.1);
+    box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.2);
   }
 
-  /* hide top-large prev/next/latest if duplicates exist */
-  #prevTopBtn,
-  #nextTopBtn,
-  #latestTopBtn {
-    display: none !important;
+  /* Theme toggle in bottom nav - smaller version */
+  .bottom-nav-center .theme-toggle-new {
+    margin: 0;
   }
-}
 
-/* small screens very narrow: hide title to save space */
-@media (max-width: 420px) {
-  .navbar-left .fh {
+  .bottom-nav-center .theme-toggle-new .toggle-track {
+    width: 48px;
+    height: 26px;
+  }
+
+  .bottom-nav-center .theme-toggle-new .toggle-thumb {
+    width: 20px;
+    height: 20px;
+  }
+
+  .bottom-nav-center
+    .theme-toggle-new
+    input:checked
+    + .toggle-track
+    .toggle-thumb {
+    transform: translateX(22px);
+  }
+
+  .bottom-nav-center .theme-toggle-new .toggle-icons {
+    font-size: 10px;
+  }
+
+  /* Dark mode styles for bottom navbar */
+  [data-bs-theme="dark"] .bottom-navbar {
+    background: rgba(33, 37, 41, 0.95);
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.3);
+  }
+
+  [data-bs-theme="dark"] .bottom-nav-center {
+    background: rgba(52, 58, 64, 0.8);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+  }
+
+  [data-bs-theme="dark"] .bottom-datepicker {
+    color: #adb5bd;
+  }
+
+  /* Reserve bottom space so content not hidden */
+  body {
+    padding-bottom: 80px;
+  }
+
+  /*Footer credits part*/
+  /* Footer layout fix for small screens */
+  .footer-grid {
+    grid-template-columns: 1fr; /* stack vertically */
+    text-align: center; /* optional: center text on mobile */
+  }
+
+  .footer-brand,
+  .footer-contacts,
+  .footer-credits {
+    margin-bottom: 20px; /* spacing between stacked sections */
+  }
+
+  /* hide page scrollbar */
+  html {
+    scrollbar-width: none;
+  } /* Firefox */
+  body {
+    -ms-overflow-style: none;
+  } /* IE and Edge */
+  body::-webkit-scrollbar,
+  body::-webkit-scrollbar-button {
     display: none;
-  }
-  .navbar-right {
-    gap: 6px;
-  }
+  } /* Chrome */
+  /* end hide page scrollbar */
 }
 
-/* final util spacing */
-.navbar-nav .nav-item {
-  display: flex;
-  align-items: center;
-}
-.theme-toggle-new {
-  margin-left: 8px;
+html,
+body {
+  max-width: 100%;
+  overflow-x: hidden; /* hides stray overflow if something slips through */
+  box-sizing: border-box;
 }
 
-/* end merged CSS */
+.noselect {
+  -webkit-touch-callout: none; /* iOS Safari */
+  -webkit-user-select: none; /* Safari */
+  -khtml-user-select: none; /* Konqueror HTML */
+  -moz-user-select: none; /* Old versions of Firefox */
+  -ms-user-select: none; /* Internet Explorer/Edge */
+  user-select: none; /* Non-prefixed version, currently
+                                  supported by Chrome, Edge, Opera and Firefox */
+}
