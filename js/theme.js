@@ -4,7 +4,6 @@ export function initializeTheme() {
   const htmlElement = document.documentElement;
   const navbar = document.querySelector(".navbar");
 
-  // Load saved theme
   const savedTheme = localStorage.getItem("theme") || "light";
 
   function setTheme(theme, skipSave = false) {
@@ -25,7 +24,6 @@ export function initializeTheme() {
       localStorage.setItem("theme", theme);
     }
 
-    // update banner overlay when theme changes
     updateBannerOverlay();
   }
 
@@ -38,20 +36,17 @@ export function initializeTheme() {
     htmlElement.style.setProperty("--banner-overlay", overlay);
   }
 
-  // Initial theme setup
   setTheme(savedTheme, true);
 
-  // Toggle button handler
   if (themeToggle) {
     themeToggle.addEventListener("change", function () {
       setTheme(this.checked ? "dark" : "light");
     });
   }
 
-  // Sync across tabs/windows
   window.addEventListener("storage", (event) => {
     if (event.key === "theme" && event.newValue) {
-      setTheme(event.newValue, true); // skipSave to prevent loop
+      setTheme(event.newValue, true);
     }
   });
 }

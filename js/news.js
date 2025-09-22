@@ -1,5 +1,9 @@
 // news.js
-import { parseFormattedText, toDirectImageUrl, parseImageSpec } from "./utils.js";
+import {
+  parseFormattedText,
+  toDirectImageUrl,
+  parseImageSpec,
+} from "./utils.js";
 
 export let currentNewsData = null;
 
@@ -46,15 +50,19 @@ export function renderNewsContent(data) {
         const spec = parseImageSpec(imgSrc);
         const imageUrl = spec.src || "";
 
-        let inlineStyles = ["cursor:zoom-in", "max-width:90%"]; 
+        let inlineStyles = ["cursor:zoom-in", "max-width:90%"];
         if (spec.width) {
           const w = Number(spec.width);
           if (!Number.isNaN(w)) {
             if (w > 0 && w <= 100) {
-              inlineStyles = inlineStyles.filter(s => !s.startsWith("max-width"));
+              inlineStyles = inlineStyles.filter(
+                (s) => !s.startsWith("max-width")
+              );
               inlineStyles.push(`max-width:${w}%`);
             } else if (w > 100) {
-              inlineStyles = inlineStyles.filter(s => !s.startsWith("max-width"));
+              inlineStyles = inlineStyles.filter(
+                (s) => !s.startsWith("max-width")
+              );
               inlineStyles.push(`width:${w}px`);
             }
           }
@@ -127,7 +135,9 @@ export function renderNoContent() {
     <div class="no-content text-center py-4">
       <i class="fas fa-newspaper fa-2x" style="color:#6c757d;"></i>
       <h3 style="margin-top:12px;">No Content Available</h3>
-      <p>No news content found for <strong>${escapeHtml(selectedDate)}</strong></p>
+      <p>No news content found for <strong>${escapeHtml(
+        selectedDate
+      )}</strong></p>
       <p class="text-muted">Please select another date or check back later.</p>
       <div style="margin-top:16px;">
         <button class="btn btn-primary" onclick="window.goToLatestNews && window.goToLatestNews()">Go to latest news</button>
@@ -176,11 +186,17 @@ export function openImageViewer(event) {
 
   let captionHtml = "";
   if (/^https?:\/\//i.test(src)) {
-    captionHtml += `<a href="${escapeAttr(src)}" target="_blank" rel="noopener noreferrer" style="color:#fff;text-decoration:underline">${escapeHtml(src)}</a>`;
+    captionHtml += `<a href="${escapeAttr(
+      src
+    )}" target="_blank" rel="noopener noreferrer" style="color:#fff;text-decoration:underline">${escapeHtml(
+      src
+    )}</a>`;
   }
   if (w || h) {
     const dims = `${w || "?"} x ${h || "?"}`;
-    captionHtml += `<div style="margin-top:6px; font-size:13px; color:#ddd">Dimensions: ${escapeHtml(dims)}</div>`;
+    captionHtml += `<div style="margin-top:6px; font-size:13px; color:#ddd">Dimensions: ${escapeHtml(
+      dims
+    )}</div>`;
   }
   viewerCaption.innerHTML = captionHtml;
   viewer.style.display = "flex";

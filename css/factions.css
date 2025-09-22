@@ -785,3 +785,228 @@
   align-items: center;
   border: none;
 }
+
+/* Theme switcher icon base style */
+.theme-switcher {
+  position: fixed; /* or absolute depending on placement */
+  top: 1rem;
+  right: 1rem;
+  width: 2.5rem;
+  height: 2.5rem;
+  font-size: 1.25rem; /* icon size */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 999;
+  cursor: pointer;
+  background: var(--link-color);
+  color: #fff;
+  border-radius: 50%;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+/* Smaller screens adjustment */
+@media (max-width: 480px) {
+  .theme-switcher {
+    width: 2rem;
+    height: 2rem;
+    font-size: 1rem;
+    top: 0.75rem;
+    right: 0.75rem;
+  }
+}
+
+/* ---------------------------
+   Factions page — navbar styles
+   Namespaced to #factionsNavbar
+   (copy of the navbar block from style.css,
+    adjusted selectors so it only affects the factions page)
+   --------------------------- */
+
+/* top navbar layout: explicit left / center / right groups */
+#factionsNavbar .container-fluid {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: nowrap;
+  justify-content: flex-start;
+}
+
+/* left area: logo + title */
+#factionsNavbar .navbar-left {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  order: 1;
+  flex: 0 0 auto;
+}
+
+/* center: page switch */
+#factionsNavbar .page-switch {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  order: 2;
+  flex: 0 0 auto;
+  margin-left: 6px;
+}
+
+#factionsNavbar .page-switch .navbar-nav {
+  flex-direction: row;
+  gap: 0;
+}
+
+#factionsNavbar .page-switch .nav-item {
+  margin: 0 5px;
+}
+
+/* right area: date, latest, theme, prev/next */
+#factionsNavbar .navbar-right {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  order: 3;
+  margin-left: auto;
+  flex: 0 0 auto;
+}
+
+/* keep toggler after right area (mobile) */
+#factionsNavbar .navbar-toggler {
+  order: 4;
+  margin-left: 8px;
+  display: none; /* still hidden if you want to keep your bottom nav approach */
+}
+
+/* prevent wrapping of important items (within this navbar only) */
+#factionsNavbar .navbar-logo,
+#factionsNavbar .fh,
+#factionsNavbar .page-switch,
+#factionsNavbar .navbar-right > * {
+  white-space: nowrap;
+}
+
+#factionsNavbar .navbar-nav .nav-item {
+  display: flex;
+  align-items: center;
+}
+
+/* theme toggle spacing inside factions navbar */
+#factionsNavbar .theme-toggle-new {
+  margin-left: 8px;
+}
+
+/* top control helpers scoped */
+#factionsNavbar .nav-control-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.45rem 0.6rem;
+  border-radius: 6px;
+  border: 1px solid rgba(13, 110, 253, 0.08);
+  background: transparent;
+  color: var(--link-color);
+  transition: background 0.14s ease, transform 0.12s ease, box-shadow 0.12s ease;
+}
+#factionsNavbar .nav-control-btn i {
+  font-size: 1rem;
+}
+#factionsNavbar .nav-control-btn:hover,
+#factionsNavbar .nav-control-btn:focus {
+  background: rgba(13, 110, 253, 0.06);
+  transform: translateY(-1px);
+  box-shadow: 0 6px 18px rgba(6, 10, 20, 0.06);
+}
+
+/* square variant */
+#factionsNavbar .nav-control-btn-square {
+  width: 44px;
+  height: 40px;
+  min-width: 44px;
+  padding: 0;
+  border-radius: 6px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+  transition: background 0.12s ease, transform 0.08s ease;
+}
+#factionsNavbar .nav-control-btn-square i {
+  font-size: 1rem;
+}
+#factionsNavbar .nav-control-btn-square:hover,
+#factionsNavbar .nav-control-btn-square:focus {
+  transform: translateY(-1px);
+}
+
+/* smaller latest button variant */
+#factionsNavbar .latest-btn-mobile {
+  background: linear-gradient(90deg, #67a4ff, #4f46e5);
+  color: #fff;
+  border-color: transparent;
+  width: 44px;
+  height: 40px;
+}
+#factionsNavbar .latest-btn-mobile:hover {
+  filter: brightness(0.96);
+}
+
+/* lighter controls for prev/next if present (remove strong gradients so they are unobtrusive) */
+#factionsNavbar #prevTopBtn,
+#factionsNavbar #nextTopBtn,
+#factionsNavbar #prevNewsBtn,
+#factionsNavbar #nextNewsBtn {
+  color: #ffffff !important;
+  font-weight: 700;
+  font-size: 16px;
+  min-width: 44px;
+  height: 44px;
+  border-radius: 8px;
+  box-shadow: 0 3px 6px rgba(13, 110, 253, 0.12);
+  transition: all 0.18s ease;
+}
+#factionsNavbar #prevTopBtn:hover,
+#factionsNavbar #nextTopBtn:hover,
+#factionsNavbar #prevNewsBtn:hover,
+#factionsNavbar #nextNewsBtn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 12px rgba(13, 110, 253, 0.18);
+}
+#factionsNavbar #prevTopBtn:disabled,
+#factionsNavbar #nextTopBtn:disabled,
+#factionsNavbar #prevNewsBtn:disabled,
+#factionsNavbar #nextNewsBtn:disabled {
+  opacity: 0.35;
+  transform: none !important;
+  box-shadow: none;
+  color: #6c757d !important;
+}
+
+/* RESPONSIVE BREAKPOINTS (factions-specific) */
+@media (max-width: 991.98px) {
+  /* If you want to hide some top-right items only for factions page, override here */
+  #factionsNavbar .navbar-right .date-display,
+  #factionsNavbar .navbar-right #datePicker,
+  #factionsNavbar .navbar-right .nav-control-btn,
+  #factionsNavbar .navbar-right .nav-control-btn-square {
+    display: none !important;
+  }
+
+  /* Show the burger toggler for this page if required */
+  #factionsNavbar .navbar-toggler {
+    display: inline-flex;
+  }
+}
+
+/* If you need page-specific overrides for very small screens */
+@media (max-width: 480px) {
+  /* make theme toggle slightly smaller in factions page if desired */
+  #factionsNavbar .theme-toggle-new .toggle-track {
+    width: 48px;
+    height: 26px;
+  }
+  #factionsNavbar .theme-toggle-new .toggle-thumb {
+    width: 20px;
+    height: 20px;
+  }
+}
