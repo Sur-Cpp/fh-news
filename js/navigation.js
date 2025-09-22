@@ -9,10 +9,13 @@ export function setLoader(fn) {
 const PROBE_LIMIT_DAYS = 60;
 export let availableNewsDates = null;
 
-
 export function updateCurrentDate(date = null) {
   if (!date) {
-    if (availableNewsDates && Array.isArray(availableNewsDates) && availableNewsDates.length) {
+    if (
+      availableNewsDates &&
+      Array.isArray(availableNewsDates) &&
+      availableNewsDates.length
+    ) {
       const latestIso = availableNewsDates[0];
       date = new Date(latestIso + "T00:00:00");
     } else {
@@ -75,7 +78,7 @@ export async function fetchNewsManifest() {
       )
       .filter(Boolean)
       .sort()
-      .reverse(); 
+      .reverse();
     availableNewsDates = normalized;
     return normalized;
   } catch (e) {
