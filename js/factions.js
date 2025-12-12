@@ -1,6 +1,8 @@
 // js/factions.js - Full replacement
 import { initializeTheme } from "./theme.js";
 
+const CACHE_KEY = "discord_cache";
+const CACHE_DURATION = 10 * 60 * 1000; //10 min
 const DATA_PATH = "../groups/factions.json";
 const $ = (sel, ctx = document) => (ctx || document).querySelector(sel);
 const $$ = (sel, ctx = document) =>
@@ -88,6 +90,14 @@ function discordChipHtml(owner) {
   return `<span class="discord-chip" title="Discord: ${ownerText}"><i class="fab fa-discord" aria-hidden="true"></i><span class="discord-username">${ownerText}</span></span>`;
 }
 
+//Apart of Beta discord function
+function saveToCache(data) {
+  localStorage.setItem(CACHE_KEY, JSON.stringify({
+    timestamp: Date.now(),
+    data: data
+  }));
+}
+
 /* small type chip for cards */
 function typeChipSmallHtml(originalType, normalizedType) {
   return `<span class="type-chip type-chip--small">${typeLabel(
@@ -122,6 +132,59 @@ function extractInviteCode(invite) {
   return null;
 }
 
+/* --- Start Experiemental functions --- */
+async function fetchDiscordData(f) {
+  inviteCode = extractInviteCode(f.invite);
+  if (!inviteCode) return null
+  try {
+    res = await fetch(`https://discord.com/api/v10/invites/${inviteCode}?with_counts=true`);
+
+    if (!res.ok) {
+      throw new Error(`HTTP Error Arised, use fallback data. ${res.status}`);
+    }
+    data = res.json;
+    memberCount = data.approximate_member_count;
+    onlineMemberCount = data.approximate_presence_count;
+    return [memberCount, onlineMemberCount]; // Returns both membercount and online members
+  } catch(e) {
+    // ignore and return null (cause yeah)
+  }
+  return null;
+}
+
+async function getDiscordData(inviteCode) { //USE THIS FUNCTION TO GET DATA, THIS WILL ALSO USE FETCH TO GET NEW DATA
+  const cached = localStorage.getItem(CACHE_KEY);
+  if (cached) {
+    const { timestamp, data } = JSON.parse(cached);
+    if (Date.now - timestamp < CACHE_DURATION) {
+      return data; // using cache if its still valid
+    }
+  }
+
+  //Fetch new data if expired/not valid
+  const freshData = await fetchDiscordData(inviteCode);
+  saveToCache(freshData);
+  return freshData
+}
+
+function display(data) {
+  onlineMembers = data[1];
+  totalMembers = data[0];
+  document.getElementById("memberCount").innertext = //id is a placeholder until we figure out how we're going to implement it
+  totalMembers.toLocaleString('en-US');
+}
+
+async function loadDiscordData(inviteCode) {
+  try {
+    const data = await getDiscordData(inviteCode);
+    display(data);
+  } catch(e) {
+    fetchDiscordData(inviteCode);
+    console.log(`\nUnknown Error Occurred while loading cached Discord data, fetched Discord data again.\n "${e}" `)
+  }
+}
+/* -- End Experimental functions -- */
+
 /* --- Grid / Card --- */
 function createCardHtml(f) {
   const tags = buildTags(f.tags);
@@ -149,7 +212,7 @@ function createCardHtml(f) {
           </div>
           ${
             f.verified
-              ? `<div class="verified-badge"><i class="fas fa-check-circle" aria-hidden="true"></i> Verified</div>`
+              ? `<div class="verified-badge"><i class="fas fa-circle-check" aria-hidden="true"></i> Verified</div>`
               : ""
           }
         </div>
@@ -238,6 +301,7 @@ function attachCardHandlers() {
 
 /* --- Sidebar stats for detail --- */
 function renderSidebarStats(f) {
+  //At some point 
   return `
   <div class="sidebar-section">
     <h5><i class="fas fa-chart-bar" aria-hidden="true"></i> Statistics</h5>
