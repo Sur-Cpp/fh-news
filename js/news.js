@@ -9,6 +9,28 @@ import {
 export let currentNewsData = null;
 export let currentNewsDate = null;
 
+function getActiveDatePicker() {
+  const pickers = document.querySelectorAll(".date-picker");
+  for (const el of pickers) {
+    if (el.offsetParent !== null) return el;
+  }
+  return null;
+}
+
+function selectActiveDatePicker() {
+  const el = getActiveDatePicker();
+  if (!el) return;
+
+  if (typeof el.showPicker === "function") {
+    el.showPicker();
+  } else {
+    el.focus();
+  }
+}
+
+//* Fuck you ESMODULE with your stupid scope issues
+window.selectActiveDatePicker = selectActiveDatePicker;
+
 //* fetch json from ../data/
 async function fetchJsonFromData(basename) {
   const tryUrl = `../data/${basename}`;
@@ -255,7 +277,7 @@ export function renderNoContent() {
       <p class="text-muted">Please select another date or check back later.</p>
       <div style="margin-top:16px;">
         <button class="btn btn-primary" onclick="window.goToLatestNews && window.goToLatestNews()">Go to latest news</button>
-        <button class="btn btn-outline-secondary ms-2" onclick="document.getElementById('datePicker') && document.getElementById('datePicker').focus()">Pick another date</button>
+        <button class="btn btn-outline-secondary ms-2" onclick="selectActiveDatePicker()">Pick another date</button>
       </div>
     </div>`;
 }
