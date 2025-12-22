@@ -1,5 +1,8 @@
 // js/factions.js - Full replacement
 import { initializeTheme } from "./theme.js";
+if (typeof window !== "undefined" && window.console && console.debug) {
+  console.debug("factions.js loaded @ " + new Date().toISOString());
+}
 
 const CACHE_KEY = "discord_cache";
 const CACHE_DURATION = 10 * 60 * 1000; //10 min
@@ -133,30 +136,43 @@ function extractInviteCode(invite) {
 }
 
 /* --- Start Experiemental functions --- */
-async function fetchDiscordData(f) {
-  inviteCode = extractInviteCode(f.invite);
+async function fetchDiscordData(inviteOrObj) {
+  // accept either the invite code, the full invite URL, or the faction object
+  let inviteCode = null;
+  if (!inviteOrObj) return null;
+  if (typeof inviteOrObj === "string") {
+    inviteCode = extractInviteCode(inviteOrObj) || inviteOrObj;
+  } else if (typeof inviteOrObj === "object") {
+    inviteCode = extractInviteCode(inviteOrObj.invite);
+  }
   if (!inviteCode) return null
   try {
-    res = await fetch(`https://discord.com/api/v10/invites/${inviteCode}?with_counts=true`);
+    const res = await fetch(`https://discord.com/api/v10/invites/${inviteCode}?with_counts=true`);
 
     if (!res.ok) {
+      const text = await res.text().catch(() => "");
+      console.warn("fetchDiscordData: non-OK response for invite", inviteCode, res.status, text);
       throw new Error(`HTTP Error Arised, use fallback data. ${res.status}`);
     }
-    data = res.json;
-    memberCount = data.approximate_member_count;
-    onlineMemberCount = data.approximate_presence_count;
+    const data = await res.json();
+    const memberCount = data.approximate_member_count;
+    const onlineMemberCount = data.approximate_presence_count;
     return [memberCount, onlineMemberCount]; // Returns both membercount and online members
   } catch(e) {
+    console.warn("fetchDiscordData: error fetching invite", inviteCode, e);
     // ignore and return null (cause yeah)
   }
   return null;
 }
 
 async function getDiscordData(inviteCode) { //USE THIS FUNCTION TO GET DATA, THIS WILL ALSO USE FETCH TO GET NEW DATA
-  const cached = localStorage.getItem(CACHE_KEY);
+  if (!inviteCode) return null;
+  const key = `${CACHE_KEY}_${inviteCode}`;
+  const cached = localStorage.getItem(key);
   if (cached) {
     const { timestamp, data } = JSON.parse(cached);
-    if (Date.now - timestamp < CACHE_DURATION) {
+    if (Date.now() - timestamp < CACHE_DURATION) {
+      console.debug("getDiscordData: cache hit for", inviteCode);
       return data; // using cache if its still valid
     }
   }
@@ -181,14 +197,20 @@ async function loadDiscordData(inviteCode) {
   } catch(e) {
     fetchDiscordData(inviteCode);
     console.log(`\nUnknown Error Occurred while loading cached Discord data, fetched Discord data again.\n "${e}" `)
+    throw new Error(`\nUnknown Error Occurred while loading cached Discord data, fetched Discord data again.\n "${e}" `)
   }
 }
 /* -- End Experimental functions -- */
 
 /* --- Grid / Card --- */
-function createCardHtml(f) {
+async function createCardHtml(f) {
   const tags = buildTags(f.tags);
   const typeChip = typeChipSmallHtml(f.originalType, f.type);
+
+  // Use experimental Discord data fetching for live member counts
+  let discordData = await getDiscordData(extractInviteCode(f.invite));
+  await new Promise((r) => setTimeout(r, 50)); // slight delay to avoid rate limits
+  let members = discordData || f.members;
 
   return `
     <article class="faction-card" data-id="${escapeHtml(
@@ -229,7 +251,7 @@ function createCardHtml(f) {
 
       <div class="faction-stats" role="list">
         <div class="stat-item"><span class="stat-number">${Number(
-          f.members
+          members
         ).toLocaleString()}</span><span class="stat-label">Members</span></div>
         <div class="stat-item"><span class="stat-number">${escapeHtml(
           f.founded
@@ -253,7 +275,7 @@ function createCardHtml(f) {
   `;
 }
 
-function renderGrid(list) {
+async function renderGrid(list) {
   const grid = $("#factionGrid"),
     no = $("#noResults");
   if (!grid) return;
@@ -263,7 +285,9 @@ function renderGrid(list) {
     return;
   }
   if (no) no.classList.add("d-none");
-  grid.innerHTML = list.map(createCardHtml).join("");
+  // `createCardHtml` is async and returns Promises — await them first
+  const htmlParts = await Promise.all(list.map((l) => createCardHtml(l)));
+  grid.innerHTML = htmlParts.join("");
   attachCardHandlers();
 }
 
@@ -307,8 +331,8 @@ function renderSidebarStats(f) {
     <h5><i class="fas fa-chart-bar" aria-hidden="true"></i> Statistics</h5>
     <div class="stat-row">
       <i class="fas fa-users" aria-hidden="true"></i>
-      <span class="stat-label">Members</span>
-      <span class="stat-value">${Number(f.members).toLocaleString()}</span>
+      <span class="stat-label" id="detailMemberLabel">Members</span>
+      <span class="stat-value" id="detailMemberCount">${Number(f.members).toLocaleString()}</span>
     </div>
     <div class="stat-row">
       <i class="fas fa-calendar-alt" aria-hidden="true"></i>
