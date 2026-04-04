@@ -1,0 +1,32 @@
+{
+  "site": {
+    "name": "Factions Hub News",
+    "tagline": "System Stress Test"
+  },
+  "articles": [
+    {
+      "id": "e000",
+      "type": 4,
+      "slug": "april-fools-morph-competition",
+      "published": "2026-04-04T03:09:00.000Z",
+      "author": "poohtoast | 1442461366983196804",
+      "heading": "April Fools Morph Competition",
+      "summary": "The Factions Hub Events Team has hosted a morph competition in the theme of April Fools.",
+      "tags": ["official fh news", "april fools"],
+      "thumbnail": "https://i.postimg.cc/BZpPy4Z2/fhn-aprilfools.png",
+      "featured": "true"
+    },
+    {
+      "id": "b000",
+      "type": 1,
+      "slug": "we-are-so-back",
+      "published": "2026-04-03T14:36:00.000Z",
+      "author": "Director of News, Sur",
+      "heading": "We are so back",
+      "summary": "The FH News team is making a comeback with weekly updates and monthly highlights, Additionally FH news Apps are now open",
+      "tags": ["official-fh-news", "we-are-so-back"],
+      "thumbnail": "https://cdn.discordapp.com/attachments/1480048863393087649/1489413650296078418/fhnews.png?ex=69d1a58e&is=69d0540e&hm=af89d8b3c152228196311c4d3d61b158cf2731877cc057242781316eaa78ee19",
+      "featured": "false"
+    }
+  ]
+}

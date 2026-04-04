@@ -1,0 +1,24 @@
+{
+  "id": "b000",
+  "slug": "we-are-so-back",
+  "body": [
+    {
+      "tag": "h2",
+      "content": "We are so back"
+    },
+    {
+      "tag": "p",
+      "content": "The FH news team, under the new administration of selugpro and sur are planning on the come back of the century. We’ll be rolling out weekly updates to keep you informed about everything happening in the community, along with a monthly recap highlighting the top factions, sites, groups, and more.\n\nOur goal for this team is to help our community groups grow and gain recognition on an official FH level. \n\nAfter all, *what good is a community news without the **community***? Applications are now open for anyone interested in joining the News team. Historically the team was dominated by volunteers from the community rather than just factions hub staff, this is to ensure we get perspective from different parts of community while staying fair and unbiased."
+    },
+    {
+      "tag": "link",
+      "label": "News Team Applications",
+      "url": "https://docs.google.com/forms/d/e/1FAIpQLSdTTBt4YUhzeE5Vcb8GOzzwjSjDO-S4nljWzCFZqehCx8-qGA/viewform?usp=header"
+    },
+    {
+      "tag": "image",
+      "src": "https://i.gyazo.com/cc449dc5ed162e7fba4d0ac4d558f842.png",
+      "alt": "factions-hub-news"
+    }
+  ]
+}

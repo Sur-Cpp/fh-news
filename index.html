@@ -1,0 +1,236 @@
+<!doctype html>
+<html lang="en" data-theme="dark">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, viewport-fit=cover"
+    />
+    <title>The Newsroom</title>
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="./assets/fhnews.png" />
+    <link rel="shortcut icon" href="./assets/fhnews.png" />
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- Bootstrap Icons (for theme toggle sun/moon + share icon) -->
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css"
+    />
+
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <!-- dim background image layer (swapped by theme.js) -->
+    <div id="siteBg" class="site-bg"></div>
+
+    <!-- ═══════════════════════ HEADER ═══════════════════════ -->
+    <header class="site-header" id="siteHeader">
+      <div class="header-inner">
+        <div class="hrow hrow--top">
+          <img
+            src="./assets/news-logo.png"
+            width="40rem"
+            height="40rem"
+            style="margin-right: 10px"
+            alt=""
+          />
+          <span class="h-date" id="hDate"></span>
+          <a href="index.html" class="wordmark" id="siteWordmark"
+            >The Newsroom</a
+          >
+          <div class="h-actions">
+            <button class="btn-ghost" id="btnSearchOpen">Search</button>
+            <button
+              class="btn-pill"
+              id="themeBtn"
+              aria-label="Toggle theme"
+            ></button>
+          </div>
+        </div>
+
+        <div class="h-rule"></div>
+
+        <div class="hrow hrow--nav">
+          <nav class="main-nav" id="mainNav">
+            <a href="#" class="nav-item" data-filter="latest">Recent</a>
+            <a href="#" class="nav-item active" data-filter="all">All</a>
+            <a href="#" class="nav-item" data-filter="featured">Featured</a>
+            <a href="#" class="nav-item" data-filter="1">Breaking</a>
+            <a href="#" class="nav-item" data-filter="4">Events</a>
+            <a href="#" class="nav-item" data-filter="2">Weekly</a>
+            <a href="#" class="nav-item" data-filter="3">Spotlight</a>
+          </nav>
+          <button
+            class="nav-hamburger"
+            id="navHamburger"
+            aria-label="Menu"
+            aria-expanded="false"
+          >
+            <span></span><span></span><span></span>
+          </button>
+        </div>
+      </div>
+
+      <!-- Search drawer -->
+      <div class="search-drawer" id="searchDrawer" aria-hidden="true">
+        <div class="search-drawer-inner">
+          <input
+            type="search"
+            id="searchInput"
+            placeholder="Search articles, authors, tags…"
+            autocomplete="off"
+            spellcheck="false"
+          />
+          <button class="btn-ghost" id="btnSearchClose">Close</button>
+        </div>
+      </div>
+
+      <!-- Mobile nav flyout -->
+      <div class="mobile-nav" id="mobileNav" aria-hidden="true">
+        <a href="#" class="mnav-item" data-filter="latest">Recent</a>
+        <a href="#" class="mnav-item active" data-filter="all">All</a>
+        <a href="#" class="mnav-item" data-filter="featured">Featured</a>
+        <a href="#" class="mnav-item" data-filter="1">Breaking</a>
+        <a href="#" class="mnav-item" data-filter="4">Events</a>
+        <a href="#" class="mnav-item" data-filter="2">Weekly</a>
+        <a href="#" class="mnav-item" data-filter="3">Spotlight</a>
+      </div>
+    </header>
+
+    <!-- ═══════════════════════ FEED ═══════════════════════ -->
+    <main class="feed" id="feed">
+      <div class="state-loading" id="stateLoading">
+        <div class="loading-track"><div class="loading-fill"></div></div>
+      </div>
+
+      <div class="state-error hidden" id="stateError">
+        <p>
+          Failed to load <code>index.json</code>. Serve via local HTTP server
+          (e.g. <code>npx serve .</code>).
+        </p>
+      </div>
+
+      <!-- ── FEATURED ── -->
+      <section class="feed-section hidden" id="secFeatured">
+        <div class="sec-eyebrow featured-eyebrow">
+          <span class="eyebrow-dot"></span> Featured
+        </div>
+        <div id="featuredSlot"></div>
+      </section>
+
+      <!-- ── BREAKING ── -->
+      <section class="feed-section hidden" id="secBreaking">
+        <div class="sec-eyebrow breaking-eyebrow">
+          <span class="eyebrow-dot"></span> Breaking News
+        </div>
+        <div id="breakingHero"></div>
+        <div class="breaking-rail" id="breakingRail"></div>
+      </section>
+
+      <!-- ── EVENTS ── -->
+      <section class="feed-section hidden" id="secEvents">
+        <div class="sec-eyebrow events-eyebrow" style="font-size: 1rem">
+          <img src="./assets/events.png" alt="" width="30rem" />
+          Events
+        </div>
+        <div id="eventsHero"></div>
+        <div class="events-rail" id="eventsRail"></div>
+      </section>
+
+      <!-- ── WEEKLY (Dispatch) ── -->
+      <section class="feed-section hidden" id="secDispatch">
+        <div class="sec-eyebrow dispatch-eyebrow">
+          The Weekly <span class="eyebrow-sub">Community News</span>
+        </div>
+        <div class="dispatch-grid" id="dispatchGrid"></div>
+      </section>
+
+      <!-- ── SPOTLIGHT ── -->
+      <section class="feed-section hidden" id="secSpotlight">
+        <div class="sec-eyebrow spotlight-eyebrow">
+          The Spotlight <span class="eyebrow-sub">Monthly Features</span>
+        </div>
+        <div class="spotlight-grid" id="spotlightGrid"></div>
+      </section>
+
+      <!-- ── SEARCH RESULTS ── -->
+      <section class="feed-section hidden" id="secSearch">
+        <div class="sec-eyebrow">Search — <span id="searchMeta"></span></div>
+        <div class="dispatch-grid" id="searchGrid"></div>
+        <p class="empty-msg hidden" id="searchEmpty">
+          No articles matched your query.
+        </p>
+      </section>
+    </main>
+
+    <!-- ═══════════════════════ ARTICLE FULL-SCREEN ═══════════════════════ -->
+    <div class="art-overlay hidden" id="artOverlay">
+      <div class="art-page" id="artPage">
+        <!-- Sticky bar -->
+        <div class="art-header" id="artHeader">
+          <div class="art-header-inner">
+            <button class="art-back" id="artBack">← Back</button>
+            <div class="art-header-right">
+              <span class="art-progress-label" id="artProgressLabel"></span>
+              <button
+                class="art-share-btn"
+                id="artShareBtn"
+                title="Share article"
+              >
+                <i class="bi bi-share"></i> Share
+              </button>
+            </div>
+          </div>
+          <div class="art-progress-bar">
+            <div class="art-progress-fill" id="artProgressFill"></div>
+          </div>
+        </div>
+
+        <!-- Cover image -->
+        <div class="art-cover hidden" id="artCover"></div>
+
+        <!-- Content -->
+        <div class="art-content-wrap">
+          <div class="art-content">
+            <div class="art-meta-top">
+              <span class="art-tier-tag" id="artTierTag"></span>
+              <span class="new-badge hidden" id="artNewBadge">New</span>
+            </div>
+            <h1 class="art-title" id="artTitle"></h1>
+            <div class="art-byline" id="artByline"></div>
+            <div class="art-body" id="artBody"></div>
+            <div class="art-tags" id="artTagsRow"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ═══════════════════════ FOOTER ═══════════════════════ -->
+    <footer class="site-footer">
+      <div class="footer-inner">
+        <span class="footer-name" id="footerName"></span>
+        <span class="footer-sep">·</span>
+        <span class="footer-note">Official Factions Hub News</span>
+      </div>
+    </footer>
+
+    <!-- Scripts: jQuery first, then modules in dependency order -->
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.min.js"></script>
+    <script src="js/theme.js"></script>
+    <script src="js/loader.js"></script>
+    <script src="js/renderer.js"></script>
+    <script src="js/article.js"></script>
+    <script src="js/search.js"></script>
+    <script src="js/nav.js"></script>
+    <script src="js/main.js"></script>
+  </body>
+</html>
