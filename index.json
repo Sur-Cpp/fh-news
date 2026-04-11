@@ -14,7 +14,7 @@
       "summary": "The Factions Hub Events Team has hosted a morph competition in the theme of April Fools.",
       "tags": ["official fh news", "april fools"],
       "thumbnail": "https://i.postimg.cc/BZpPy4Z2/fhn-aprilfools.png",
-      "featured": "true"
+      "featured": "false"
     },
     {
       "id": "b000",
@@ -32,7 +32,7 @@
   "id": "w000",
   "type": 2,
   "slug": "events-team-application",
-  "published": "2026-04-07T09:36:00.000Z",
+  "published": "2026-04-11T18:22:11.000Z",
   "author": "poohtoast | 1442461366983196804",
   "heading": "Events Team Application",
   "summary": "The Factions Hub Events Team has released their entrance applications to the public, offering players an opportunity to contribute to the community.",
@@ -117,7 +117,7 @@
   "id": "b001",
   "type": 1,
   "slug": "site-416s-4th-anniversary",
-  "published": "2026-04-10T16:15:00.000Z",
+  "published": "2026-04-11T18:22:11.000Z",
   "author": "a_suscat | 1044186076639670283",
   "heading": "Site-416’s 4th Anniversary",
   "summary": "As of 5 April 2026, Site-416 marked its 4th anniversary. The community has grown to over 12,000 members and stands as one of the oldest communities in SCP:RP still running today.",
