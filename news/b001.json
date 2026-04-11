@@ -1,0 +1,35 @@
+{
+  "id": "b001",
+  "slug": "site-416s-4th-anniversary",
+  "body": [
+    {
+      "tag": "h2",
+      "content": "Site-416 became one of the oldest SCP:RP communities"
+    },
+    {
+      "tag": "p",
+      "content": "As of *5 April 2026,* **Site-416 marked its 4th anniversary.** It has been a long journey for both management and moderation, reflecting years of growth and learning. Over time, the community has grown to over 12,000 members and __stands as one of the oldest communities in SCP:RP that is still running today.__"
+    },
+    {
+      "tag": "divider"
+    },
+    {
+      "tag": "quote",
+      "content": "\"Hell, I never thought we’d ever be capable of achieving almost 12,000 members for a discord server. \"",
+      "attribution": "redeye_416, Founder of the Site-416."
+    },
+    {
+      "tag": "divider"
+    },
+    {
+      "tag": "image",
+      "src": "https://ambitious-brown-ibf26ioygl.edgeone.app/site416.png",
+      "alt": "Original redeye_416 message image."
+    },
+    {
+      "tag": "link",
+      "label": "Message Link",
+      "url": "https://discord.com/channels/1331497708380225566/1331501866198110354/1490042890691285243"
+    }
+  ]
+}
