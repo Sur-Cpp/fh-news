@@ -14,7 +14,7 @@
       "summary": "The Factions Hub Events Team has hosted a morph competition in the theme of April Fools.",
       "tags": ["official fh news", "april fools"],
       "thumbnail": "https://i.postimg.cc/BZpPy4Z2/fhn-aprilfools.png",
-      "featured": "true"
+      "featured": false
     },
     {
       "id": "b000",
@@ -26,7 +26,42 @@
       "summary": "The FH News team is making a comeback with weekly updates and monthly highlights, Additionally FH news Apps are now open",
       "tags": ["official-fh-news", "we-are-so-back"],
       "thumbnail": "https://cdn.discordapp.com/attachments/1480048863393087649/1489413650296078418/fhnews.png?ex=69d1a58e&is=69d0540e&hm=af89d8b3c152228196311c4d3d61b158cf2731877cc057242781316eaa78ee19",
-      "featured": "false"
+      "featured": false
+    },
+    {
+      "id": "w000",
+      "type": 2,
+      "slug": "events-team-application",
+      "published": "2026-04-11T18:22:11.000Z",
+      "author": "poohtoast | 1442461366983196804",
+      "heading": "Events Team Application",
+      "summary": "The Factions Hub Events Team has released their entrance applications to the public, offering players an opportunity to contribute to the community.",
+      "featured": false,
+      "tags": ["events-team", "applications"],
+      "thumbnail": "https://i.postimg.cc/6pSDhSg8/fhevt.png"
+    },
+    {
+      "id": "e001",
+      "type": 4,
+      "slug": "april-fools-morph-competition-winners-announced",
+      "published": "2026-04-10T06:09:00.000Z",
+      "author": "mitch47 | 469440184895799296",
+      "heading": "April Fool's Morph Competition Winners Announced",
+      "summary": "The results are in....",
+      "tags": ["factions-hub-news", "april-fools"],
+      "thumbnail": "https://i.postimg.cc/MHgJr7Gq/evtmorph.png",
+      "featured": true
+    },
+    {
+      "id": "b001",
+      "type": 1,
+      "slug": "site-416s-4th-anniversary",
+      "published": "2026-04-11T18:22:11.000Z",
+      "author": "a_suscat | 1044186076639670283",
+      "heading": "Site-416's 4th Anniversary",
+      "summary": "As of 5 April 2026, Site-416 marked its 4th anniversary. The community has grown to over 12,000 members and stands as one of the oldest communities in SCP:RP still running today.",
+      "tags": ["site-416"],
+      "thumbnail": "https://i.postimg.cc/cLsHk5GV/416.png"
     }
   ]
 }

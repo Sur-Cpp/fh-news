@@ -1,0 +1,23 @@
+{
+  "id": "w000",
+  "slug": "events-team-application",
+  "body": [
+    {
+      "tag": "h2",
+      "content": "Events Team Application"
+    },
+    {
+      "tag": "p",
+      "content": "With the Factions Hub Events looking for members to join their team, they have decided to open applications for any potential new members to join. Alongside this release, they have also revealed that there are a total 5 sub-teams in the Events Team. Each of these serves their own respective purpose which will fit a lot of players’ preferences."
+    },
+    {
+      "tag": "p",
+      "content": "After an anxious wait of 30 hours, the Factions Hub Events Team application results are finally here. A total of 10 members have been accepted into the team. Congratulations to the passers of this application!"
+    },
+    {
+      "tag": "link",
+      "label": "Application Results!",
+      "url": "https://discord.com/channels/1050232152815571055/1153228217486950490/1490702167538139318"
+    }
+  ]
+}
