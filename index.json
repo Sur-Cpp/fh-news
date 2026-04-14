@@ -14,7 +14,7 @@
       "summary": "The Factions Hub Events Team has hosted a morph competition in the theme of April Fools.",
       "tags": ["official fh news", "april fools"],
       "thumbnail": "https://i.postimg.cc/BZpPy4Z2/fhn-aprilfools.png",
-      "featured": "false"
+      "featured": false
     },
     {
       "id": "b000",
@@ -26,105 +26,42 @@
       "summary": "The FH News team is making a comeback with weekly updates and monthly highlights, Additionally FH news Apps are now open",
       "tags": ["official-fh-news", "we-are-so-back"],
       "thumbnail": "https://cdn.discordapp.com/attachments/1480048863393087649/1489413650296078418/fhnews.png?ex=69d1a58e&is=69d0540e&hm=af89d8b3c152228196311c4d3d61b158cf2731877cc057242781316eaa78ee19",
-      "featured": "false"
+      "featured": false
     },
     {
-  "id": "w000",
-  "type": 2,
-  "slug": "events-team-application",
-  "published": "2026-04-11T18:22:11.000Z",
-  "author": "poohtoast | 1442461366983196804",
-  "heading": "Events Team Application",
-  "summary": "The Factions Hub Events Team has released their entrance applications to the public, offering players an opportunity to contribute to the community.",
-  "tags": [
-    "events-team",
-    "applications"
-  ],
-  "thumbnail": "https://i.postimg.cc/6pSDhSg8/fhevt.png"
-  },
-  {
-  "id": "e001",
-  "slug": "april-fools-morph-competition-winners-announced",
-  "body": [
-    {
-      "tag": "h2",
-      "content": "The Results Are In!"
+      "id": "w000",
+      "type": 2,
+      "slug": "events-team-application",
+      "published": "2026-04-11T18:22:11.000Z",
+      "author": "poohtoast | 1442461366983196804",
+      "heading": "Events Team Application",
+      "summary": "The Factions Hub Events Team has released their entrance applications to the public, offering players an opportunity to contribute to the community.",
+      "featured": false,
+      "tags": ["events-team", "applications"],
+      "thumbnail": "https://i.postimg.cc/6pSDhSg8/fhevt.png"
     },
     {
-      "tag": "p",
-      "content": "The results are in. Acting Events Team leader, *controlpowerz* (333520455535427584), officially announced the winners of the Factions Hub April Fools Morph Competition earlier this week, after receiving many unique and fun submissions from dozens of community members."
+      "id": "e001",
+      "type": 4,
+      "slug": "april-fools-morph-competition-winners-announced",
+      "published": "2026-04-10T06:09:00.000Z",
+      "author": "mitch47 | 469440184895799296",
+      "heading": "April Fool's Morph Competition Winners Announced",
+      "summary": "The results are in....",
+      "tags": ["factions-hub-news", "april-fools"],
+      "thumbnail": "https://i.postimg.cc/MHgJr7Gq/evtmorph.png",
+      "featured": true
     },
     {
-      "tag": "link",
-      "label": "See the results announcement here!",
-      "url": "https://discord.com/channels/1050232152815571055/1487114847186587658/1490672097284853880"
-    },
-    {
-      "tag": "p",
-      "content": "The competition invited server members to create unique morphs based on the theme “April Fools”, with the top three submissions receiving Robux prizes, and first place being awarded the exclusive Event Winner Role.\n\nAnd so, the winners are…"
-    },
-    {
-      "tag": "divider"
-    },
-    {
-      "tag": "p",
-      "content": "1st Place - *dambaine* (810878462252023848), with their silly yet suave Autumn Tree outfit."
-    },
-    {
-      "tag": "image",
-      "src": "https://media.discordapp.net/attachments/1488834060900892722/1489486099100467210/image.png?ex=69d9d207&is=69d88087&hm=81b563c0571307579d3b142602ca332c8e862c9f6f8a88e3fa6a7847e8e58160&=&format=webp&quality=lossless",
-      "alt": "dambaine's submission"
-    },
-    {
-      "tag": "divider"
-    },
-    {
-      "tag": "p",
-      "content": "2nd Place - *Geraldhoo01* (704929649884659773), with their hilarious pickle-themed costume."
-    },
-    {
-      "tag": "image",
-      "src": "https://media.discordapp.net/attachments/1488834060900892722/1489851275481714789/image-14.png?ex=69d9d4a0&is=69d88320&hm=658080b464564dbd4e38da0048162f316bb4e38594ce4b4927895bef485e61d8&=&format=webp&quality=lossless",
-      "alt": "Geraldhoo01's submission"
-    },
-    {
-      "tag": "divider"
-    },
-    {
-      "tag": "p",
-      "content": "3rd Place - *robery98765* (804438826301784116), with their mischevious trollface-themed creation."
-    },
-    {
-      "tag": "image",
-      "src": "https://media.discordapp.net/attachments/1488834060900892722/1489181450673590422/image.png?ex=69d95f0d&is=69d80d8d&hm=c4adadd609a3b1327fbd0df779bfa72167cb334a42f581dc5c332da918443b65&=&format=webp&quality=lossless",
-      "alt": "robery98765's submission"
-    },
-    {
-      "tag": "divider"
-    },
-    {
-      "tag": "p",
-      "content": "The event drew positive engagement from the community, with many participants showcasing their designs and celebrating the playful spirit of the competition. Congratulations to the winners and well done to all who participated.\n\nInterested in checking out the submissions for yourself? Check them out in the official Factions Hub Discord events channel."
-    },
-    {
-      "tag": "link",
-      "label": "Check out the submissions for yourself!",
-      "url": "https://discord.com/channels/1050232152815571055/1487114847186587658/1488834060900892722"
+      "id": "b001",
+      "type": 1,
+      "slug": "site-416s-4th-anniversary",
+      "published": "2026-04-11T18:22:11.000Z",
+      "author": "a_suscat | 1044186076639670283",
+      "heading": "Site-416's 4th Anniversary",
+      "summary": "As of 5 April 2026, Site-416 marked its 4th anniversary. The community has grown to over 12,000 members and stands as one of the oldest communities in SCP:RP still running today.",
+      "tags": ["site-416"],
+      "thumbnail": "https://i.postimg.cc/cLsHk5GV/416.png"
     }
-  ]
-  },
-  {
-  "id": "b001",
-  "type": 1,
-  "slug": "site-416s-4th-anniversary",
-  "published": "2026-04-11T18:22:11.000Z",
-  "author": "a_suscat | 1044186076639670283",
-  "heading": "Site-416’s 4th Anniversary",
-  "summary": "As of 5 April 2026, Site-416 marked its 4th anniversary. The community has grown to over 12,000 members and stands as one of the oldest communities in SCP:RP still running today.",
-  "tags": [
-    "site-416"
-  ],
-  "thumbnail": "https://i.postimg.cc/cLsHk5GV/416.png"
-}
   ]
 }
