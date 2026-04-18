@@ -9,6 +9,15 @@
   let activeFilter = "all";
   let activeDateFilter = null;
 
+  // Flatpickr instance
+  let fp;
+
+  const $input = $("#dateFilterInput");
+  const $label = $("#dateFilterLabel");
+  const $clear = $("#dateFilterClear");
+  const $wrap = $("#dateFilterWrap");
+  const $btn = $("#dateFilterBtn");
+
   function getAllNews() {
     return allNews;
   }
@@ -24,6 +33,27 @@
     window.NR.loader.resetPages();
     doRenderView(f);
     window.scrollTo({ top: 0, behavior: "smooth" });
+
+    // ✅ update URL category
+    const url = new URL(window.location.href);
+
+    // map numeric filters back to category names if needed
+    const catMapReverse = {
+      1: "breaking-news",
+      2: "weekly",
+      3: "spotlight",
+      4: "events",
+    };
+
+    const categoryValue = catMapReverse[f];
+
+    if (categoryValue) {
+      url.searchParams.set("category", categoryValue);
+    } else {
+      url.searchParams.delete("category");
+    }
+
+    window.history.pushState({}, "", url);
   }
 
   /* ── Shared date formatter ── */
@@ -32,6 +62,27 @@
     if (isNaN(d)) return null;
 
     return `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, "0")}-${String(d.getDate()).padStart(2, "0")}`;
+  }
+
+  function formatLabel(dateStr) {
+    const d = new Date(dateStr);
+    return d.toLocaleDateString("en-GB", {
+      day: "numeric",
+      month: "short",
+      year: "numeric",
+    });
+  }
+
+  function setUI(dateStr) {
+    if (dateStr) {
+      $label.text(formatLabel(dateStr)).removeClass("hidden");
+      $clear.removeClass("hidden");
+      $wrap.addClass("has-date");
+    } else {
+      $label.text("").addClass("hidden");
+      $clear.addClass("hidden");
+      $wrap.removeClass("has-date");
+    }
   }
 
   function doRenderView(f) {
@@ -87,28 +138,56 @@
     setFilter(targetFilter);
   }
 
+  function initDatePicker() {
+    fp = flatpickr("#dateFilterInput", {
+      dateFormat: "Y-m-d",
+      disableMobile: true,
+
+      onChange: function (selectedDates, dateStr) {
+        activeDateFilter = dateStr || null;
+
+        const url = new URL(window.location.href);
+
+        if (dateStr) {
+          url.searchParams.set("date", dateStr);
+        } else {
+          url.searchParams.delete("date");
+        }
+
+        // ✅ NO reload
+        window.history.pushState({}, "", url);
+
+        setUI(dateStr);
+        doRenderView(activeFilter);
+      },
+    });
+
+    // restore state from URL
+    const params = new URLSearchParams(window.location.search);
+    if (params.has("date")) {
+      const date = params.get("date");
+      activeDateFilter = date;
+      fp.setDate(date, true);
+      setUI(date);
+    }
+  }
+
   /* ── Date filter UI wiring ── */
   function bindDateFilter() {
-    $("#dateFilterBtn").on("click", function (e) {
-      e.stopPropagation();
-
-      const input = document.getElementById("dateFilterInput");
-      if (input.showPicker) input.showPicker();
-      else input.focus();
+    $btn.on("click", function () {
+      if (fp) fp.open();
     });
 
-    $("#dateFilterInput").on("change", function () {
-      activeDateFilter = this.value || null;
-      window.NR.loader.resetPages();
-      doRenderView(activeFilter);
-    });
-
-    $("#dateFilterClear").on("click", function (e) {
+    $clear.on("click", function (e) {
       e.stopPropagation();
+
+      if (fp) fp.clear();
+
       activeDateFilter = null;
-      $("#dateFilterInput").val("");
-      window.NR.loader.resetPages();
-      doRenderView(activeFilter);
+
+      const url = new URL(window.location.href);
+      url.searchParams.delete("date");
+      window.location.href = url.toString();
     });
   }
 
@@ -129,6 +208,8 @@
         window.NR.checkDeepLink(allNews);
         handleUrlParams();
         window.NR.initLazyLoad();
+
+        initDatePicker(); // ✅ IMPORTANT: after allNews exists
       })
       .fail(function () {
         $("#stateLoading").addClass("hidden");

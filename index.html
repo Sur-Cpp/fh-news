@@ -20,6 +20,14 @@
       rel="stylesheet"
     />
 
+    <!-- date picker -->
+    <!-- Flatpickr -->
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css"
+    />
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+
     <!-- Bootstrap Icons (for theme toggle sun/moon + share icon) -->
     <link
       rel="stylesheet"
@@ -149,11 +157,10 @@
                 </svg>
               </button>
               <input
-                type="date"
+                type="text"
                 id="dateFilterInput"
                 class="date-filter-input"
-                tabindex="-1"
-                aria-hidden="true"
+                readonly
               />
               <button
                 class="date-filter-clear hidden"

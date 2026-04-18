@@ -55,12 +55,17 @@
   }
 
   // kinda gimicky ik but this is way better than the 10 line monsotrsity we f'ing had. - sur
-  $(document).on("click", ".see-all-btn", function (e) {
-    // console.log("Button clicked!", e);
+  $(document).on("click", ".see-all-btn", function () {
     const filterValue = $(this).data("filter");
-    //    console.log(filterValue);
+    const url = new URL(window.location.href);
 
-    $(`a[data-filter="${filterValue}"]`).click();
+    if (filterValue && filterValue !== "all") {
+      url.searchParams.set("category", filterValue);
+    } else {
+      url.searchParams.delete("category");
+    }
+
+    window.location.href = url.toString();
   });
 
   window.NR.bindNav = bindNav;
