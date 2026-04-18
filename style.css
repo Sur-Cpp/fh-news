@@ -1,29 +1,56 @@
-/* =======================================================
-    Style for our fh news website
-    Font: Libre Baskerville (headlines) and DM Sans (UI/body)
-   ======================================================= */
+/* =================================================================
+   FH NEWS — STYLESHEET
+   Fonts: Libre Baskerville (headlines) · DM Sans (UI / body)
 
-/* VARIABLESS  */
+   TABLE OF CONTENTS
+   1.  Variables & themes
+   2.  Reset
+   3.  Background image layer
+   4.  Header & navigation
+   5.  Search drawer
+   6.  Date filter (nav inline)
+   7.  Feed layout & section eyebrows
+   8.  Badges (NEW, card-new)
+   9.  Featured banner
+   10. Breaking news (type 1)
+   11. Events (type 4)
+   12. Weekly / Dispatch (type 2)
+   13. Spotlight (type 3)
+   14. Article overlay
+   15. Footer
+   16. Flatpickr theme overrides
+   17. Skeleton & lazy-reveal
+   18. Responsive breakpoints
+   19. Safe-area insets
+================================================================= */
+
+/* -----------------------------------------------------------------
+   1. VARIABLES & THEMES
+----------------------------------------------------------------- */
 :root {
+  /* Brand colours */
   --blue: #2563eb;
   --blue-d: #1d4ed8;
   --blue-wash: rgba(37, 99, 235, 0.08);
 
+  /* Tier accent colours */
   --breaking: #dc2626;
-  --spotlight: #d97706;
-  --dispatch: #059669;
   --events: #7c3aed;
+  --dispatch: #059669;
+  --spotlight: #d97706;
 
+  /* Typography */
   --fd: "Libre Baskerville", Georgia, serif;
   --fu: "DM Sans", system-ui, sans-serif;
 
+  /* Radii, easing, transition duration */
   --r: 5px;
   --rl: 10px;
   --ease: cubic-bezier(0.4, 0, 0.2, 1);
   --t: 0.18s;
 }
 
-/* [THEME] Dark theme */
+/* Dark theme */
 [data-theme="dark"] {
   --bg: #0c0c0f;
   --bg-card: #131318;
@@ -37,8 +64,7 @@
   --hbg: rgba(12, 12, 15, 0.96);
 }
 
-/* [THEME] Light theme */
-/*I never get light theme, matter of fact I hate em - Sur*/
+/* Light theme — warm parchment, easy on the eyes */
 [data-theme="light"] {
   --bg: #f2ede6;
   --bg-card: #faf7f2;
@@ -52,34 +78,9 @@
   --hbg: rgba(242, 237, 230, 0.97);
 }
 
-/*? events*/
-
-/*I wanted to add some custom exclusive feel but Oh well, later maybe - Sur*/
-
-html[data-theme="dark"] body.events-mode .site-bg {
-  opacity: 0.1;
-  background-color: #48148d;
-  /* background-image: url("./assets/events.png") !important;  */
-  /* we will add this later - sur*/
-}
-
-html[data-theme="light"] body.events-mode .site-bg {
-  opacity: 0.08;
-  background-color: #f3e8ff;
-  background-image: none;
-  filter: hue-rotate(280deg);
-}
-
-/* Optional: Smooth transition for the color change */
-.site-bg {
-  transition:
-    opacity 0.3s,
-    background-image 0.3s,
-    background-color 0.5s ease;
-}
-/*> events */
-
-/* - Reset - */
+/* -----------------------------------------------------------------
+   2. RESET
+----------------------------------------------------------------- */
 *,
 *::before,
 *::after {
@@ -87,9 +88,11 @@ html[data-theme="light"] body.events-mode .site-bg {
   margin: 0;
   padding: 0;
 }
+
 html {
   scroll-behavior: smooth;
 }
+
 body {
   font-family: var(--fu);
   background: var(--bg);
@@ -101,6 +104,7 @@ body {
     background 0.3s,
     color 0.3s;
 }
+
 a {
   color: inherit;
   text-decoration: none;
@@ -109,32 +113,49 @@ img {
   display: block;
   max-width: 100%;
 }
+
 .hidden {
   display: none !important;
 }
 
-/* ===================================================== 
-   BACKGROUND IMAGE LAYER
-   theme.js swaps the image on toggle if all goes well - sur
-======================================================= */
+/* -----------------------------------------------------------------
+   3. BACKGROUND IMAGE LAYER
+   theme.js swaps dark-bg / light-bg on toggle.
+   events-mode tints the layer purple for visual identity.
+----------------------------------------------------------------- */
 .site-bg {
   position: fixed;
   inset: 0;
   z-index: 0;
   pointer-events: none;
+  background-image: url("./assets/dark-bg.png");
   background-size: cover;
   background-position: center;
-  background-image: url("./assets/dark-bg.png"); /* default dark */
-  opacity: 0.06; /* very dim — just a texture hint */
+  opacity: 0.06;
   transition:
     opacity 0.3s,
-    background-image 0.3s;
+    background-image 0.3s,
+    background-color 0.5s;
 }
+
 [data-theme="light"] .site-bg {
   background-image: url("./assets/light-bg.png");
   opacity: 0.05;
 }
 
+/* Events mode — subtle purple tint */
+html[data-theme="dark"] body.events-mode .site-bg {
+  opacity: 0.1;
+  background-color: #48148d;
+}
+html[data-theme="light"] body.events-mode .site-bg {
+  opacity: 0.08;
+  background-color: #f3e8ff;
+  background-image: none;
+  filter: hue-rotate(280deg);
+}
+
+/* Keep all content above the bg layer */
 .site-header,
 .feed,
 .art-overlay,
@@ -143,9 +164,9 @@ img {
   z-index: 1;
 }
 
-/* =======================================================
-   HEADER
-======================================================= */
+/* -----------------------------------------------------------------
+   4. HEADER & NAVIGATION
+----------------------------------------------------------------- */
 .site-header {
   position: sticky;
   top: 0;
@@ -156,21 +177,26 @@ img {
   -webkit-backdrop-filter: blur(12px);
   transition: background 0.3s;
 }
+
 .header-inner {
   max-width: 1340px;
   margin: 0 auto;
   padding: 0 24px;
 }
 
+/* Generic flex row */
 .hrow {
   display: flex;
   align-items: center;
 }
+
+/* Top row: logo · date · wordmark · actions */
 .hrow--top {
   justify-content: space-between;
   padding: 11px 0 9px;
   position: relative;
 }
+
 .h-date {
   font-size: 11px;
   color: var(--t3);
@@ -180,6 +206,7 @@ img {
   text-overflow: ellipsis;
   min-width: 0;
 }
+
 .wordmark {
   font-family: var(--fd);
   font-size: 21px;
@@ -191,6 +218,7 @@ img {
   transform: translateX(-50%);
   white-space: nowrap;
 }
+
 .h-actions {
   display: flex;
   align-items: center;
@@ -198,6 +226,7 @@ img {
   margin-left: auto;
 }
 
+/* Ghost text button */
 .btn-ghost {
   background: none;
   border: none;
@@ -215,7 +244,7 @@ img {
   color: var(--t1);
 }
 
-/* toggling themes */
+/* Circular icon button (theme toggle) */
 .btn-pill {
   background: none;
   border: 1px solid var(--border);
@@ -244,10 +273,12 @@ img {
   background: var(--border);
 }
 
-/* nav row */
+/* Nav row */
 .hrow--nav {
   justify-content: space-between;
+  flex-wrap: nowrap;
 }
+
 .main-nav {
   display: flex;
   align-items: stretch;
@@ -280,7 +311,29 @@ img {
   border-bottom-color: var(--blue);
 }
 
-/* hamburger hamburgir? not sure - Sur */
+/* Right-side nav cluster (date filter + hamburger) */
+.nav-right {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-shrink: 0;
+  margin-left: auto;
+  padding-left: 12px;
+}
+
+/* Mobile search icon button */
+.nav-search-btn {
+  background: none;
+  border: none;
+  color: var(--t1);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2px;
+}
+
+/* Hamburger */
 .nav-hamburger {
   display: none;
   flex-direction: column;
@@ -321,7 +374,7 @@ img {
   transform: translateY(-6.5px) rotate(-45deg);
 }
 
-/* mobile flyout - we love mobile users - sur */
+/* Mobile nav flyout */
 .mobile-nav {
   display: none;
   flex-direction: column;
@@ -332,6 +385,7 @@ img {
 .mobile-nav.open {
   display: flex;
 }
+
 .mnav-item {
   padding: 12px 24px;
   font-size: 13px;
@@ -352,7 +406,53 @@ img {
   border-left-color: var(--blue);
 }
 
-/* search drawer */
+/* Mobile nav date row */
+.mnav-date-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 24px 12px;
+  border-top: 1px solid var(--border);
+  margin-top: 4px;
+}
+
+.mnav-date-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--bg-raise);
+  border: 1px solid var(--border);
+  border-radius: var(--r);
+  color: var(--t1);
+  font-family: var(--fu);
+  font-size: 0.95rem;
+  padding: 8px 12px;
+  cursor: pointer;
+}
+
+.mnav-date-label {
+  font-family: var(--fu);
+  font-size: 0.95rem;
+  font-weight: 500;
+  color: var(--t1);
+}
+
+.mnav-date-clear {
+  background: none;
+  border: none;
+  font-family: var(--fu);
+  font-size: 0.9rem;
+  color: var(--t2);
+  cursor: pointer;
+  transition: color var(--t);
+}
+.mnav-date-clear:hover {
+  color: var(--breaking);
+}
+
+/* -----------------------------------------------------------------
+   5. SEARCH DRAWER
+----------------------------------------------------------------- */
 .search-drawer {
   display: none;
   border-top: 1px solid var(--border);
@@ -361,6 +461,7 @@ img {
 .search-drawer.open {
   display: block;
 }
+
 .search-drawer-inner {
   max-width: 1340px;
   margin: 0 auto;
@@ -369,6 +470,7 @@ img {
   gap: 10px;
   align-items: center;
 }
+
 .search-drawer-inner input {
   flex: 1;
   background: var(--bg-card);
@@ -388,15 +490,138 @@ img {
   border-color: var(--blue);
 }
 
-/* =======================================================
-   FEED
-======================================================= */
+/* Date range + sort inputs inside the search drawer */
+.search-date-input,
+.search-sort-select {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--r);
+  color: var(--t1);
+  font-family: var(--fu);
+  font-size: 12px;
+  padding: 5px 9px;
+  height: 36px;
+  outline: none;
+  transition: border-color var(--t);
+  color-scheme: dark;
+}
+[data-theme="light"] .search-date-input,
+[data-theme="light"] .search-sort-select {
+  color-scheme: light;
+}
+
+.search-date-input:focus,
+.search-sort-select:focus {
+  border-color: var(--blue);
+}
+
+.search-sort-select {
+  cursor: pointer;
+}
+
+/* -----------------------------------------------------------------
+   6. DATE FILTER (inline nav widget)
+----------------------------------------------------------------- */
+.date-filter-wrap {
+  display: inline-flex;
+  align-items: center;
+  background: var(--bg-raise);
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  padding: 4px 10px;
+  position: relative;
+  gap: 6px;
+  transition:
+    border-color var(--t),
+    background var(--t);
+}
+.date-filter-wrap:has(#dateFilterInput:focus),
+.date-filter-wrap.has-date {
+  border-color: var(--blue);
+  background: var(--blue-wash);
+}
+
+.date-filter-label {
+  display: inline-flex;
+  align-items: center;
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--blue);
+  letter-spacing: 0.02em;
+  white-space: nowrap;
+  padding: 0 4px 0 10px;
+  line-height: 1;
+}
+
+.date-filter-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: var(--t2);
+  width: 28px;
+  height: 15px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 20px;
+  flex-shrink: 0;
+  transition: color var(--t);
+}
+.date-filter-btn:hover {
+  color: var(--t1);
+}
+.date-filter-wrap.has-date .date-filter-btn {
+  color: var(--blue);
+}
+
+/* Hidden native date input overlaid on the button */
+.date-filter-input {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  cursor: pointer;
+  z-index: 1;
+}
+.date-filter-input::-webkit-calendar-picker-indicator {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  cursor: pointer;
+}
+
+.date-filter-clear {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--blue);
+  line-height: 1;
+  padding: 0 8px 0 2px;
+  height: 28px;
+  display: flex;
+  align-items: center;
+  border-radius: 0 20px 20px 0;
+  position: relative;
+  z-index: 3; /* sit above the transparent date input */
+  transition: color var(--t);
+}
+.date-filter-clear:hover {
+  color: var(--breaking);
+}
+
+/* -----------------------------------------------------------------
+   7. FEED LAYOUT & SECTION EYEBROWS
+----------------------------------------------------------------- */
 .feed {
   max-width: 1340px;
   margin: 0 auto;
   padding: 0 24px 80px;
 }
 
+/* Loading bar */
 .state-loading {
   padding: 60px 0;
   display: flex;
@@ -425,6 +650,7 @@ img {
   }
 }
 
+/* Error state */
 .state-error {
   padding: 60px 0;
   text-align: center;
@@ -439,11 +665,22 @@ img {
   font-size: 13px;
 }
 
-/* sections */
+/* Feed sections — subtle entrance animation */
 .feed-section {
   padding-top: 48px;
+  opacity: 0;
+  transform: translateY(10px);
+  transition:
+    opacity 0.3s var(--ease),
+    transform 0.3s var(--ease);
+}
+.feed-section.section-visible,
+.feed-section:not(.hidden) {
+  opacity: 1;
+  transform: none;
 }
 
+/* Section eyebrow */
 .sec-eyebrow {
   font-size: 10px;
   font-weight: 600;
@@ -472,6 +709,7 @@ img {
   flex-shrink: 0;
 }
 
+/* Eyebrow accent colours */
 .featured-eyebrow {
   color: var(--blue);
 }
@@ -488,14 +726,9 @@ img {
   color: var(--spotlight);
 }
 
-/* =======================================================
-   ADD THESE RULES TO style.css
-   (paste anywhere after the .sec-eyebrow block)
-======================================================= */
-
-/* ── See-all arrow button (inside .sec-eyebrow) ─────── */
+/* See-all button (injected by renderer into eyebrow) */
 .see-all-btn {
-  margin-left: auto; /* push to right edge of eyebrow */
+  margin-left: auto;
   background: none;
   border: 1px solid var(--border);
   font-family: var(--fu);
@@ -521,6 +754,7 @@ img {
   border-color: var(--t2);
   background: var(--bg-hover);
 }
+
 .see-all-arrow {
   font-size: 13px;
   line-height: 1;
@@ -530,36 +764,34 @@ img {
   transform: translateX(3px);
 }
 
-/* Color the arrow to match the section accent */
+/* Tier-tinted see-all buttons */
 .breaking-eyebrow .see-all-btn {
   border-color: color-mix(in srgb, var(--breaking) 30%, var(--border));
 }
+.events-eyebrow .see-all-btn {
+  border-color: color-mix(in srgb, var(--events) 30%, var(--border));
+}
+.dispatch-eyebrow .see-all-btn {
+  border-color: color-mix(in srgb, var(--dispatch) 30%, var(--border));
+}
+.spotlight-eyebrow .see-all-btn {
+  border-color: color-mix(in srgb, var(--spotlight) 30%, var(--border));
+}
+
 .breaking-eyebrow .see-all-btn:hover {
   color: var(--breaking);
   border-color: var(--breaking);
   background: color-mix(in srgb, var(--breaking) 8%, transparent);
-}
-
-.events-eyebrow .see-all-btn {
-  border-color: color-mix(in srgb, var(--events) 30%, var(--border));
 }
 .events-eyebrow .see-all-btn:hover {
   color: var(--events);
   border-color: var(--events);
   background: color-mix(in srgb, var(--events) 8%, transparent);
 }
-
-.dispatch-eyebrow .see-all-btn {
-  border-color: color-mix(in srgb, var(--dispatch) 30%, var(--border));
-}
 .dispatch-eyebrow .see-all-btn:hover {
   color: var(--dispatch);
   border-color: var(--dispatch);
   background: color-mix(in srgb, var(--dispatch) 8%, transparent);
-}
-
-.spotlight-eyebrow .see-all-btn {
-  border-color: color-mix(in srgb, var(--spotlight) 30%, var(--border));
 }
 .spotlight-eyebrow .see-all-btn:hover {
   color: var(--spotlight);
@@ -567,10 +799,10 @@ img {
   background: color-mix(in srgb, var(--spotlight) 8%, transparent);
 }
 
-/* ── Load More button ───────────────────────────────── */
+/* Load more button */
 .load-more-btn {
   display: block;
-  margin: 22px auto 0; /* centred */
+  margin: 22px auto 0;
   padding: 10px 28px;
   background: none;
   border: 1px solid var(--border);
@@ -598,7 +830,17 @@ img {
   transform: translateY(0);
 }
 
-/* NEW badge */
+/* Empty search state */
+.empty-msg {
+  padding: 48px 0;
+  text-align: center;
+  color: var(--t3);
+  font-size: 14px;
+}
+
+/* -----------------------------------------------------------------
+   8. BADGES
+----------------------------------------------------------------- */
 .new-badge {
   display: inline-block;
   font-size: 9.5px;
@@ -637,9 +879,9 @@ img {
   vertical-align: middle;
 }
 
-/* =======================================================
-   FEATURED BANNER
-======================================================= */
+/* -----------------------------------------------------------------
+   9. FEATURED BANNER
+----------------------------------------------------------------- */
 .featured-banner {
   position: relative;
   border-radius: var(--rl);
@@ -657,6 +899,8 @@ img {
   box-shadow: 0 0 0 2px var(--featured-accent, var(--blue));
   border-color: var(--featured-accent, var(--blue));
 }
+
+/* Blurred background fill */
 .featured-bg {
   position: absolute;
   inset: 0;
@@ -670,6 +914,7 @@ img {
 .featured-banner:hover .featured-bg {
   filter: blur(18px) brightness(0.48) saturate(1.7);
 }
+
 .featured-bg-overlay {
   position: absolute;
   inset: 0;
@@ -680,6 +925,7 @@ img {
     rgba(0, 0, 0, 0.1) 100%
   );
 }
+
 .featured-img {
   position: relative;
   z-index: 2;
@@ -689,6 +935,7 @@ img {
   flex-shrink: 0;
   display: block;
 }
+
 .featured-body {
   position: relative;
   z-index: 2;
@@ -716,6 +963,7 @@ img {
   align-items: center;
   gap: 8px;
 }
+
 .featured-headline {
   font-family: var(--fd);
   font-size: clamp(1.25rem, 2.6vw, 1.85rem);
@@ -727,6 +975,7 @@ img {
 [data-theme="light"] .featured-headline {
   color: var(--t1);
 }
+
 .featured-summary {
   font-size: 14px;
   color: rgba(255, 255, 255, 0.72);
@@ -736,6 +985,7 @@ img {
 [data-theme="light"] .featured-summary {
   color: var(--t2);
 }
+
 .featured-meta {
   font-size: 11px;
   color: rgba(255, 255, 255, 0.42);
@@ -762,9 +1012,9 @@ img {
   }
 }
 
-/* =======================================================
-   BREAKING (type 1 — red)
-======================================================= */
+/* -----------------------------------------------------------------
+   10. BREAKING (type 1 — red)
+----------------------------------------------------------------- */
 .breaking-hero-card {
   display: flex;
   flex-direction: column;
@@ -783,12 +1033,6 @@ img {
   box-shadow: 0 0 0 1px var(--breaking);
 }
 
-@media (min-width: 760px) {
-  .breaking-hero-card {
-    flex-direction: row;
-    min-height: 250px;
-  }
-}
 .breaking-hero-img {
   width: 100%;
   height: 200px;
@@ -796,13 +1040,7 @@ img {
   flex-shrink: 0;
   display: block;
 }
-@media (min-width: 760px) {
-  .breaking-hero-img {
-    width: 44%;
-    height: auto;
-    min-height: 230px;
-  }
-}
+
 .breaking-hero-body {
   padding: 22px 24px;
   display: flex;
@@ -810,12 +1048,23 @@ img {
   justify-content: center;
   border-top: 3px solid var(--breaking);
 }
+
 @media (min-width: 760px) {
+  .breaking-hero-card {
+    flex-direction: row;
+    min-height: 250px;
+  }
+  .breaking-hero-img {
+    width: 44%;
+    height: auto;
+    min-height: 230px;
+  }
   .breaking-hero-body {
     border-top: none;
     border-left: 3px solid var(--breaking);
   }
 }
+
 .breaking-rail {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
@@ -826,6 +1075,7 @@ img {
   overflow: hidden;
   margin-top: 3px;
 }
+
 .breaking-rail-card {
   background: var(--bg-card);
   padding: 15px 17px 14px;
@@ -840,126 +1090,7 @@ img {
   background: var(--bg-hover);
 }
 
-/* =======================================================
-   EVENTS (type 4 — amber, blur bg hero)
-======================================================= */
-.events-hero-card {
-  position: relative;
-  border-radius: var(--rl);
-  overflow: hidden;
-  cursor: pointer;
-  border: 1px solid var(--border);
-  min-height: 250px;
-  display: flex;
-  flex-direction: column;
-  margin-bottom: 3px;
-  transition:
-    border-color var(--t),
-    box-shadow var(--t);
-}
-.events-hero-card:hover {
-  border-color: var(--events);
-  box-shadow: 0 0 0 1px var(--events);
-}
-.events-hero-card .featured-bg {
-  filter: blur(22px) brightness(0.35) saturate(1.8);
-}
-.events-hero-card:hover .featured-bg {
-  filter: blur(18px) brightness(0.42) saturate(2);
-}
-
-.events-hero-img {
-  position: relative;
-  z-index: 2;
-  width: 100%;
-  height: 210px;
-  object-fit: cover;
-  flex-shrink: 0;
-  display: block;
-}
-@media (min-width: 760px) {
-  .events-hero-img {
-    width: 44%;
-    height: auto;
-    min-height: 230px;
-  }
-}
-.events-hero-body {
-  position: relative;
-  z-index: 2;
-  padding: 22px 26px 20px;
-  background: rgba(0, 0, 0, 0.58);
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
-  border-top: 3px solid var(--events);
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-  justify-content: center;
-}
-[data-theme="light"] .events-hero-body {
-  background: rgba(242, 237, 230, 0.82);
-}
-
-@media (min-width: 760px) {
-  .events-hero-card {
-    flex-direction: row;
-    min-height: 250px;
-  }
-  .events-hero-body {
-    border-top: none;
-    border-left: 3px solid var(--events);
-  }
-}
-
-.events-hero-body .e-kicker {
-  color: var(--events);
-}
-.events-hero-body .e-headline {
-  color: #fff;
-}
-.events-hero-body .e-summary {
-  color: rgba(255, 255, 255, 0.72);
-}
-.events-hero-body .e-meta {
-  color: rgba(255, 255, 255, 0.4);
-}
-[data-theme="light"] .events-hero-body .e-headline {
-  color: var(--t1);
-}
-[data-theme="light"] .events-hero-body .e-summary {
-  color: var(--t2);
-}
-[data-theme="light"] .events-hero-body .e-meta {
-  color: var(--t3);
-}
-
-.events-rail {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-  gap: 3px;
-  background: var(--border);
-  border: 1px solid var(--border);
-  border-radius: var(--rl);
-  overflow: hidden;
-  margin-top: 3px;
-}
-.events-rail-card {
-  background: var(--bg-card);
-  padding: 15px 17px 14px;
-  cursor: pointer;
-  display: flex;
-  flex-direction: column;
-  gap: 5px;
-  transition: background var(--t);
-  border-top: 2px solid var(--events);
-}
-.events-rail-card:hover {
-  background: var(--bg-hover);
-}
-
-/* shared small card text */
+/* Shared small-card text helpers */
 .kicker {
   font-size: 9.5px;
   font-weight: 700;
@@ -998,7 +1129,7 @@ img {
   margin-top: 2px;
 }
 
-/* breaking hero text */
+/* Breaking hero text helpers */
 .tier-kicker {
   font-size: 10px;
   font-weight: 700;
@@ -1030,7 +1161,104 @@ img {
   color: var(--t3);
 }
 
-/* events hero text */
+/* -----------------------------------------------------------------
+   11. EVENTS (type 4 — purple, blurred hero)
+----------------------------------------------------------------- */
+.events-hero-card {
+  position: relative;
+  border-radius: var(--rl);
+  overflow: hidden;
+  cursor: pointer;
+  border: 1px solid var(--border);
+  min-height: 250px;
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 3px;
+  transition:
+    border-color var(--t),
+    box-shadow var(--t);
+}
+.events-hero-card:hover {
+  border-color: var(--events);
+  box-shadow: 0 0 0 1px var(--events);
+}
+
+/* Reuse featured-bg but darker for events */
+.events-hero-card .featured-bg {
+  filter: blur(22px) brightness(0.35) saturate(1.8);
+}
+.events-hero-card:hover .featured-bg {
+  filter: blur(18px) brightness(0.42) saturate(2);
+}
+
+.events-hero-img {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  height: 210px;
+  object-fit: cover;
+  flex-shrink: 0;
+  display: block;
+}
+
+.events-hero-body {
+  position: relative;
+  z-index: 2;
+  padding: 22px 26px 20px;
+  background: rgba(0, 0, 0, 0.58);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border-top: 3px solid var(--events);
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  justify-content: center;
+}
+[data-theme="light"] .events-hero-body {
+  background: rgba(242, 237, 230, 0.82);
+}
+
+@media (min-width: 760px) {
+  .events-hero-card {
+    flex-direction: row;
+    min-height: 250px;
+  }
+  .events-hero-img {
+    width: 44%;
+    height: auto;
+    min-height: 230px;
+  }
+  .events-hero-body {
+    border-top: none;
+    border-left: 3px solid var(--events);
+  }
+}
+
+/* Events text — white on dark blur, themed on light */
+.events-hero-body .e-kicker {
+  color: var(--events);
+}
+.events-hero-body .e-headline {
+  color: #fff;
+}
+.events-hero-body .e-summary {
+  color: rgba(255, 255, 255, 0.72);
+}
+.events-hero-body .e-meta {
+  color: rgba(255, 255, 255, 0.4);
+}
+[data-theme="light"] .events-hero-body .e-headline {
+  color: var(--t1);
+}
+[data-theme="light"] .events-hero-body .e-summary {
+  color: var(--t2);
+}
+[data-theme="light"] .events-hero-body .e-meta {
+  color: var(--t3);
+}
+
+/* Events text class definitions */
 .e-kicker {
   font-size: 10px;
   font-weight: 700;
@@ -1060,10 +1288,34 @@ img {
   font-size: 11px;
 }
 
-/* =======================================================
-   WEEKLY NEWS (type 2 — green)
-   lmao imagine we uploading news weekly - Sur
-======================================================= */
+.events-rail {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 3px;
+  background: var(--border);
+  border: 1px solid var(--border);
+  border-radius: var(--rl);
+  overflow: hidden;
+  margin-top: 3px;
+}
+
+.events-rail-card {
+  background: var(--bg-card);
+  padding: 15px 17px 14px;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  transition: background var(--t);
+  border-top: 2px solid var(--events);
+}
+.events-rail-card:hover {
+  background: var(--bg-hover);
+}
+
+/* -----------------------------------------------------------------
+   12. WEEKLY / DISPATCH (type 2 — green)
+----------------------------------------------------------------- */
 .dispatch-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -1073,6 +1325,7 @@ img {
   border-radius: var(--rl);
   overflow: hidden;
 }
+
 .dispatch-card {
   background: var(--bg-card);
   padding: 20px 20px 18px;
@@ -1086,6 +1339,7 @@ img {
 .dispatch-card:hover {
   background: var(--bg-hover);
 }
+
 .dispatch-card-thumb {
   width: 100%;
   height: 155px;
@@ -1093,6 +1347,7 @@ img {
   border-radius: 3px;
   margin-bottom: 2px;
 }
+
 .d-kicker {
   font-size: 9.5px;
   font-weight: 700;
@@ -1122,9 +1377,9 @@ img {
   justify-content: space-between;
 }
 
-/* =======================================================
-   SPOTLIGHT (type 3 — purple)
-======================================================= */
+/* -----------------------------------------------------------------
+   13. SPOTLIGHT (type 3 — amber)
+----------------------------------------------------------------- */
 .spotlight-grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
@@ -1134,6 +1389,7 @@ img {
   border-radius: var(--rl);
   overflow: hidden;
 }
+
 .spotlight-card {
   background: var(--bg-card);
   cursor: pointer;
@@ -1144,11 +1400,13 @@ img {
 .spotlight-card:hover {
   background: var(--bg-hover);
 }
+
 .spotlight-card-thumb {
   width: 100%;
   height: 200px;
   object-fit: cover;
 }
+
 .spotlight-card-body {
   padding: 22px 24px 20px;
   flex: 1;
@@ -1157,6 +1415,7 @@ img {
   gap: 8px;
   border-left: 3px solid var(--spotlight);
 }
+
 .sp-kicker {
   font-size: 9.5px;
   font-weight: 700;
@@ -1185,16 +1444,9 @@ img {
   border-top: 1px solid var(--border-s);
 }
 
-.empty-msg {
-  padding: 48px 0;
-  text-align: center;
-  color: var(--t3);
-  font-size: 14px;
-}
-
-/* =======================================================
-   FULL-SCREEN ARTICLE
-======================================================= */
+/* -----------------------------------------------------------------
+   14. ARTICLE OVERLAY
+----------------------------------------------------------------- */
 .art-overlay {
   position: fixed;
   inset: 0;
@@ -1220,6 +1472,7 @@ img {
   flex-direction: column;
 }
 
+/* Sticky reading bar */
 .art-header {
   position: sticky;
   top: 0;
@@ -1265,7 +1518,6 @@ img {
   font-variant-numeric: tabular-nums;
 }
 
-/* share button */
 .art-share-btn {
   background: none;
   border: 1px solid var(--border);
@@ -1301,7 +1553,7 @@ img {
   transition: width 0.1s linear;
 }
 
-/* cover */
+/* Cover image with blur background */
 .art-cover {
   width: 100%;
   overflow: hidden;
@@ -1335,6 +1587,7 @@ img {
   background: linear-gradient(transparent, var(--bg));
 }
 
+/* Article content */
 .art-content-wrap {
   max-width: 760px;
   margin: 0 auto;
@@ -1348,6 +1601,7 @@ img {
   gap: 10px;
   margin-bottom: 16px;
 }
+
 .art-tier-tag {
   font-size: 10.5px;
   font-weight: 700;
@@ -1376,6 +1630,7 @@ img {
   color: var(--t1);
   margin-bottom: 14px;
 }
+
 .art-byline {
   font-size: 12px;
   color: var(--t3);
@@ -1386,6 +1641,7 @@ img {
   gap: 12px;
 }
 
+/* Rich body typography */
 .art-body {
   font-size: 16px;
   line-height: 1.78;
@@ -1500,9 +1756,9 @@ img {
   margin-right: 1px;
 }
 
-/* =======================================================
-   FOOTER
-======================================================= */
+/* -----------------------------------------------------------------
+   15. FOOTER
+----------------------------------------------------------------- */
 .site-footer {
   border-top: 1px solid var(--border);
   background: var(--hbg);
@@ -1527,300 +1783,146 @@ img {
   color: var(--border);
 }
 
-/*I hate css, here is date*/
-.hrow--nav {
-  /* already justify-content: space-between, just ensure no wrap */
-  flex-wrap: nowrap;
-}
-
-.nav-right {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  flex-shrink: 0;
-  margin-left: auto;
-  padding-left: 12px;
-}
-
-.date-filter-wrap {
-  display: flex;
-  align-items: center;
-  gap: 0;
-  position: relative;
-  height: 28px;
-  border: 1px solid var(--border);
-  border-radius: 20px;
-  overflow: visible;
-  transition: border-color var(--t);
-}
-.date-filter-wrap:has(#dateFilterInput:focus) {
-  border-color: var(--blue);
-}
-.date-filter-wrap.has-date {
-  border-color: var(--blue);
-  background: var(--blue-wash);
-}
-
-.date-filter-label {
-  display: inline-flex;
-  align-items: center;
-  font-size: 11px;
-  font-weight: 600;
-  color: var(--blue);
-  letter-spacing: 0.02em;
-  white-space: nowrap;
-  padding-left: 10px;
-  padding-right: 4px;
-  line-height: 1;
-}
-
-.date-filter-btn {
-  background: none;
-  border: none;
-  cursor: pointer;
-  color: var(--t3);
-  width: 28px;
-  height: 28px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border-radius: 20px;
-  flex-shrink: 0;
-  transition: color var(--t);
-}
-.date-filter-btn:hover {
-  color: var(--t1);
-}
-.date-filter-wrap.has-date .date-filter-btn {
-  color: var(--blue);
-}
-
-/* the real <input type=date> is hidden, overlaid on the button */
-.date-filter-input {
-  position: absolute;
-  inset: 0;
-  opacity: 0;
-  cursor: pointer;
-  z-index: 1; /* IMPORTANT */
-}
-/* hide browser's own calendar button to avoid double icon */
-.date-filter-input::-webkit-calendar-picker-indicator {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  opacity: 0;
-  cursor: pointer;
-}
-
-.date-filter-clear {
-  background: none;
-  border: none;
-  cursor: pointer;
-  font-size: 13px;
-  font-weight: 600;
-  color: var(--blue);
-  line-height: 1;
-  padding: 0 8px 0 2px;
-  height: 28px;
-  display: flex;
-  align-items: center;
-  border-radius: 0 20px 20px 0;
-  transition:
-    color var(--t),
-    background var(--t);
-  position: relative;
-  z-index: 3; /* above the transparent date input */
-}
-.date-filter-clear:hover {
-  color: var(--breaking);
-}
-
-/* mobile nav date row */
-.mnav-date-row {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  padding: 10px 24px 12px;
-  border-top: 1px solid var(--border);
-  margin-top: 4px;
-}
-.mnav-date-btn {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  background: none;
-  border: 1px solid var(--border);
-  border-radius: 20px;
-  color: var(--t2);
-  font-family: var(--fu);
-  font-size: 12px;
-  font-weight: 500;
-  padding: 5px 12px;
-  cursor: pointer;
-  transition:
-    color var(--t),
-    border-color var(--t);
-}
-.mnav-date-btn:hover {
-  color: var(--t1);
-  border-color: var(--t2);
-}
-.mnav-date-label {
-  font-size: 11px;
-  font-weight: 600;
-  color: var(--blue);
-}
-.mnav-date-clear {
-  background: none;
-  border: none;
-  font-size: 11px;
-  font-weight: 600;
-  color: var(--t3);
-  cursor: pointer;
-  padding: 0;
-  transition: color var(--t);
-}
-.mnav-date-clear:hover {
-  color: var(--breaking);
-}
-
-.nav-right {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-}
-
-.date-filter-wrap {
-  display: inline-flex;
-  align-items: center;
-  background: var(--bg-raise);
-  border: 1px solid var(--border);
-  border-radius: 20px;
-  padding: 4px 10px;
-  position: relative;
-}
-
-.date-filter-btn,
-.date-filter-clear,
-.nav-search-btn {
-  background: none;
-  border: none;
-  color: var(--t1);
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 2px;
-}
-
-.date-filter-clear {
-  margin-left: 6px;
-  font-size: 1.1rem;
-}
-
-.date-filter-label {
-  font-family: var(--fu);
-  font-size: 0.85rem;
-  color: var(--t1);
-  margin-right: 6px;
-}
-
-.mnav-date-row {
-  display: flex;
-  align-items: center;
-  padding: 1rem;
-  border-top: 1px solid var(--border);
-  margin-top: 0.5rem;
-  gap: 10px;
-}
-
-.mnav-date-btn {
-  background: var(--bg-raise);
-  border: 1px solid var(--border);
-  color: var(--t1);
-  padding: 8px 12px;
-  border-radius: var(--r);
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  font-family: var(--fu);
-  font-size: 0.95rem;
-  cursor: pointer;
-}
-
-.mnav-date-clear {
-  background: none;
-  border: none;
-  color: var(--t2);
-  font-family: var(--fu);
-  font-size: 0.9rem;
-  cursor: pointer;
-}
-
-.mnav-date-label {
-  font-family: var(--fu);
-  color: var(--t1);
-  font-size: 0.95rem;
-  font-weight: 500;
-}
-
-/* Flatpickr Theme Overrides */
+/* -----------------------------------------------------------------
+   16. FLATPICKR THEME OVERRIDES
+   All overrides in one place; dark-theme variants then shared.
+----------------------------------------------------------------- */
 .flatpickr-calendar {
   background: var(--bg-card) !important;
   border: 1px solid var(--border) !important;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1) !important;
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.15) !important;
+  transition:
+    background 0.15s,
+    color 0.15s;
 }
 
-.flatpickr-day,
+[data-theme="dark"] .flatpickr-calendar {
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4) !important;
+}
+
+/* Header / month nav */
+[data-theme="dark"] .flatpickr-months,
+[data-theme="dark"] .flatpickr-month,
+[data-theme="dark"] .flatpickr-current-month {
+  background: transparent !important;
+  color: var(--t1) !important;
+}
+
+[data-theme="dark"] .flatpickr-monthDropdown-months {
+  background: var(--bg-card) !important;
+  color: var(--t1) !important;
+}
+
+/* Weekdays */
 .flatpickr-weekday,
+[data-theme="dark"] .flatpickr-weekday {
+  color: var(--t2) !important;
+}
+
+/* Day cells */
+.flatpickr-day,
+[data-theme="dark"] .flatpickr-day {
+  color: var(--t1) !important;
+}
+
+.flatpickr-day:hover,
+[data-theme="dark"] .flatpickr-day:hover {
+  background: var(--bg-hover) !important;
+  border-color: var(--border-s) !important;
+  color: var(--t1) !important;
+}
+
+.flatpickr-day.selected,
+[data-theme="dark"] .flatpickr-day.selected {
+  background: var(--blue) !important;
+  border-color: var(--blue) !important;
+  color: #fff !important;
+}
+
+.flatpickr-day.today,
+[data-theme="dark"] .flatpickr-day.today {
+  border-color: var(--blue) !important;
+}
+
+[data-theme="dark"] .flatpickr-day.flatpickr-disabled {
+  color: var(--t3) !important;
+  opacity: 0.4;
+}
+
+/* Navigation arrows */
+[data-theme="dark"] .flatpickr-prev-month svg,
+[data-theme="dark"] .flatpickr-next-month svg {
+  stroke: var(--t1) !important;
+  fill: none !important;
+}
+
+[data-theme="dark"] .flatpickr-prev-month,
+[data-theme="dark"] .flatpickr-next-month {
+  color: var(--t1) !important;
+}
+
+[data-theme="dark"] .flatpickr-prev-month:hover svg,
+[data-theme="dark"] .flatpickr-next-month:hover svg {
+  stroke: var(--blue) !important;
+}
+
+/* Year / month inputs */
 .flatpickr-current-month .flatpickr-monthDropdown-months,
 .numInputWrapper span,
 .flatpickr-current-month input.cur-year {
   color: var(--t1) !important;
 }
 
-.flatpickr-day:hover,
-.flatpickr-day:focus {
-  background: var(--bg-hover) !important;
-  border-color: var(--border-s) !important;
-}
-
-.flatpickr-day.selected {
-  background: var(--blue) !important;
-  border-color: var(--blue) !important;
-  color: #fff !important;
-}
-
-/* Highlight Dates with News */
+/* Dates with news articles — highlighted by JS */
 .flatpickr-day.has-news {
-  font-weight: bold;
+  font-weight: 700;
   border-bottom: 2px solid var(--events) !important;
   background: var(--blue-wash);
 }
 
-@media (max-width: 768px) {
-  #btnSearchOpen {
-    display: none;
+/* -----------------------------------------------------------------
+   17. SKELETON LOADING & LAZY-REVEAL
+----------------------------------------------------------------- */
+.art-body-skeleton {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding-top: 8px;
+}
+.skel-line {
+  height: 14px;
+  border-radius: 4px;
+  background: linear-gradient(
+    90deg,
+    var(--border) 25%,
+    var(--bg-hover) 50%,
+    var(--border) 75%
+  );
+  background-size: 200% 100%;
+  animation: skelShimmer 1.4s ease infinite;
+  width: 100%;
+}
+.skel-line.short {
+  width: 45%;
+}
+.skel-line.med {
+  width: 70%;
+}
+
+@keyframes skelShimmer {
+  0% {
+    background-position: 200% 0;
+  }
+  100% {
+    background-position: -200% 0;
   }
 }
 
-@media (min-width: 769px) {
-  #navSearchBtnMobile {
-    display: none;
-  }
-}
+/* -----------------------------------------------------------------
+   18. RESPONSIVE BREAKPOINTS
+----------------------------------------------------------------- */
 
-/* Responsive: keep date filter visible on mobile but hide text label */
-@media (max-width: 700px) {
-  .date-filter-label {
-    display: none !important;
-  }
-}
-
-/* =======================================================
-   RESPONSIVE
-======================================================= */
+/* Tablet */
 @media (max-width: 900px) {
   .dispatch-grid {
     grid-template-columns: 1fr 1fr;
@@ -1829,6 +1931,8 @@ img {
     grid-template-columns: 1fr;
   }
 }
+
+/* Mobile */
 @media (max-width: 700px) {
   .main-nav {
     display: none;
@@ -1839,17 +1943,20 @@ img {
   .header-inner {
     padding: 0 16px;
   }
-  .wordmark {
-    font-size: 17px;
-    position: static;
-    transform: none;
-  }
   .h-date {
     display: none;
   }
   .h-actions .btn-ghost {
     display: none;
   }
+
+  /* Wordmark stops being centred absolutely on small screens */
+  .wordmark {
+    font-size: 17px;
+    position: static;
+    transform: none;
+  }
+
   .feed {
     padding: 0 16px 60px;
   }
@@ -1863,6 +1970,8 @@ img {
   .events-rail {
     grid-template-columns: 1fr 1fr;
   }
+
+  /* Article overlay */
   .art-content-wrap {
     padding: 28px 16px 60px;
   }
@@ -1880,8 +1989,32 @@ img {
   }
   .art-share-btn span {
     display: none;
-  } /* icon only on mobile */
+  } /* icon-only on mobile */
+
+  /* Search drawer controls */
+  .search-date-input,
+  .search-sort-select {
+    display: none;
+  }
+
+  /* Date filter label text hidden, icon only */
+  .date-filter-label {
+    display: none !important;
+  }
+
+  /* Show mobile search icon, hide desktop text button */
+  #btnSearchOpen {
+    display: none;
+  }
 }
+
+@media (min-width: 769px) {
+  #navSearchBtnMobile {
+    display: none;
+  }
+}
+
+/* Small mobile */
 @media (max-width: 440px) {
   .breaking-rail,
   .events-rail {
@@ -1895,7 +2028,9 @@ img {
   }
 }
 
-/* Safe area insets (notched phones) - thank you stack overflow! */
+/* -----------------------------------------------------------------
+   19. SAFE-AREA INSETS (notched / island phones)
+----------------------------------------------------------------- */
 @supports (padding: max(0px)) {
   .site-header {
     padding-left: env(safe-area-inset-left);
