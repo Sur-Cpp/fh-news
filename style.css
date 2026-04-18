@@ -1527,6 +1527,308 @@ img {
   color: var(--border);
 }
 
+/*I hate css, here is date*/
+.hrow--nav {
+  /* already justify-content: space-between, just ensure no wrap */
+  flex-wrap: nowrap;
+}
+
+.nav-right {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-shrink: 0;
+  margin-left: auto;
+  padding-left: 12px;
+}
+
+.date-filter-wrap {
+  display: flex;
+  align-items: center;
+  gap: 0;
+  position: relative;
+  height: 28px;
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  overflow: visible;
+  transition: border-color var(--t);
+}
+.date-filter-wrap:has(#dateFilterInput:focus) {
+  border-color: var(--blue);
+}
+.date-filter-wrap.has-date {
+  border-color: var(--blue);
+  background: var(--blue-wash);
+}
+
+.date-filter-label {
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--blue);
+  letter-spacing: 0.02em;
+  white-space: nowrap;
+  padding-left: 10px;
+  padding-right: 4px;
+  line-height: 1;
+}
+
+.date-filter-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: var(--t3);
+  width: 28px;
+  height: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 20px;
+  flex-shrink: 0;
+  transition: color var(--t);
+}
+.date-filter-btn:hover {
+  color: var(--t1);
+}
+.date-filter-wrap.has-date .date-filter-btn {
+  color: var(--blue);
+}
+
+/* the real <input type=date> is hidden, overlaid on the button */
+.date-filter-input {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  cursor: pointer;
+  width: 100%;
+  height: 100%;
+  border: none;
+  background: none;
+  z-index: 2;
+  /* on some browsers the calendar icon area triggers the picker */
+}
+/* hide browser's own calendar button to avoid double icon */
+.date-filter-input::-webkit-calendar-picker-indicator {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  cursor: pointer;
+}
+
+.date-filter-clear {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--blue);
+  line-height: 1;
+  padding: 0 8px 0 2px;
+  height: 28px;
+  display: flex;
+  align-items: center;
+  border-radius: 0 20px 20px 0;
+  transition:
+    color var(--t),
+    background var(--t);
+  position: relative;
+  z-index: 3; /* above the transparent date input */
+}
+.date-filter-clear:hover {
+  color: var(--breaking);
+}
+
+/* mobile nav date row */
+.mnav-date-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 24px 12px;
+  border-top: 1px solid var(--border);
+  margin-top: 4px;
+}
+.mnav-date-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: none;
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  color: var(--t2);
+  font-family: var(--fu);
+  font-size: 12px;
+  font-weight: 500;
+  padding: 5px 12px;
+  cursor: pointer;
+  transition:
+    color var(--t),
+    border-color var(--t);
+}
+.mnav-date-btn:hover {
+  color: var(--t1);
+  border-color: var(--t2);
+}
+.mnav-date-label {
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--blue);
+}
+.mnav-date-clear {
+  background: none;
+  border: none;
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--t3);
+  cursor: pointer;
+  padding: 0;
+  transition: color var(--t);
+}
+.mnav-date-clear:hover {
+  color: var(--breaking);
+}
+
+.nav-right {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.date-filter-wrap {
+  display: inline-flex;
+  align-items: center;
+  background: var(--bg-raise);
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  padding: 4px 10px;
+  position: relative;
+}
+
+.date-filter-input {
+  position: absolute;
+  opacity: 0;
+  width: 0;
+  height: 0;
+  pointer-events: none;
+}
+
+.date-filter-btn,
+.date-filter-clear,
+.nav-search-btn {
+  background: none;
+  border: none;
+  color: var(--t1);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2px;
+}
+
+.date-filter-clear {
+  margin-left: 6px;
+  font-size: 1.1rem;
+}
+
+.date-filter-label {
+  font-family: var(--fu);
+  font-size: 0.85rem;
+  color: var(--t1);
+  margin-right: 6px;
+}
+
+.mnav-date-row {
+  display: flex;
+  align-items: center;
+  padding: 1rem;
+  border-top: 1px solid var(--border);
+  margin-top: 0.5rem;
+  gap: 10px;
+}
+
+.mnav-date-btn {
+  background: var(--bg-raise);
+  border: 1px solid var(--border);
+  color: var(--t1);
+  padding: 8px 12px;
+  border-radius: var(--r);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--fu);
+  font-size: 0.95rem;
+  cursor: pointer;
+}
+
+.mnav-date-clear {
+  background: none;
+  border: none;
+  color: var(--t2);
+  font-family: var(--fu);
+  font-size: 0.9rem;
+  cursor: pointer;
+}
+
+.mnav-date-label {
+  font-family: var(--fu);
+  color: var(--t1);
+  font-size: 0.95rem;
+  font-weight: 500;
+}
+
+/* Flatpickr Theme Overrides */
+.flatpickr-calendar {
+  background: var(--bg-card) !important;
+  border: 1px solid var(--border) !important;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1) !important;
+}
+
+.flatpickr-day,
+.flatpickr-weekday,
+.flatpickr-current-month .flatpickr-monthDropdown-months,
+.numInputWrapper span,
+.flatpickr-current-month input.cur-year {
+  color: var(--t1) !important;
+}
+
+.flatpickr-day:hover,
+.flatpickr-day:focus {
+  background: var(--bg-hover) !important;
+  border-color: var(--border-s) !important;
+}
+
+.flatpickr-day.selected {
+  background: var(--blue) !important;
+  border-color: var(--blue) !important;
+  color: #fff !important;
+}
+
+/* Highlight Dates with News */
+.flatpickr-day.has-news {
+  font-weight: bold;
+  border-bottom: 2px solid var(--events) !important;
+  background: var(--blue-wash);
+}
+
+@media (max-width: 768px) {
+  #btnSearchOpen {
+    display: none;
+  }
+}
+
+@media (min-width: 769px) {
+  #navSearchBtnMobile {
+    display: none;
+  }
+}
+
+/* Responsive: keep date filter visible on mobile but hide text label */
+@media (max-width: 700px) {
+  .date-filter-label {
+    display: none !important;
+  }
+}
+
 /* =======================================================
    RESPONSIVE
 ======================================================= */
