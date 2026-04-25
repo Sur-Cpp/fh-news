@@ -1909,13 +1909,67 @@ html[data-theme="light"] body.events-mode .site-bg {
   width: 70%;
 }
 
-@keyframes skelShimmer {
-  0% {
-    background-position: 200% 0;
-  }
-  100% {
-    background-position: -200% 0;
-  }
+.fhn-divider {
+  /* Use viewport width to cover the whole screen */
+  width: 100vw;
+  
+  /* Center the element relative to the viewport */
+  position: relative;
+  left: 50%;
+  right: 50%;
+  margin-left: -50vw;
+  margin-right: -50vw;
+
+  /* Your existing styles */
+  display: flex;
+  flex-direction: column;
+  margin-top: 32px;
+  margin-bottom: 32px;
+  overflow: hidden;
+  border-radius: 0; /* Border radius usually looks odd on full-width lines */
+}
+.fhn-divider-top {
+  height: 2px;
+  background: var(--blue);
+}
+.fhn-divider-tape {
+  height: 22px;
+  background: var(--blue-wash);
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+}
+.fhn-divider-track {
+  display: flex;
+  align-items: center;
+  white-space: nowrap;
+  animation: fhn-tape 18s linear infinite;
+  will-change: transform;
+}
+.fhn-divider-track span {
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--blue);
+  opacity: 0.55;
+  padding: 0 14px;
+  flex-shrink: 0;
+}
+.fhn-divider-track span.sep {
+  opacity: 0.25;
+  padding: 0 2px;
+  letter-spacing: 0;
+}
+.fhn-divider-bot {
+  height: 2px;
+  background: var(--blue);
+  opacity: 0.35;
+}
+
+#m_logo {
+  width: 20px !important;
+  transform: translateY(3.5px) !important;
 }
 
 /* -----------------------------------------------------------------
@@ -2027,6 +2081,21 @@ html[data-theme="light"] body.events-mode .site-bg {
     font-size: 15px;
   }
 }
+
+@keyframes skelShimmer {
+  0% {
+    background-position: 200% 0;
+  }
+  100% {
+    background-position: -200% 0;
+  }
+}
+
+@keyframes fhn-tape {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+
 
 /* -----------------------------------------------------------------
    19. SAFE-AREA INSETS (notched / island phones)

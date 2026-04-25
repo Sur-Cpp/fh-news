@@ -118,6 +118,16 @@
             return `<a class="art-link-btn" href="${esc(b.url)}" target="_blank" rel="noopener noreferrer">${esc(b.label)}</a>`;
           case "image":
             return `<img src="${esc(b.src)}" alt="${esc(b.alt || "")}" onerror="this.style.display='none'">`;
+          case "section-break":
+            return `<div class="fhn-divider">
+               <div class="fhn-divider-top"></div>
+                <div class="fhn-divider-tape">
+                  <div class="fhn-divider-track">
+                      ${'<span><img src="./assets/news-logo.png" id="m_logo"></span><span class="sep">·</span><span>Faction Hub News</span><span class="sep">·</span>'.repeat(16)}
+                  </div>
+                </div>
+              <div class="fhn-divider-bot"></div>
+            </div>`;
           default:
             return "";
         }

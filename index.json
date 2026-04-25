@@ -1,7 +1,7 @@
 {
   "site": {
     "name": "Factions Hub News",
-    "tagline": "System Stress Test"
+    "tagline": "FH NEWS"
   },
   "articles": [
     {
@@ -36,9 +36,9 @@
       "author": "poohtoast | 1442461366983196804",
       "heading": "Events Team Application",
       "summary": "The Factions Hub Events Team has released their entrance applications to the public, offering players an opportunity to contribute to the community.",
-      "featured": false,
       "tags": ["events-team", "applications"],
-      "thumbnail": "https://i.postimg.cc/6pSDhSg8/fhevt.png"
+      "thumbnail": "https://i.postimg.cc/6pSDhSg8/fhevt.png",
+      "featured": false
     },
     {
       "id": "e001",
@@ -50,7 +50,7 @@
       "summary": "The results are in....",
       "tags": ["factions-hub-news", "april-fools"],
       "thumbnail": "https://i.postimg.cc/MHgJr7Gq/evtmorph.png",
-      "featured": true
+      "featured": false
     },
     {
       "id": "b001",
@@ -61,7 +61,31 @@
       "heading": "Site-416's 4th Anniversary",
       "summary": "As of 5 April 2026, Site-416 marked its 4th anniversary. The community has grown to over 12,000 members and stands as one of the oldest communities in SCP:RP still running today.",
       "tags": ["site-416"],
-      "thumbnail": "https://i.postimg.cc/cLsHk5GV/416.png"
+      "thumbnail": "https://i.postimg.cc/cLsHk5GV/416.png",
+      "featured": false
+    },
+    {
+      "id": "b002",
+      "type": 1,
+      "slug": "delta-0-livid-night-1000-member-ceremony",
+      "published": "2026-04-24T06:52:00.000Z",
+      "author": "a_suscat | 1044186076639670283",
+      "heading": "Delta-0 \"Livid Night\" | 1000+ Member Ceremony",
+      "summary": "As of 23 April 2026, Delta-0 “Livid Night” has surpassed 1,000 members, and now standing as one of the largest custom factions in SCP:RP.",
+      "tags": ["delta-0"],
+      "thumbnail": "https://www.image2url.com/r2/default/images/1777014238916-453c5e80-3da6-4db8-89cc-969f6bb7a274.png"
+    },
+    {
+      "id": "w001",
+      "type": 2,
+      "slug": "weekly-2026-04-25",
+      "published": "2026-04-25T14:22:00.000Z",
+      "author": "Newsroom",
+      "heading": "Weekly Release 25/04/2026",
+      "summary": "This week's digest featuring an interview with Omega-1's owner and a deep dive into the impact of Roblox chat sanctions across SCP:RP.",
+      "tags": ["weekly digest", "Roblox", "SCP:RP", "Omega-1"],
+      "thumbnail": "https://i.imgur.com/kApK6kG.jpeg",
+      "featured": true
     }
   ]
 }

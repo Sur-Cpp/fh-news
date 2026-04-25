@@ -1,0 +1,57 @@
+{
+  "id": "b002",
+  "slug": "delta-0-livid-night-1000-member-ceremony",
+  "body": [
+    {
+      "tag": "image",
+      "src": "https://excellent-tan-uvhtchtmax.edgeone.app/delta-0-NEWS-FACTION-PHOTO.png",
+      "alt": "Faction Members"
+    },
+    {
+      "tag": "divider"
+    },
+    {
+      "tag": "h2",
+      "content": "Delta-0 has become one of the largest custom factions in SCP:RP"
+    },
+    {
+      "tag": "p",
+      "content": "*As of 23 April 2026,* **Delta-0 “Livid Night” has surpassed 1,000 members.** This milestone marks a significant achievement in its ongoing development within the SCP:RP community for over the last 8 month. It reflects a long and dedicated journey for both High Command and faction members alike. Over time, Delta-0 has continued to expand and evolve, __now standing as one of the largest custom factions in SCP:RP.__"
+    },
+    {
+      "tag": "divider"
+    },
+    {
+      "tag": "p",
+      "content": "**Several events** are currently being planned by the Delta-0 High Command to commemorate this momentous occasion. __The list of activities will be provided below.__"
+    },
+    {
+      "tag": "list",
+      "style": "ul",
+      "items": [
+        "Community Meeting and Medal Ceremony.",
+        "EAO Sponsored Tournament.",
+        "HQ Events.",
+        "Giveaway."
+      ]
+    },
+    {
+      "tag": "divider"
+    },
+    {
+      "tag": "quote",
+      "content": "We now sit as one of the largest custom factions in SCPRP!!",
+      "attribution": "duck4594, Delta-0 \"Livid Night\" Task Force Director."
+    },
+    {
+      "tag": "image",
+      "src": "https://www.image2url.com/r2/default/images/1777014469060-3658b407-6e0b-4386-9318-839a572f8b11.png",
+      "alt": "Announcement Contexts"
+    },
+    {
+      "tag": "link",
+      "label": "Message Link",
+      "url": "https://discord.com/channels/1050232152815571055/1487500048131424387/1496886342976671955"
+    }
+  ]
+}

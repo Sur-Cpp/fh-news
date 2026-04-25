@@ -34,7 +34,6 @@
     doRenderView(f);
     window.scrollTo({ top: 0, behavior: "smooth" });
 
-    // ✅ update URL category
     const url = new URL(window.location.href);
 
     // map numeric filters back to category names if needed
