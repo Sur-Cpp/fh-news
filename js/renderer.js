@@ -116,8 +116,30 @@
           </div>`;
           case "link":
             return `<a class="art-link-btn" href="${esc(b.url)}" target="_blank" rel="noopener noreferrer">${esc(b.label)}</a>`;
-          case "image":
-            return `<img src="${esc(b.src)}" alt="${esc(b.alt || "")}" onerror="this.style.display='none'">`;
+          case "image": {
+            const rawSrc = b.src || "";
+            const pipIdx = rawSrc.indexOf("|");
+            let src,
+              sizeStyle = "";
+
+            if (pipIdx !== -1) {
+              src = rawSrc.slice(0, pipIdx).trim();
+              const sizeRaw = rawSrc.slice(pipIdx + 1).trim();
+              if (/^\d+$/.test(sizeRaw)) {
+                sizeStyle = `width:${sizeRaw}px`;
+              } else if (/^\d+(\.\d+)?(%|px|vw|rem|em)$/.test(sizeRaw)) {
+                sizeStyle = `width:${sizeRaw}`;
+              }
+            } else {
+              src = rawSrc;
+            }
+
+            const alt = esc(b.alt || "");
+            const sizeAttr = sizeStyle
+              ? `class="art-img-sized" style="${sizeStyle}"`
+              : ``;
+            return `<img src="${esc(src)}" alt="${alt}" ${sizeAttr} onerror="this.style.display='none'">`;
+          }
           case "section-break":
             return `<div class="fhn-divider">
                <div class="fhn-divider-top"></div>

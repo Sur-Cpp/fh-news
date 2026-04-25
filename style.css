@@ -1912,7 +1912,7 @@ html[data-theme="light"] body.events-mode .site-bg {
 .fhn-divider {
   /* Use viewport width to cover the whole screen */
   width: 100vw;
-  
+
   /* Center the element relative to the viewport */
   position: relative;
   left: 50%;
@@ -2062,6 +2062,16 @@ html[data-theme="light"] body.events-mode .site-bg {
   }
 }
 
+/* sized images — width set via JSON |size, must beat .art-body img */
+.art-body img.art-img-sized {
+  width: auto; /* reset the 100% default */
+  max-width: 100%;
+  border-radius: 6px;
+  margin: 10px auto 18px;
+  align-self: center; /*HOW DO I CENTER A DIV HELP ME*/
+  display: block;
+}
+
 @media (min-width: 769px) {
   #navSearchBtnMobile {
     display: none;
@@ -2092,10 +2102,13 @@ html[data-theme="light"] body.events-mode .site-bg {
 }
 
 @keyframes fhn-tape {
-  from { transform: translateX(0); }
-  to   { transform: translateX(-50%); }
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
 }
-
 
 /* -----------------------------------------------------------------
    19. SAFE-AREA INSETS (notched / island phones)
