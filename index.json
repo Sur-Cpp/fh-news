@@ -86,6 +86,17 @@
       "tags": ["weekly digest", "Roblox", "SCP:RP", "Omega-1", "NSRI"],
       "thumbnail": "https://i.imgur.com/kApK6kG.jpeg",
       "featured": true
+    },
+    {
+      "id": "e002",
+      "type": 4,
+      "slug": "fh-short-film-competition",
+      "published": "2026-04-26T04:24:00.000Z",
+      "author": "tamago_boii | 1272171468104400950",
+      "heading": "FH Short Film Competition",
+      "summary": "The Events Team has recently announced a short film competition! Participants can expect to utilise their creativity, spark exciting ideas and generate awesome films based on the community! What are you waiting for? Have a go at it!",
+      "tags": ["events", "film"],
+      "thumbnail": "https://i.gyazo.com/f147c63987ec20dab400a282e6322efd.png"
     }
   ]
 }

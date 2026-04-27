@@ -1,0 +1,50 @@
+{
+  "id": "e002",
+  "slug": "fh-short-film-competition",
+  "body": [
+    {
+      "tag": "h3",
+      "content": "Details"
+    },
+    {
+      "tag": "p",
+      "content": "The Events Team of the Faction Hub has initiated a brand new competition: A **short film competition**! Through the films, members of the community may team up with each other, using their existing knowledge on the game and the SCP universe to create the **best** videos possible!\n\nParticipants are encouraged to go the extra mile in these films, editing and adding music to the RAW films in order to __polish__ and __elevate__ them to the next level!"
+    },
+    {
+      "tag": "h3",
+      "content": "Guidelines"
+    },
+    {
+      "tag": "list",
+      "style": "ul",
+      "items": [
+        "Films must follow **SCP:RP regulations**",
+        "Films must be made within the **time of the event message being posted** and the **submission date**",
+        "Teams must have between **1 to 8 people**",
+        "Films must be made within **SCP: Roleplay**",
+        "Each team may only submit **one** film"
+      ]
+    },
+    {
+      "tag": "h3",
+      "content": "Prizes"
+    },
+    {
+      "tag": "p",
+      "content": "What would be a competition without its prizes? The Faction Hub Events Team has very kindly offered a  ***__1750 Robux__*** prize pool for our winners!"
+    },
+    {
+      "tag": "quote",
+      "content": "🥇First Place - **1000 Robux** + Event Winner role\n🥈Second Place - **500 Robux**\n🥉Third Place - **250 Robux**"
+    },
+    {
+      "tag": "p",
+      "content": "Interested? Click on the button below for more information regarding the competition! Hope to see you there!"
+    },
+    {
+      "tag": "link",
+      "label": "Short Film Competition!",
+      "url": "https://discord.com/channels/1050232152815571055/1487114847186587658/1497612324331065495"
+    }
+  ]
+}
