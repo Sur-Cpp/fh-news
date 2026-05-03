@@ -1,55 +1,23 @@
 {
-  "id": "w002",
-  "slug": "weekly-release-19-04-2026",
+  "id": "w000",
+  "slug": "events-team-application",
   "body": [
     {
       "tag": "h2",
-      "content": "Weekly Community Release — 19/04/2026"
-    },
-
-    {
-      "tag": "h3",
-      "content": "Site 58 Begins Development of a New Map"
+      "content": "Events Team Application"
     },
     {
       "tag": "p",
-      "content": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris."
-    },
-
-    {
-      "tag": "h3",
-      "content": "New Verified Faction Officially Announced"
+      "content": "With the Factions Hub Events looking for members to join their team, they have decided to open applications for any potential new members to join. Alongside this release, they have also revealed that there are a total 5 sub-teams in the Events Team. Each of these serves their own respective purpose which will fit a lot of players’ preferences."
     },
     {
       "tag": "p",
-      "content": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque vel urna eu arcu maximus tristique. Integer facilisis, sapien non fringilla molestie, lacus purus cursus risus, vitae facilisis libero dolor ut orci."
-    },
-
-    {
-      "tag": "h3",
-      "content": "F3X Builder Discovers Innovative Elevator Technique"
+      "content": "After an anxious wait of 30 hours, the Factions Hub Events Team application results are finally here. A total of 10 members have been accepted into the team. Congratulations to the passers of this application!"
     },
     {
-      "tag": "p",
-      "content": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec vehicula, nisl at convallis tincidunt, sapien justo cursus urna, ut blandit eros nisl eget sapien. Curabitur non sem vel sapien tempor fermentum."
-    },
-
-    {
-      "tag": "h3",
-      "content": "Players Develop New Dash Script System"
-    },
-    {
-      "tag": "p",
-      "content": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean ut lacus ac justo efficitur luctus. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae."
-    },
-
-    {
-      "tag": "h3",
-      "content": "Verified Group of the Week Spotlight"
-    },
-    {
-      "tag": "p",
-      "content": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent eget tortor vitae lacus finibus viverra. Sed sit amet sapien id nunc tincidunt facilisis non at lorem."
+      "tag": "link",
+      "label": "Application Results!",
+      "url": "https://discord.com/channels/1050232152815571055/1153228217486950490/1490702167538139318"
     }
   ]
 }

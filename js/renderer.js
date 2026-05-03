@@ -93,29 +93,38 @@
   function renderBody(blocks) {
     return (blocks || [])
       .map((b) => {
+        let html = "";
+
         switch (b.tag) {
           case "h2":
-            return `<h2>${md(b.content)}</h2>`;
+            html = `<h2>${md(b.content)}</h2>`;
+            break;
           case "h3":
-            return `<h3>${md(b.content)}</h3>`;
+            html = `<h3>${md(b.content)}</h3>`;
+            break;
           case "p":
-            return `<p>${md(b.content)}</p>`;
+            html = `<p>${md(b.content)}</p>`;
+            break;
           case "divider":
-            return `<hr>`;
+            html = `<hr>`;
+            break;
           case "list": {
             const tag = b.style === "ol" ? "ol" : "ul";
             const items = (b.items || [])
               .map((i) => `<li>${md(i)}</li>`)
               .join("");
-            return `<${tag}>${items}</${tag}>`;
+            html = `<${tag}>${items}</${tag}>`;
+            break;
           }
           case "quote":
-            return `<div class="art-blockquote">
-            <p>${md(b.content)}</p>
-            ${b.attribution ? `<cite>— ${esc(b.attribution)}</cite>` : ""}
-          </div>`;
+            html = `<div class="art-blockquote">
+              <p>${md(b.content)}</p>
+              ${b.attribution ? `<cite>— ${esc(b.attribution)}</cite>` : ""}
+            </div>`;
+            break;
           case "link":
-            return `<a class="art-link-btn" href="${esc(b.url)}" target="_blank" rel="noopener noreferrer">${esc(b.label)}</a>`;
+            html = `<a class="art-link-btn" href="${esc(b.url)}" target="_blank" rel="noopener noreferrer">${esc(b.label)}</a>`;
+            break;
           case "image": {
             const rawSrc = b.src || "";
             const pipIdx = rawSrc.indexOf("|");
@@ -138,21 +147,69 @@
             const sizeAttr = sizeStyle
               ? `class="art-img-sized" style="${sizeStyle}"`
               : ``;
-            return `<img src="${esc(src)}" alt="${alt}" ${sizeAttr} onerror="this.style.display='none'">`;
+            html = `<img src="${esc(src)}" alt="${alt}" ${sizeAttr} onerror="this.style.display='none'">`;
+            break;
           }
-          case "section-break":
-            return `<div class="fhn-divider">
-               <div class="fhn-divider-top"></div>
-                <div class="fhn-divider-tape">
-                  <div class="fhn-divider-track">
-                      ${'<span><img src="./assets/news-logo.png" id="m_logo"></span><span class="sep">·</span><span>Faction Hub News</span><span class="sep">·</span>'.repeat(16)}
-                  </div>
+          case "section-break": {
+            if (b.type === "corrupted") {
+              html = `<div class="fhn-divider corrupted">
+                <div class="fhn-divider-half left">
+                  <div class="fhn-divider-top"></div>
+                  <div class="fhn-divider-tape"><div class="fhn-divider-track">${'<span>· [ DATA EXPUNGED ] ·</span><span class="sep">· UNKNOWN ·</span>'.repeat(16)}</div></div>
+                  <div class="fhn-divider-bot"></div>
                 </div>
-              <div class="fhn-divider-bot"></div>
-            </div>`;
+                <div class="fhn-divider-half right">
+                  <div class="fhn-divider-top"></div>
+                  <div class="fhn-divider-tape"><div class="fhn-divider-track">${'<span>· [ DATA EXPUNGED ] ·</span><span class="sep">· UNKNOWN ·</span>'.repeat(16)}</div></div>
+                  <div class="fhn-divider-bot"></div>
+                </div>
+              </div>`;
+            } else if (b.type === "caution") {
+              html = `<div class="fhn-divider caution">
+                 <div class="fhn-divider-top"></div>
+                  <div class="fhn-divider-tape">
+                    <div class="fhn-divider-track">
+                        ${'<span>· CAUTION ·</span><span class="sep">·</span><span>RESTRICTED AREA</span><span class="sep">·</span>'.repeat(8)}
+                    </div>
+                  </div>
+                <div class="fhn-divider-bot"></div>
+              </div>`;
+            } else {
+              html = `<div class="fhn-divider">
+                 <div class="fhn-divider-top"></div>
+                  <div class="fhn-divider-tape">
+                    <div class="fhn-divider-track">
+                        ${'<span><img src="./assets/news-logo.png" id="m_logo"></span><span class="sep">·</span><span>Faction Hub News</span><span class="sep">·</span>'.repeat(16)}
+                    </div>
+                  </div>
+                <div class="fhn-divider-bot"></div>
+              </div>`;
+            }
+            break;
+          }
           default:
-            return "";
+            html = "";
         }
+
+        // Apply background coloring via CSS wrapper
+        if (b.bg && b.bg !== "default") {
+          let colorStr = esc(b.bg);
+
+          // Map legacy word colors to solid hexes so the opacity rules in styles.css can handle the transparency cleanly.
+          if (!colorStr.startsWith("#")) {
+            const legacyColors = {
+              red: "#dc2626",
+              blue: "#2563eb",
+              green: "#059669",
+              purple: "#7c3aed",
+            };
+            colorStr = legacyColors[colorStr] || colorStr;
+          }
+
+          html = `<div class="art-block-bg" style="--block-bg-color: ${colorStr};">${html}</div>`;
+        }
+
+        return html;
       })
       .join("\n");
   }

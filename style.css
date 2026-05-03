@@ -89,6 +89,11 @@
   padding: 0;
 }
 
+::-webkit-scrollbar {
+  width: 8px; /* Vertical width */
+  height: 0px; /* Hides horizontal bar on elements */
+}
+
 html {
   scroll-behavior: smooth;
 }
@@ -1972,6 +1977,113 @@ html[data-theme="light"] body.events-mode .site-bg {
   transform: translateY(3.5px) !important;
 }
 
+.art-block-bg {
+  position: relative;
+  z-index: 5;
+}
+.art-block-bg::before {
+  content: "";
+  position: absolute;
+  top: -6px;
+  bottom: -6px; /* slight vertical padding bleed */
+  left: -50vw;
+  right: -50vw; /* full viewport width */
+  background: var(--block-bg-color);
+  z-index: -1;
+  box-shadow: 0 0 80px 60px var(--block-bg-color);
+  pointer-events: none;
+  mix-blend-mode: normal;
+  opacity: 0.18; /* Dark mode opacity */
+}
+[data-theme="light"] .art-block-bg::before {
+  opacity: 0.12; /* Light mode opacity */
+}
+
+/* Corrupted Section Break (Asymmetrical & Broken) */
+.fhn-divider.corrupted {
+  display: block;
+  height: 120px;
+  background: transparent;
+  margin-top: 50px;
+  margin-bottom: 50px;
+}
+.fhn-divider-half {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+.fhn-divider-half.left {
+  width: 58vw;
+  left: 0;
+  top: 15px;
+  transform-origin: left center;
+  transform: rotate(2.2deg);
+}
+.fhn-divider-half.right {
+  width: 52vw;
+  right: -2vw;
+  top: 50px;
+  transform-origin: right center;
+  transform: rotate(-6.5deg);
+  animation: fatal-error-glitch 4s infinite linear;
+}
+
+.fhn-divider.corrupted .fhn-divider-top {
+  background: var(--t2);
+  opacity: 0.6;
+  height: 1px;
+}
+.fhn-divider.corrupted .fhn-divider-bot {
+  background: var(--t2);
+  opacity: 0.4;
+  height: 1px;
+}
+.fhn-divider.corrupted .fhn-divider-tape {
+  background: rgba(136, 136, 164, 0.04);
+  border-top: 1px dashed rgba(136, 136, 164, 0.4);
+  border-bottom: 1px dashed rgba(136, 136, 164, 0.4);
+  height: 26px;
+}
+.fhn-divider.corrupted .fhn-divider-track {
+  animation-duration: 20s;
+}
+.fhn-divider-half.right .fhn-divider-track {
+  animation-direction: reverse;
+  animation-duration: 15s;
+}
+.fhn-divider.corrupted .fhn-divider-track span {
+  color: var(--t2);
+  opacity: 0.7;
+}
+
+/* ── Caution Tape Section Break ── */
+.fhn-divider.caution .fhn-divider-top {
+  background: #eab308; /* Yellow/Amber */
+}
+.fhn-divider.caution .fhn-divider-bot {
+  background: #eab308;
+  opacity: 0.35;
+}
+.fhn-divider.caution .fhn-divider-tape {
+  /* Subtle diagonal hazard stripes */
+  background: repeating-linear-gradient(
+    -45deg,
+    rgba(234, 179, 8, 0.08),
+    rgba(234, 179, 8, 0.08) 10px,
+    rgba(0, 0, 0, 0.15) 10px,
+    rgba(0, 0, 0, 0.15) 20px
+  );
+  border-top: 1px solid rgba(234, 179, 8, 0.3);
+  border-bottom: 1px solid rgba(234, 179, 8, 0.3);
+}
+.fhn-divider.caution .fhn-divider-track span {
+  color: #eab308;
+  opacity: 0.95;
+  font-weight: 800;
+  letter-spacing: 0.2em;
+}
+
 /* -----------------------------------------------------------------
    18. RESPONSIVE BREAKPOINTS
 ----------------------------------------------------------------- */
@@ -2107,6 +2219,35 @@ html[data-theme="light"] body.events-mode .site-bg {
   }
   to {
     transform: translateX(-50%);
+  }
+}
+
+@keyframes fatal-error-glitch {
+  0%,
+  94%,
+  98%,
+  100% {
+    transform: rotate(-6.5deg) translate(0, 0);
+    opacity: 1;
+    filter: none;
+  }
+  95% {
+    transform: rotate(-7deg) translate(-10px, 8px);
+    opacity: 0.8;
+    filter: hue-rotate(90deg) contrast(2);
+    text-shadow:
+      2px 2px 0 red,
+      -2px -2px 0 cyan;
+  }
+  96% {
+    transform: rotate(-1.5deg) translate(8px, -5px);
+    opacity: 0.5;
+    filter: invert(0.8);
+  }
+  97% {
+    transform: rotate(-9deg) translate(-4px, 4px);
+    opacity: 1;
+    filter: sepia(1) hue-rotate(-50deg) saturate(3);
   }
 }
 
