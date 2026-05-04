@@ -85,7 +85,7 @@
       "summary": "This week's release featuring an interview with Omega-1, community leadership responding to the new Roblox chat rules, and our Verified Group of the Week.",
       "tags": ["weekly digest", "Roblox", "SCP:RP", "Omega-1", "NSRI"],
       "thumbnail": "https://i.imgur.com/kApK6kG.jpeg",
-      "featured": true
+      "featured": false
     },
     {
       "id": "e002",
@@ -97,6 +97,24 @@
       "summary": "The Events Team has recently announced a short film competition! Participants can expect to utilise their creativity, spark exciting ideas and generate awesome films based on the community! What are you waiting for? Have a go at it!",
       "tags": ["events", "film"],
       "thumbnail": "https://i.gyazo.com/f147c63987ec20dab400a282e6322efd.png"
+    },
+    {
+      "id": "w002",
+      "type": 2,
+      "slug": "weekly-2026-05-02",
+      "published": "2026-05-02T14:22:00.000Z",
+      "author": "Newsroom",
+      "heading": "Weekly Release 02/05/2026",
+      "summary": "This week's release featuring Area-15 hitting 500 members, our Verified Group of the Week: The Sarkic Union, and Astra hosting their first global SSU.",
+      "tags": [
+        "weekly digest",
+        "SCP:RP",
+        "Area-15",
+        "The Sarkic Union",
+        "Astra"
+      ],
+      "thumbnail": "https://i.gyazo.com/4f991856bc06f7ff643d1c231b54d140.webp",
+      "featured": true
     }
   ]
 }
