@@ -114,6 +114,26 @@
         "Astra"
       ],
       "thumbnail": "https://i.gyazo.com/4f991856bc06f7ff643d1c231b54d140.webp",
+      "featured": false
+    },
+    {
+      "id": "w003",
+      "type": 2,
+      "slug": "weekly-2026-05-02",
+      "published": "2026-05-17T04:32:00.000Z",
+      "author": "Newsroom",
+      "heading": "Weekly Release 16/05/2026",
+      "summary": "This week's update covers the verified group of the week (Epsilon-11), the unfortunate shutdown of Site-64, and a new upcoming site, site 97 \"Veridian\".",
+      "tags": [
+        "weekly digest",
+        "SCP:RP",
+        "epsilon-11",
+        "site-64",
+        "site-97",
+        "shutdown",
+        "return"
+      ],
+      "thumbnail": "https://i.gyazo.com/c22647a84cad8b96e01433050fd87216.png",
       "featured": true
     }
   ]
