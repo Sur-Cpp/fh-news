@@ -29,33 +29,32 @@
     {
       "tag": "section-break"
     },
-
-  {
-      "tag": "h2",
-      "content": "Site-97 \"Veridian\""
-    },
-    {
-      "tag": "image",
-      "src": "https://i.gyazo.com/912690a8849c0c7ba56220afee921bcf.png"
-    },
-    {
-      "tag": "p",
-      "content": "Site-97 \"Veridian\" is a relatively new site founded by Hendrix, who joined the SCP RP community in 2023. She joined several official servers like Site-45 and the E-11 Nine-Tailed Fox, where she currently holds the rank of Third in Command. Using her experience, she teamed up with several peers from Site-45 and launched Site-97, where she now serves as Owner and Administrator.\n\nSite-97 is built around one goal, a fair, welcoming community free of corruption and drama, which has been Hendrix's goal from day one. As of early May 2026, the server has seen a noticeable increase in activity, with staff and higher-ups putting in more effort than before.\n\nAs for development, a custom map is currently being worked on and is expected to release around summer. Currently, the site is hosting events on the default map to keep the community engaged while they build the new one."
-    },
-    {
-      "tag": "quote",
-      "content": "We strive, at least I do, in having a community where everyone feels welcome. I want people to have a fun experience roleplaying. I am against corruption and unfairness. One of the main reasons why I created this Site is because of that. I want to have people come in here, see how awesome we can be, and end up sticking around!",
-      "attribution": "Owner and Administrator of Site-97 \"Veridian\""
-    },
-    {
-      "tag": "p",
-      "content": "With a member count of 125 and growing, this community seems promising. Click the button below to join the site."
-    },
-    {
-      "tag": "link",
-      "label": "Join now!",
-      "url": "https://discord.gg/jNsN4Wbxm8"
-    },
+    {
+      "tag": "h2",
+      "content": "Site-97 \"Veridian\""
+    },
+    {
+      "tag": "image",
+      "src": "https://i.gyazo.com/912690a8849c0c7ba56220afee921bcf.png"
+    },
+    {
+      "tag": "p",
+      "content": "Site-97 \"Veridian\" is a relatively new site founded by Hendrix, who joined the SCP RP community in 2023. She joined several official servers like Site-45 and the E-11 Nine-Tailed Fox, where she currently holds the rank of Third in Command. Using her experience, she teamed up with several peers from Site-45 and launched Site-97, where she now serves as Owner and Administrator.\n\nSite-97 is built around one goal, a fair, welcoming community free of corruption and drama, which has been Hendrix's goal from day one. As of early May 2026, the server has seen a noticeable increase in activity, with staff and higher-ups putting in more effort than before.\n\nAs for development, a custom map is currently being worked on and is expected to release around summer. Currently, the site is hosting events on the default map to keep the community engaged while they build the new one."
+    },
+    {
+      "tag": "quote",
+      "content": "We strive, at least I do, in having a community where everyone feels welcome. I want people to have a fun experience roleplaying. I am against corruption and unfairness. One of the main reasons why I created this Site is because of that. I want to have people come in here, see how awesome we can be, and end up sticking around!",
+      "attribution": "Owner and Administrator of Site-97 \"Veridian\""
+    },
+    {
+      "tag": "p",
+      "content": "With a member count of 125 and growing, this community seems promising. Click the button below to join the site."
+    },
+    {
+      "tag": "link",
+      "label": "Join now!",
+      "url": "https://discord.gg/jNsN4Wbxm8"
+    },
     {
       "tag": "section-break"
     },
