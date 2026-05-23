@@ -145,7 +145,8 @@
       "heading": "News Team application release",
       "summary": "Application for FH News staff team have been released",
       "thumbnail": "./fhnews.png",
-      "tags": ["factions-hub-news", "applications"]
+      "tags": ["factions-hub-news", "applications"],
+      "featured": false
     }
   ]
 }
