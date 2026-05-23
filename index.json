@@ -135,6 +135,17 @@
       ],
       "thumbnail": "https://i.gyazo.com/c22647a84cad8b96e01433050fd87216.png",
       "featured": true
+    },
+    {
+      "id": "b006",
+      "type": 1,
+      "slug": "news-application-release",
+      "published": "2026-05-23T19:57:00.000Z",
+      "author": "FHN Director - Sur",
+      "heading": "News Team application release",
+      "summary": "Application for FH News staff team have been released",
+      "thumbnail": "./fhnews.png",
+      "tags": ["factions-hub-news", "applications"]
     }
   ]
 }

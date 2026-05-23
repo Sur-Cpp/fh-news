@@ -1,0 +1,23 @@
+{
+  "id": "b006",
+  "slug": "news-application-release",
+  "body": [
+    {
+      "tag": "h2",
+      "content": "FHN NEWS TEAM APPLICATIONS!"
+    },
+    {
+      "tag": "p",
+      "content": "Over the past few weeks, we have been (somewhat) consistently releasing news publications, helping various groups across our  community gain recognition and attract new members.\n\nWe are also planning on branching out to various other ventures like media (youtube channel), advertising custom server events etc. \n(subject to change)\n\nIt has always been our goal to help our community grow, including helping lesser known communities gain recognition. If you believe in what we do, click the button below to apply for our news staff!"
+    },
+    {
+      "tag": "link",
+      "label": "Join News Team!",
+      "url": "https://docs.google.com/forms/d/e/1FAIpQLSdTTBt4YUhzeE5Vcb8GOzzwjSjDO-S4nljWzCFZqehCx8-qGA/viewform?usp=header"
+    },
+    {
+      "tag": "image",
+      "src": "https://i.gyazo.com/cc449dc5ed162e7fba4d0ac4d558f842.png"
+    }
+  ]
+}
