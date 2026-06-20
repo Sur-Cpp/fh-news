@@ -158,5 +158,16 @@
   "summary": "We have invited factions from Site: Noctum to give their insights on the academy system!",
   "tags": []
     }
+    {
+  "id": "w005",
+  "type": 2,
+  "slug": "weekly-release-24052026",
+  "published": "2026-05-17T15:11:00.000Z",
+  "author": "Newsroom",
+  "heading": "Weekly Release 24/05/2026",
+  "summary": "Weekly news",
+  "tags": [],
+  "featured": true
+    }
   ]
 }
