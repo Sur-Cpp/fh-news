@@ -147,7 +147,7 @@
       "thumbnail": "./fhnews.png",
       "tags": ["factions-hub-news", "applications"],
       "featured": false
-    }
+    },
     {
   "id": "w006",
   "type": 2,
@@ -157,7 +157,7 @@
   "heading": "Academies",
   "summary": "We have invited factions from Site: Noctum to give their insights on the academy system!",
   "tags": []
-    }
+    },
     {
   "id": "w005",
   "type": 2,
@@ -168,7 +168,7 @@
   "summary": "Weekly news",
   "tags": [],
   "featured": true
-    }
+    },
     {
   "id": "w007",
   "type": 2,
