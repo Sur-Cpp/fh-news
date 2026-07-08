@@ -168,6 +168,35 @@
   "heading": "Academies",
   "summary": "We have invited factions from Site: Noctum to give their insights on the academy system!",
   "tags": []
-    }
+    },
+    {
+  "id": "w007",
+  "type": 2,
+  "slug": "site-404-has-surpassed-100-members",
+  "published": "2026-07-04T08:45:00.000Z",
+  "author": "a_suscat | 1044186076639670283",
+  "heading": "Site-404 has surpassed 100 members",
+  "summary": "Despite being a relatively small server, Site-404 has experienced steady growth, consistently attracts 20 to 40 players per SSU, and is gaining recognition within the SCP community.",
+  "tags": [
+    "site-404"
+  ],
+  "thumbnail": "https://www.image2url.com/r2/default/images/1783158907380-b06409a7-8d81-4783-9192-f3bb3bb7c0a0.png"
+		},
+    {
+  "id": "w008",
+  "type": 2,
+  "slug": "area-16-achieves-record-player-count",
+  "published": "2026-07-04T10:50:00.000Z",
+  "author": "mitch47 (469440184895799296)",
+  "heading": "Area-16 Achieves Record Player Count",
+  "summary": "Area-16 has achieved a new all-time record player count.",
+  "tags": [
+    "area-16",
+    "weekly",
+    "players",
+    "record"
+  ],
+  "thumbnail": "https://gyazo.com/ecadf9eac164a61164fe39a6f6a2097d"
+		}
   ]
 }
